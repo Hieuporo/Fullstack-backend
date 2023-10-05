@@ -14,7 +14,9 @@ namespace StoreProject.Application.Profiles
         public MappingProfile()
         {
           CreateMap<Coupon, CouponDto>().ReverseMap();
-          
+          CreateMap<Coupon, CreateCouponDto>().ReverseMap();
+          CreateMap<Coupon, UpdateCouponDto>().ReverseMap();
+
         }
     }
 }

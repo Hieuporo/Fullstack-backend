@@ -15,10 +15,4 @@
     <ProjectReference Include="..\StoreProject.Domain\StoreProject.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Coupons\Handlers\Commands\" />
-    <Folder Include="Features\Coupons\Handlers\Queries\" />
-    <Folder Include="Features\Coupons\Requests\" />
-  </ItemGroup>
-
 </Project>
