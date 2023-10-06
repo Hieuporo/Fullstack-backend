@@ -10,12 +10,18 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\StoreProject.Application\StoreProject.Application.csproj" />
     <ProjectReference Include="..\StoreProject.Domain\StoreProject.Domain.csproj" />
+    <ProjectReference Include="..\StoreProject.Infrastructure\StoreProject.Infrastructure.csproj" />
+    <ProjectReference Include="..\StoreProject.Persistence\StoreProject.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

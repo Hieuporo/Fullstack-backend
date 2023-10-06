@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using StoreProject.Application.Contracts.Persistence;
+using StoreProject.Application.DTOs.Coupon.Validators;
+using StoreProject.Application.Exceptions;
 using StoreProject.Application.Features.Coupons.Requests.Commands;
 using StoreProject.Domain.Entities;
 using System;
@@ -24,6 +26,13 @@ namespace StoreProject.Application.Features.Coupons.Handlers.Commands
 
         public async Task<Unit> Handle(UpdateCouponCommand request, CancellationToken cancellationToken)
         {
+            var validator = new UpdateCouponDtoValidator();
+            var validatorResult = await validator.ValidateAsync(request.CouponDto);
+
+            if (validatorResult.IsValid == false)
+            {
+                throw new ValidationException(validatorResult);
+            }
 
             var coupon = await _unitOfWork.CouponRepository.Get(request.CouponDto.Id);
 

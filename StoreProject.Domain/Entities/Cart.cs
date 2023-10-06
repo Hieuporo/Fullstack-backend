@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Domain.Entities
 {
-    public class Coupon : BaseDomainEntity
+    public class Cart : BaseDomainEntity
     {
-
-        public string CouponCode { get; set; }
-        public double MinAmount { get; set; }
-        public double DiscountAmount { get; set; }
+        public string UserId { get; set; }
     }
 }

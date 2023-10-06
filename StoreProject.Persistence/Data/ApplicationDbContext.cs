@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StoreProject.Domain.Common;
+using StoreProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,17 @@ namespace StoreProject.Persistence.Data
 {
     public class ApplicationDbContext : DbContext
     {
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+            
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        }
+
+        public DbSet<Coupon> Coupons { get; set; }
         public virtual async Task<int> SaveChangesAsync(string username = "SYSTEM")
         {
             foreach (var entry in base.ChangeTracker.Entries<BaseDomainEntity>()
@@ -29,5 +41,7 @@ namespace StoreProject.Persistence.Data
 
             return result;
         }
+
+            
     }
 }

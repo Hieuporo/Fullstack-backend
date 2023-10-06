@@ -1,4 +1,6 @@
-﻿using StoreProject.Application.Contracts.Persistence;
+﻿using Microsoft.EntityFrameworkCore;
+using StoreProject.Application.Contracts.Persistence;
+using StoreProject.Persistence.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,34 +11,42 @@ namespace StoreProject.Persistence.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        public Task<T> Add(T entity)
+        private readonly ApplicationDbContext _dbContext;
+
+        public GenericRepository(ApplicationDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
+        }
+        public async Task<T> Add(T entity)
+        {
+            await _dbContext.AddAsync(entity);
+            return entity;
         }
 
-        public Task Delete(T entity)
+        public async Task Delete(T entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Set<T>().Remove(entity);
         }
 
-        public Task<bool> Exists(int id)
+        public async Task<bool> Exists(int id)
         {
-            throw new NotImplementedException();
+            var entity = await Get(id);
+            return entity != null;
         }
 
-        public Task<T> Get(int id)
+        public async Task<T> Get(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public Task<IReadOnlyList<T>> GetAll()
+        public async Task<IReadOnlyList<T>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Set<T>().ToListAsync();
         }
 
-        public Task Update(T entity)
+        public async Task Update(T entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(entity).State = EntityState.Modified;
         }
     }
 }

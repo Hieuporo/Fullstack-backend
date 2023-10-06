@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoreProject.Application.DTOs.Coupon;
+using StoreProject.Application.Features.Coupons.Requests.Commands;
+using StoreProject.Application.Features.Coupons.Requests.Queries;
 using StoreProject.Domain.Entities;
 
 namespace StoreProject.Api.Controllers
@@ -8,12 +12,56 @@ namespace StoreProject.Api.Controllers
     [ApiController]
     public class CouponController : Controller
     {
+        IMediator _mediator;
+        public CouponController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+      
+
+        [HttpGet]
+        public async Task<ActionResult<List<CouponDto>>> Get()
+        {
+            var coupons = await _mediator.Send(new GetCouponListRequest());
+            return Ok(coupons); 
+        }
+
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<ActionResult<CouponDto>> Get(int id)
         {
-            var coupon = new Coupon { Id = id , CouponCode = "Hello" };
+            var coupon = await _mediator.Send(new GetCouponRequest { Id = id });
+
             return Ok(coupon);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] CreateCouponDto coupon)
+        {
+            var command = new CreateCouponCommand { CouponDto = coupon };
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] UpdateCouponDto coupon)
+        {
+            var command = new UpdateCouponCommand { CouponDto = coupon };
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var command = new DeleteCouponCommand { Id = id };
+            await _mediator.Send(command);
+
+            return NoContent();
         }
     }
 }

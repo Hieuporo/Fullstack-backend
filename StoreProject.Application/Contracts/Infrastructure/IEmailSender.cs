@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StoreProject.Application.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace StoreProject.Application.Contracts.Infrastructure
 {
     public interface IEmailSender 
     {
-        //Task<bool> SendEmail(Email email);
+        Task<bool> SendEmail(Email email);
     }
 }
