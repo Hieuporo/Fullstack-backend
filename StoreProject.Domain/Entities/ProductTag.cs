@@ -11,6 +11,5 @@ namespace StoreProject.Domain.Entities
     {
         public string TagId {  get; set; }
         public string ProductId { get; set; }
-
     }
 }

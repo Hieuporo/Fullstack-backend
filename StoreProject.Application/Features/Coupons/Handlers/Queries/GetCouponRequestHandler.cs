@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Persistence;
+using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Application.DTOs.Coupon;
 using StoreProject.Application.Features.Coupons.Requests.Queries;
 using System;

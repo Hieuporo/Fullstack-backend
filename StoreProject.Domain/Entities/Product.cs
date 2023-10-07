@@ -13,7 +13,7 @@ namespace StoreProject.Domain.Entities
         public string Description { get; set; }
         public string CategoryId { get; set; }
         public string BrandId { get; set; }
-        public string ProductImageUrl { get; set; }
+        public string ImageUrl { get; set; }
 
     }
 }

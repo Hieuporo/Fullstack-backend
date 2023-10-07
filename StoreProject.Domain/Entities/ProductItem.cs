@@ -11,7 +11,7 @@ namespace StoreProject.Domain.Entities
     {
         public string ProductId { get; set; }
         public int QuantityInStock { get; set; }
-        public string ProductImageUrl { get; set; }
+        public string ImageUrl { get; set; }
         public double Price { get; set; }
 
     }

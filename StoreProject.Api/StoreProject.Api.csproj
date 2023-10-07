@@ -21,7 +21,6 @@
     <ProjectReference Include="..\StoreProject.Application\StoreProject.Application.csproj" />
     <ProjectReference Include="..\StoreProject.Domain\StoreProject.Domain.csproj" />
     <ProjectReference Include="..\StoreProject.Infrastructure\StoreProject.Infrastructure.csproj" />
-    <ProjectReference Include="..\StoreProject.Persistence\StoreProject.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using StoreProject.Api.Middleware;
 using StoreProject.Application;
 using StoreProject.Infrastructure;
-using StoreProject.Persistence;
+using StoreProject.Infrastructure;
 
 
 
@@ -14,7 +14,6 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigureInfrastructureServices(builder.Configuration);
-builder.Services.ConfigurePersistenceServices(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

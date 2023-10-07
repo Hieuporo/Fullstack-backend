@@ -16,4 +16,51 @@
     <ProjectReference Include="..\StoreProject.Domain\StoreProject.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Categories\Handlers\Commands\" />
+    <Folder Include="Features\Categories\Handlers\Queries\" />
+    <Folder Include="Features\Categories\Requests\Commands\" />
+    <Folder Include="Features\Categories\Requests\Queries\" />
+    <Folder Include="Features\Brand\Handlers\Commands\" />
+    <Folder Include="Features\Brand\Handlers\Queries\" />
+    <Folder Include="Features\Brand\Requests\Commands\" />
+    <Folder Include="Features\Brand\Requests\Queries\" />
+    <Folder Include="Features\CartItems\Handlers\Commands\" />
+    <Folder Include="Features\CartItems\Handlers\Queries\" />
+    <Folder Include="Features\CartItems\Requests\Commands\" />
+    <Folder Include="Features\CartItems\Requests\Queries\" />
+    <Folder Include="Features\ProductTag\Handlers\Commands\" />
+    <Folder Include="Features\ProductTag\Handlers\Queries\" />
+    <Folder Include="Features\ProductTag\Requests\Commands\" />
+    <Folder Include="Features\ProductTag\Requests\Queries\" />
+    <Folder Include="Features\ProductItem\Handlers\Commands\" />
+    <Folder Include="Features\ProductItem\Handlers\Queries\" />
+    <Folder Include="Features\ProductItem\Requests\Commands\" />
+    <Folder Include="Features\ProductItem\Requests\Queries\" />
+    <Folder Include="Features\Product\Handlers\Commands\" />
+    <Folder Include="Features\Product\Handlers\Queries\" />
+    <Folder Include="Features\Product\Requests\Commands\" />
+    <Folder Include="Features\Product\Requests\Queries\" />
+    <Folder Include="Features\OrderItem\Handlers\Commands\" />
+    <Folder Include="Features\OrderItem\Handlers\Queries\" />
+    <Folder Include="Features\OrderItem\Requests\Commands\" />
+    <Folder Include="Features\OrderItem\Requests\Queries\" />
+    <Folder Include="Features\Carts\Handlers\Commands\" />
+    <Folder Include="Features\Carts\Handlers\Queries\" />
+    <Folder Include="Features\Carts\Requests\Commands\" />
+    <Folder Include="Features\Carts\Requests\Queries\" />
+    <Folder Include="Features\Tags\Handlers\Commands\" />
+    <Folder Include="Features\Tags\Handlers\Queries\" />
+    <Folder Include="Features\Tags\Requests\Commands\" />
+    <Folder Include="Features\Tags\Requests\Queries\" />
+    <Folder Include="Features\ShippingMethods\Handlers\Commands\" />
+    <Folder Include="Features\ShippingMethods\Handlers\Queries\" />
+    <Folder Include="Features\ShippingMethods\Requests\Commands\" />
+    <Folder Include="Features\ShippingMethods\Requests\Queries\" />
+    <Folder Include="Features\Order\Handlers\Commands\" />
+    <Folder Include="Features\Order\Handlers\Queries\" />
+    <Folder Include="Features\Order\Requests\Commands\" />
+    <Folder Include="Features\Order\Requests\Queries\" />
+  </ItemGroup>
+
 </Project>
