@@ -72,6 +72,8 @@ namespace StoreProject.Infrastructure.Services
             {
                 Email = request.Email,
                 Name = request.Name,
+                PhoneNumber = request.PhoneNumber,
+                Address = request.Address,
                 UserName = request.UserName,
                 EmailConfirmed = true
             };
@@ -84,7 +86,7 @@ namespace StoreProject.Infrastructure.Services
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Employee");
+                    await _userManager.AddToRoleAsync(user, "User");
                     return new RegistrationResponse() { UserId = user.Id };
                 }
                 else

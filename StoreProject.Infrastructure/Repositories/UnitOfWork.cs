@@ -25,13 +25,49 @@ namespace StoreProject.Infrastructure.Repositories
         public ICouponRepository CouponRepository =>
            _couponRepository ??= new CouponRepository(_context);
 
-        public IBrandRepository BrandRepository => throw new NotImplementedException();
+        private IBrandRepository _brandRepository;
+        public IBrandRepository BrandRepository =>
+            _brandRepository ??= new BrandRepository(_context);
 
-        public ITagRepository TagRepository => throw new NotImplementedException();
+        private ITagRepository _tagRepository;
+        public ITagRepository TagRepository =>
+            _tagRepository ??= new TagRepository(_context);
 
-        public IShippingMethodRepository ShippingMethodRepository => throw new NotImplementedException();
+        private IShippingMethodRepository _shippingMethodRepository;
+        public IShippingMethodRepository ShippingMethodRepository =>
+            _shippingMethodRepository ??= new ShippingMethodRepository(_context);
 
-        public ICategoryRepository CategoryRepository => throw new NotImplementedException();
+        private ICategoryRepository _categoryRepository;
+        public ICategoryRepository CategoryRepository =>
+            _categoryRepository ??= new CategoryRepository(_context);
+
+        private ICartItemRepository _cartItemRepository;
+        public ICartItemRepository CartItemRepository =>
+            _cartItemRepository ??= new CartItemRepository(_context);
+
+        private ICartRepository _cartRepository;
+        public ICartRepository CartRepository =>
+            _cartRepository ??= new CartRepository(_context);
+
+        private IOrderItemRepository _orderItemRepository;
+        public IOrderItemRepository OrderItemRepository =>
+            _orderItemRepository ??= new OrderItemRepository(_context);
+
+        private IOrderRepository _orderRepository;
+        public IOrderRepository OrderRepository =>
+            _orderRepository ??= new OrderRepository(_context);
+
+        private IProductItemRepository _productItemRepository;
+        public IProductItemRepository ProductItemRepository =>
+            _productItemRepository ??= new ProductItemRepository(_context);
+
+        private IProductRepository _productRepository;
+        public IProductRepository ProductRepository =>
+            _productRepository ??= new ProductRepository(_context);
+
+        private IProductTagRepository _productTagRepository;
+        public IProductTagRepository ProductTagRepository =>
+            _productTagRepository ??= new ProductTagRepository(_context);
 
         public void Dispose()
         {
