@@ -10,6 +10,7 @@ namespace StoreProject.Domain.Entities
     public class ShippingMethod : BaseDomainEntity
     {
         public string Name { get; set; }
-        public float Price { get; set; }
+        public double Price { get; set; }
+        public ICollection<Order> Orders { get;}
     }
 }

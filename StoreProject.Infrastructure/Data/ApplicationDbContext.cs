@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using StoreProject.Domain.Common;
 using StoreProject.Domain.Entities;
 using StoreProject.Infrastructure.Configurations;
-using StoreProject.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +26,17 @@ namespace StoreProject.Infrastructure.Data
         }
 
         public DbSet<Coupon> Coupons { get; set; }
-
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<ShippingMethod> ShippingMethods { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<ProductItem> ProductItems { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductTag> ProductTags { get; set; }
         public virtual async Task<int> SaveChangesAsync(string username = "SYSTEM")
         {
             foreach (var entry in base.ChangeTracker.Entries<BaseDomainEntity>()

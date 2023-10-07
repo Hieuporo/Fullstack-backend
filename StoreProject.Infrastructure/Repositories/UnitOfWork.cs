@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using StoreProject.Application.Constants;
 using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Infrastructure.Data;
 using System;
@@ -77,7 +78,7 @@ namespace StoreProject.Infrastructure.Repositories
 
         public async Task Save()
         {
-            //var username = _httpContextAccessor.HttpContext.User.FindFirst(CustomClam)
+            //var username = _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Uid);
             await _context.SaveChangesAsync();
         }
     }

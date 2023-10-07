@@ -13,6 +13,12 @@ namespace StoreProject.Infrastructure.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Coupon> builder)
         {
+            builder
+             .HasMany(e => e.Orders)
+             .WithOne(e => e.Coupon)
+             .HasForeignKey(e => e.CouponId)
+             .HasPrincipalKey(e => e.Id);
+
             builder.HasData(
                 new Coupon
                 {

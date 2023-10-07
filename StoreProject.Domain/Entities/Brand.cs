@@ -10,5 +10,7 @@ namespace StoreProject.Domain.Entities
     public class Brand : BaseDomainEntity
     {
         public string Name { get; set; }
+        public ICollection<Product> Products { get; }
+
     }
 }

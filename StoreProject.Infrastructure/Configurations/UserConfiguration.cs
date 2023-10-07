@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StoreProject.Infrastructure.Models;
+using StoreProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

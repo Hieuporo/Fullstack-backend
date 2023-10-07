@@ -10,5 +10,7 @@ namespace StoreProject.Domain.Entities
     public class Tag : BaseDomainEntity
     {
         public string Name { get; set; }
+        public List<ProductTag> ProductTags  { get; }
+
     }
 }

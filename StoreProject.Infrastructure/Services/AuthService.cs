@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using StoreProject.Application.Constants;
 using StoreProject.Application.Contracts.Infrastructure.Identity;
 using StoreProject.Application.Models.Identity;
-using StoreProject.Infrastructure.Models;
+using StoreProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;

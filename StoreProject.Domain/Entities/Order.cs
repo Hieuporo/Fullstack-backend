@@ -10,8 +10,12 @@ namespace StoreProject.Domain.Entities
     public class Order : BaseDomainEntity
     {
         public string UserId {  get; set; }
-        public string? CouponId { get; set; }
-        public string ShippingMethodId { get; set; }
+        public ApplicationUser User { get; set; }
+        public int? CouponId { get; set; }
+        public Coupon Coupon { get; set; }
+        public int ShippingMethodId { get; set; }
+        public ShippingMethod ShippingMethod { get; set; }
+
         public string CustomerName { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
@@ -20,6 +24,9 @@ namespace StoreProject.Domain.Entities
         public string Status { get; set; }
         public string PaymentIntentId { get; set; }
         public string StripeSessionId { get; set;}
+
+        public ICollection<OrderItem> OrderItems { get; set; }
+
 
     }
 }
