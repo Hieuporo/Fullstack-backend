@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StoreProject.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class addTableAndRelation : Migration
+    public partial class AddTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -485,8 +485,8 @@ namespace StoreProject.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "Ha Noi", "e3cdb2e8-ccc2-4f73-86e4-3d3f56ad12b7", "admin@gmail.com", true, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEPLzzojG8vFszGOeprNKYNsljXT2QaoQRv0+JQQZaAS8lvvDHIKoOwCB43kdBTYFBw==", null, false, "2c3db5dc-3a7f-41df-960b-08aa0f70cea5", false, "admin@gmail.com" },
-                    { "9e224968-33e4-4652-b7b7-8574d048cdb9", 0, "Ha Noi", "d94c9cb4-791d-4f03-8d99-671d93ca397c", "user@gmail.com", true, false, null, "User", "USER@GMAIL.COM", "USER@GMAIL.COM", "AQAAAAIAAYagAAAAEBnvVKJh6ludGAMYUIZouA1O69yqBvxVz+gphHQ7cEhhHq12S+cb3PBG5b6UIlVtHg==", null, false, "61968c39-1f13-4e78-9e21-4c9557db5e0b", false, "user@gmail.com" }
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "Ha Noi", "98df11ab-224a-4fa9-ac3c-968c239f80d8", "admin@gmail.com", true, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEEfPoupwz4VBYQGkjqScNz/cLlR3fjrNhp9D5d9h/rZmKaiyj15DnY2WK91//1UbPg==", null, false, "19e9c90c-5438-44df-9f2e-a8931ad6883d", false, "admin@gmail.com" },
+                    { "9e224968-33e4-4652-b7b7-8574d048cdb9", 0, "Ha Noi", "01cdc8c4-b40c-418f-b3ff-94d6cc9043e5", "user@gmail.com", true, false, null, "User", "USER@GMAIL.COM", "USER@GMAIL.COM", "AQAAAAIAAYagAAAAENfMqV8muSp1jyQsHwQILXpl+td1RvVmumQnyHxHq7uL1Qxvp63omvPn+nrrJC2Ieg==", null, false, "f3112fda-89aa-4bbc-9c2b-2924e77c6665", false, "user@gmail.com" }
                 });
 
             migrationBuilder.InsertData(

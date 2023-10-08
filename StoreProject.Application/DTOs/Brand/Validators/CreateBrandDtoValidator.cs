@@ -11,7 +11,12 @@ namespace StoreProject.Application.DTOs.Brand.Validators
     {
         public CreateBrandDtoValidator()
         {
-            
+
+            RuleFor(p => p.Name)
+                .NotEmpty().WithMessage("{PropertyName} is required")
+                .NotNull()
+                .MaximumLength(30).WithMessage("{PropertyName} must not exceed 30 characters.");
+       
         }
     }
 }

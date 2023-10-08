@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.DTOs.Tag
 {
-    public class CreateTagDto
+    public class CreateTagDto 
     {
-        
+        public string Name { get; set; }
     }
 }

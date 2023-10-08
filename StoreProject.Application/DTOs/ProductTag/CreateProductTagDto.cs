@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.DTOs.ProductTag
 {
-    internal class CreateProductTagDto
+    public class CreateProductTagDto
     {
+        public int TagId { get; set; }
+        public int ProductId { get; set; }
     }
 }

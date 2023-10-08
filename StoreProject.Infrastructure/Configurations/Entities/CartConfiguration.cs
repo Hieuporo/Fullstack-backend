@@ -21,11 +21,7 @@ namespace StoreProject.Infrastructure.Configurations.Entities
               .HasForeignKey(e => e.CartId)
               .HasPrincipalKey(e => e.Id);
 
-            //builder
-            //   .HasOne(e => e.User)
-            //   .WithOne(e => e.Cart)
-            //   .HasForeignKey<ApplicationUser>(e => e.Id)
-            //   .IsRequired();
+          
 
         }
     }

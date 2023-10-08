@@ -20,10 +20,7 @@ namespace StoreProject.Infrastructure.Configurations.Entities
             .HasForeignKey(e => e.CategoryId)
             .HasPrincipalKey(e => e.Id);
 
-            //builder
-            // .HasMany(c => c.SubCategories)
-            // .WithOne(c => c.Parent)
-            // .HasForeignKey(c => c.ParentId);
+           
 
         }
     }

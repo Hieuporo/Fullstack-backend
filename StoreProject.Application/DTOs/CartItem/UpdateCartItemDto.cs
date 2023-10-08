@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.DTOs.CartItem
 {
-    internal class UpdateCartItemDto
+    public class UpdateCartItemDto
     {
+        public int CartId { get; set; }
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
     }
 }

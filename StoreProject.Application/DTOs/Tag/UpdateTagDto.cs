@@ -9,6 +9,6 @@ namespace StoreProject.Application.DTOs.Tag
 {
     public class UpdateTagDto : BaseDto
     {
-      
+        public string Name { get; set; }
     }
 }

@@ -17,14 +17,6 @@ namespace StoreProject.Infrastructure.Data
         {
             
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-        }
-
         public DbSet<Coupon> Coupons { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Tag> Tags { get; set; }
@@ -32,11 +24,25 @@ namespace StoreProject.Infrastructure.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Cart> Carts { get; set; }
-        public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<ProductItem> ProductItems { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+  
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductTag> ProductTags { get; set; }
+        public DbSet<ProductItem> ProductItems { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ApplicationUser>()
+             .HasOne(u => u.Cart)
+             .WithOne(c => c.ApplicationUser)
+             .HasForeignKey<Cart>(c => c.UserId);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        }
+       
         public virtual async Task<int> SaveChangesAsync(string username = "SYSTEM")
         {
             foreach (var entry in base.ChangeTracker.Entries<BaseDomainEntity>()

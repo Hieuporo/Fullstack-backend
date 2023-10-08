@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.DTOs.Cart
 {
-    internal class CreateCartDto
+    public class CreateCartDto
     {
+        public string UserId { get; set; }
     }
 }

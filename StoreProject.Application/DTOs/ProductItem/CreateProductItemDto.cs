@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.DTOs.ProductItem
 {
-    internal class CreateProductItemDto
+    public class CreateProductItemDto 
     {
+        public int ProductId { get; set; }
+        public int QuantityInStock { get; set; }
+        public string ImageUrl { get; set; }
+        public double Price { get; set; }
     }
 }

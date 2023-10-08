@@ -12,12 +12,7 @@ namespace StoreProject.Domain.Entities
         public string Name {  get ; set; }
         public string Description {  get ; set; }
         public string ImageUrl {  get ; set; }
-        //public int? ParentId {  get ; set; }
-        //public Category Parent { get; set; }
-        //public ICollection<Category> SubCategories { get; set; }
-
         public ICollection<Product> Products { get; }
-
 
     }
 }

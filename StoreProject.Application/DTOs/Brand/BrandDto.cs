@@ -9,5 +9,6 @@ namespace StoreProject.Application.DTOs.Brand
 {
     public class BrandDto : BaseDto
     {
+        public string Name { get; set; }
     }
 }

@@ -9,8 +9,7 @@ namespace StoreProject.Application.DTOs.ShippingMethod
 {
     public class ShippingMethodDto : BaseDto
     {
-        public string CouponCode { get; set; }
-        public double MinAmount { get; set; }
-        public double DiscountAmount { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
     }
 }

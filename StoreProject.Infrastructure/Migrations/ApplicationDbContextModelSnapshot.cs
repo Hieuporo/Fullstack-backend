@@ -259,16 +259,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "e3cdb2e8-ccc2-4f73-86e4-3d3f56ad12b7",
+                            ConcurrencyStamp = "98df11ab-224a-4fa9-ac3c-968c239f80d8",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPLzzojG8vFszGOeprNKYNsljXT2QaoQRv0+JQQZaAS8lvvDHIKoOwCB43kdBTYFBw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEfPoupwz4VBYQGkjqScNz/cLlR3fjrNhp9D5d9h/rZmKaiyj15DnY2WK91//1UbPg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2c3db5dc-3a7f-41df-960b-08aa0f70cea5",
+                            SecurityStamp = "19e9c90c-5438-44df-9f2e-a8931ad6883d",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -277,16 +277,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "d94c9cb4-791d-4f03-8d99-671d93ca397c",
+                            ConcurrencyStamp = "01cdc8c4-b40c-418f-b3ff-94d6cc9043e5",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "User",
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBnvVKJh6ludGAMYUIZouA1O69yqBvxVz+gphHQ7cEhhHq12S+cb3PBG5b6UIlVtHg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENfMqV8muSp1jyQsHwQILXpl+td1RvVmumQnyHxHq7uL1Qxvp63omvPn+nrrJC2Ieg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "61968c39-1f13-4e78-9e21-4c9557db5e0b",
+                            SecurityStamp = "f3112fda-89aa-4bbc-9c2b-2924e77c6665",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -831,13 +831,13 @@ namespace StoreProject.Infrastructure.Migrations
 
             modelBuilder.Entity("StoreProject.Domain.Entities.Cart", b =>
                 {
-                    b.HasOne("StoreProject.Domain.Entities.ApplicationUser", "User")
+                    b.HasOne("StoreProject.Domain.Entities.ApplicationUser", "ApplicationUser")
                         .WithOne("Cart")
                         .HasForeignKey("StoreProject.Domain.Entities.Cart", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("StoreProject.Domain.Entities.CartItem", b =>

@@ -11,7 +11,7 @@ namespace StoreProject.Domain.Entities
     public class Cart : BaseDomainEntity
     {
         public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
         public ICollection<CartItem> CartItems { get ; set; } 
     }
 }
