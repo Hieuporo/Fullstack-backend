@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.DTOs.Brand.Validators
 {
-    public class UpdateShippingMethodDtoValidator : AbstractValidator<UpdateBrandDto>
+    public class UpdateBrandDtoValidator : AbstractValidator<UpdateBrandDto>
     {
-        public UpdateShippingMethodDtoValidator()
+        public UpdateBrandDtoValidator()
         {
             RuleFor(p => p.Name)
                 .NotEmpty().WithMessage("{PropertyName} is required")

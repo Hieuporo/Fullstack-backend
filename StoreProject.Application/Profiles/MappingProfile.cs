@@ -46,7 +46,6 @@ namespace StoreProject.Application.Profiles
 
             CreateMap<Cart, CartDto>().ReverseMap();
             CreateMap<Cart, CreateCartDto>().ReverseMap();
-            CreateMap<Cart, UpdateCartDto>().ReverseMap();
 
             CreateMap<CartItem, CartItemDto>().ReverseMap();
             CreateMap<CartItem, CreateCartItemDto>().ReverseMap();
@@ -58,16 +57,15 @@ namespace StoreProject.Application.Profiles
 
 
             CreateMap<OrderItem, OrderItemDto>().ReverseMap();
-            CreateMap<OrderItem, CreateOrderItemrDto>().ReverseMap();
+            CreateMap<OrderItem, CreateOrderItemDto>().ReverseMap();
             CreateMap<OrderItem, UpdateOrderItemDto >().ReverseMap();
 
             CreateMap<ProductTag, ProductTagDto>().ReverseMap();
             CreateMap<ProductTag, CreateProductTagDto>().ReverseMap();
-            CreateMap<ProductTag, UpdateProductTagDto>().ReverseMap();
 
             CreateMap<Product, ProductDto>().ReverseMap();
-            CreateMap<Product, CreateProductItemDto>().ReverseMap();
-            CreateMap<Product, UpdateProductItemDto>().ReverseMap();
+            CreateMap<Product, CreateProductDto>().ReverseMap();
+            CreateMap<Product, UpdateProductDto>().ReverseMap();
 
             CreateMap<ProductItem, ProductItemDto>().ReverseMap();
             CreateMap<ProductItem, CreateProductItemDto>().ReverseMap();

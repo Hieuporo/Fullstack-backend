@@ -1,0 +1,68 @@
+﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using StoreProject.Application.DTOs.Brand;
+
+using StoreProject.Application.Features.Brands.Requests.Commands;
+using StoreProject.Application.Features.Brands.Requests.Queries;
+
+namespace StoreProject.Api.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class BrandController : ControllerBase
+    {
+        private readonly IMediator _mediator;
+        public BrandController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
+
+
+        [HttpGet]
+        public async Task<ActionResult<List<BrandDto>>> Get()
+        {
+            var coupons = await _mediator.Send(new GetBrandListRequest());
+            return Ok(coupons);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult<BrandDto>> Get(int id)
+        {
+            var coupon = await _mediator.Send(new GetBrandRequest { Id = id });
+
+            return Ok(coupon);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] CreateBrandDto productItem)
+        {
+            var command = new CreateBrandCommand { BrandDto = productItem };
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] UpdateBrandDto productItem)
+        {
+            var command = new UpdateBrandCommand { BrandDto = productItem };
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var command = new DeleteBrandCommand { Id = id };
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+    }
+}
+    

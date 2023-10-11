@@ -6,6 +6,7 @@ using StoreProject.Infrastructure.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,9 +37,10 @@ namespace StoreProject.Infrastructure.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ApplicationUser>()
-             .HasOne(u => u.Cart)
-             .WithOne(c => c.ApplicationUser)
-             .HasForeignKey<Cart>(c => c.UserId);
+               .HasOne(e => e.Cart)
+               .WithOne(e => e.ApplicationUser)
+               .HasForeignKey<Cart>(e => e.UserId)
+               .IsRequired();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
