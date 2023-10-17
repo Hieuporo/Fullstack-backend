@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StoreProject.Application.DTOs.Coupon;
@@ -37,6 +38,7 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> Post([FromBody] CreateCouponDto coupon)
         {
             var command = new CreateCouponCommand { CouponDto = coupon };
@@ -46,6 +48,7 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult> Put([FromBody] UpdateCouponDto coupon)
         {
             var command = new UpdateCouponCommand { CouponDto = coupon };
@@ -56,6 +59,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize]
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteCouponCommand { Id = id };

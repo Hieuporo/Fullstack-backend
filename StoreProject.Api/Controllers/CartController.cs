@@ -1,12 +1,15 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using Azure.Core;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StoreProject.Application.Constants;
+using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Application.DTOs.Brand;
-using StoreProject.Application.DTOs.Cart;
-using StoreProject.Application.Features.Brands.Requests.Commands;
-using StoreProject.Application.Features.Carts.Requests.Commands;
+using StoreProject.Domain.Entities;
+using StoreProject.Infrastructure.Repositories;
+using System.Security.Claims;
 
 namespace StoreProject.Api.Controllers
 {
@@ -16,22 +19,21 @@ namespace StoreProject.Api.Controllers
     public class CartController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+  
 
-        public CartController(IMediator mediator, IHttpContextAccessor httpContextAccessor)
+        public CartController(IMediator mediator, IUnitOfWork unitOfWork, IMapper mapper)
         {
-            this._httpContextAccessor = httpContextAccessor;
             _mediator = mediator;
         }
 
         [HttpPost]
         public async Task<ActionResult> Post()
         {
-            var userId = _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Uid);
-            var command = new CreateCartCommand { UserId = userId.Value };
-            var response = await _mediator.Send(command);
+            string userId = User.FindFirst(CustomClaimTypes.Uid)?.Value;
 
-            return Ok(response);
+           
+
+            return Ok();
         }
     }
 }

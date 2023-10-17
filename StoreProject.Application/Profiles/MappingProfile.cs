@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using StoreProject.Application.DTOs.Brand;
-using StoreProject.Application.DTOs.Cart;
 using StoreProject.Application.DTOs.CartItem;
 using StoreProject.Application.DTOs.Category;
 using StoreProject.Application.DTOs.Coupon;
@@ -43,9 +42,6 @@ namespace StoreProject.Application.Profiles
             CreateMap<Tag, TagDto>().ReverseMap();
             CreateMap<Tag, CreateTagDto>().ReverseMap();
             CreateMap<Tag, UpdateTagDto>().ReverseMap();
-
-            CreateMap<Cart, CartDto>().ReverseMap();
-            CreateMap<Cart, CreateCartDto>().ReverseMap();
 
             CreateMap<CartItem, CartItemDto>().ReverseMap();
             CreateMap<CartItem, CreateCartItemDto>().ReverseMap();
