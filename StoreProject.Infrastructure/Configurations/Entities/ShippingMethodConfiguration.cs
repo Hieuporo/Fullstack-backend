@@ -13,11 +13,7 @@ namespace StoreProject.Infrastructure.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<ShippingMethod> builder)
         {
-            builder
-              .HasMany(e => e.Orders)
-              .WithOne(e => e.ShippingMethod)
-              .HasForeignKey(e => e.ShippingMethodId)
-              .HasPrincipalKey(e => e.Id);
+           
 
         }
     }

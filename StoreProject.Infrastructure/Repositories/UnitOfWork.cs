@@ -46,10 +46,6 @@ namespace StoreProject.Infrastructure.Repositories
         public ICartItemRepository CartItemRepository =>
             _cartItemRepository ??= new CartItemRepository(_context);
 
-        private ICartRepository _cartRepository;
-        public ICartRepository CartRepository =>
-            _cartRepository ??= new CartRepository(_context);
-
         private IOrderItemRepository _orderItemRepository;
         public IOrderItemRepository OrderItemRepository =>
             _orderItemRepository ??= new OrderItemRepository(_context);

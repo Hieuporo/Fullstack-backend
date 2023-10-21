@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreProject.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using StoreProject.Infrastructure.Data;
 namespace StoreProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231017103153_UpdateTable")]
+    partial class UpdateTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,16 +262,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "fadbe714-9c56-48b8-98d9-215f1f758b7d",
+                            ConcurrencyStamp = "47a204e3-60ac-4caf-b657-07a27075c555",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOq2cKjtpYZOeVCdJMEa8Stol/gbc2HcW1+ssq6jH8JOiyzTb6k8fmynLB91Czm4iQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM0TWLC05j8PIJmDIshYFbtWCjsGIqvRvdz1O+kiKt5URK1S+LcG8Pm/AErb8Qbk4w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1be32af7-536a-45d4-9e05-dae6199d8d5c",
+                            SecurityStamp = "9cf555c7-5b2e-4955-b874-297a4b236999",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -277,16 +280,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "ee18fd7c-2c84-4dee-ba4d-bb56c3c00c07",
+                            ConcurrencyStamp = "1f69286d-ae73-446f-81ad-e777b504e478",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "User",
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECKZJn8tMWtbRg4pYT77XcSPbvDI0fcKZZXxPQ4DR1hkmX1ANFM5HP2Em+rE5/Gkug==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEN4kaCj+mgMSiqLaVrXXlekaO2Q6xhbNvkVePEdcSumc6eYRxauvhtzQw4hIrrJv9A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b0decc5d-ed9e-4cc7-b077-5d8c8763a734",
+                            SecurityStamp = "f412ae7f-fda5-40ef-ba0f-4063b9784f10",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -350,15 +353,17 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("CartItems");
                 });
@@ -808,9 +813,7 @@ namespace StoreProject.Infrastructure.Migrations
 
                     b.HasOne("StoreProject.Domain.Entities.ApplicationUser", "User")
                         .WithMany("CartItems")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("Product");
 

@@ -13,12 +13,7 @@ namespace StoreProject.Infrastructure.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Tag> builder)
         {
-            builder
-             .HasMany(e => e.ProductTags)
-             .WithOne(e => e.Tag)
-             .HasForeignKey(e => e.TagId)
-             .HasPrincipalKey(e => e.Id);
-
+           
         }
     }
 }

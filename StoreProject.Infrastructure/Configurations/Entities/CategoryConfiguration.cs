@@ -14,13 +14,7 @@ namespace StoreProject.Infrastructure.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder
-            .HasMany(e => e.Products)
-            .WithOne(e => e.Category)
-            .HasForeignKey(e => e.CategoryId)
-            .HasPrincipalKey(e => e.Id);
 
-           
 
         }
     }

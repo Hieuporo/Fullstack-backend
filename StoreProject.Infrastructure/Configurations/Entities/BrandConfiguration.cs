@@ -13,11 +13,7 @@ namespace StoreProject.Infrastructure.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Brand> builder)
         {
-            builder
-             .HasMany(e => e.Products)
-             .WithOne(e => e.Brand)
-             .HasForeignKey(e => e.BrandId)
-             .HasPrincipalKey(e => e.Id);
+           
 
         }
     }

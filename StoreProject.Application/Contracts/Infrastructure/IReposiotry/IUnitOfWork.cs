@@ -10,7 +10,6 @@ namespace StoreProject.Application.Contracts.Infrastructure.IReposiotry
     {
         IBrandRepository BrandRepository { get; }
         ICartItemRepository CartItemRepository { get; }
-        ICartRepository CartRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         ICouponRepository CouponRepository { get; }
         IOrderItemRepository OrderItemRepository { get; }

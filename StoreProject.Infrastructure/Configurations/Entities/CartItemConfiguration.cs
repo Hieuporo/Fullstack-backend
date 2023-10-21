@@ -14,7 +14,7 @@ namespace StoreProject.Infrastructure.Configurations.Entities
         public void Configure(EntityTypeBuilder<CartItem> builder)
         {
 
-
+          
         }
     }
 }

@@ -13,17 +13,7 @@ namespace StoreProject.Infrastructure.Configurations.Entities
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder
-               .HasMany(e => e.OrderItems)
-               .WithOne(e => e.Order)
-               .HasForeignKey(e => e.OrderId)
-               .HasPrincipalKey(e => e.Id);
-
-            builder
-              .HasOne(e => e.User)
-              .WithMany(e => e.Orders)
-              .HasForeignKey(e => e.UserId)
-              .HasPrincipalKey(e => e.Id);
+           
         }
     }
 }

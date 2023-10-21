@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using StoreProject.Application.Constants;
 using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Application.DTOs.Brand;
+using StoreProject.Application.DTOs.CartItem;
 using StoreProject.Domain.Entities;
 using StoreProject.Infrastructure.Repositories;
 using System.Security.Claims;
@@ -27,9 +28,10 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post()
+        public async Task<ActionResult> Post([FromBody] CreateCartItemDto createCartItemDto)
         {
             string userId = User.FindFirst(CustomClaimTypes.Uid)?.Value;
+
 
            
 
