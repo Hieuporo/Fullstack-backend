@@ -12,9 +12,6 @@ namespace StoreProject.Application.DTOs.CartItem.Validators
     {
         public CreateCartItemDtoValidator()
         {
-            RuleFor(p => p.UserId)
-              .NotEmpty().WithMessage("{PropertyName} is required")
-              .NotNull();
 
             RuleFor(p => p.ProductId)
               .NotEmpty().WithMessage("{PropertyName} is required")

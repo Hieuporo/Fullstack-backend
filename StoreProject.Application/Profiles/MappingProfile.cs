@@ -59,7 +59,7 @@ namespace StoreProject.Application.Profiles
             CreateMap<ProductTag, ProductTagDto>().ReverseMap();
             CreateMap<ProductTag, CreateProductTagDto>().ReverseMap();
 
-            CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<ProductDto, Product>().ReverseMap();
             CreateMap<Product, CreateProductDto>().ReverseMap();
             CreateMap<Product, UpdateProductDto>().ReverseMap();
 

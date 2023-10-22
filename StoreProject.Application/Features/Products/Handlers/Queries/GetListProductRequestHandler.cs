@@ -25,7 +25,8 @@ namespace StoreProject.Application.Features.Products.Handlers.Queries
 
             public async Task<List<ProductDto>> Handle(GetProductListRequest request, CancellationToken cancellationToken)
             {
-                var products = await _unitOfWork.ProductRepository.GetAll();
+                var products = _unitOfWork.ProductRepository.GetProductsWithProductItem();
+
                 return _mapper.Map<List<ProductDto>>(products);
             }
         }

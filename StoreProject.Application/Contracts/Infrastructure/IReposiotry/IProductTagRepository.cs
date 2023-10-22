@@ -9,5 +9,7 @@ namespace StoreProject.Application.Contracts.Infrastructure.IReposiotry
 {
     public interface IProductTagRepository : IGenericRepository<ProductTag>
     {
+        public Task<ProductTag> GetProductTag(int productId, int tagId);
+
     }
 }

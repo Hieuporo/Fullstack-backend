@@ -17,5 +17,13 @@ namespace StoreProject.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
+
+        public async Task<ProductTag> GetProductTag(int productId, int tagId)
+        {
+            var productTag = await _dbContext.ProductTags
+                .FirstOrDefaultAsync(p => p.TagId == tagId && p.ProductId == productId);
+
+            return productTag;
+        }
     }
 }

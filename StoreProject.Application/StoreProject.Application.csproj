@@ -29,10 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\ProductTag\Handlers\Commands\" />
-    <Folder Include="Features\ProductTag\Handlers\Queries\" />
-    <Folder Include="Features\ProductTag\Requests\Commands\" />
-    <Folder Include="Features\ProductTag\Requests\Queries\" />
     <Folder Include="Features\OrderItem\Handlers\Commands\" />
     <Folder Include="Features\OrderItem\Handlers\Queries\" />
     <Folder Include="Features\OrderItem\Requests\Commands\" />

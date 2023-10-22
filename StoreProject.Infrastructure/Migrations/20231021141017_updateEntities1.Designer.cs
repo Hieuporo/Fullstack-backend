@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreProject.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using StoreProject.Infrastructure.Data;
 namespace StoreProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231021141017_updateEntities1")]
+    partial class updateEntities1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,16 +262,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "a89bef04-94cc-4cdc-b9f1-9ae0f07b4129",
+                            ConcurrencyStamp = "b90a17ca-bca9-42c0-b2f6-f41e8c5ceda6",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEySRa7vTahH80ixtnKPsUdtNU8GsTHKTZAKW+l8pqCV43j/RAG5KnwZpY3r6a/c6A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENixjjAYHM4KJkevxL0a8S96qKxh1g9gfvp3mMzvO+TJA3Af6gSitySbxAi88nVTLQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5cd6b360-1122-4a7a-9cb9-759915e9b715",
+                            SecurityStamp = "c35b4e26-1bd7-4a40-b61c-cd1890df7858",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -277,16 +280,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "c5fc0511-8e6f-4ac1-9683-045ec4c18373",
+                            ConcurrencyStamp = "cd84fc83-6e1c-4bec-bbe0-954ded178a3d",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "User",
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDjWyOHXGketYT0ZGYYrth8uBJHu5qZaqVRffZFsJnauDzuoIA0984NLf0lYX3+wDg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEEMISx4Bhu1tA5tqKGyv3Xw3qELbNXe8w8jNVK7Uo/mN7iHMNgw0XmSCKM2xjgQ7Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8cb0b254-2151-492f-a33a-b9cb9e6c6487",
+                            SecurityStamp = "34712a93-e503-4d17-88f1-cea5b6bffc99",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -681,13 +684,33 @@ namespace StoreProject.Infrastructure.Migrations
 
             modelBuilder.Entity("StoreProject.Domain.Entities.ProductTag", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("TagId")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductId", "TagId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("TagId");
 

@@ -1,4 +1,6 @@
 ﻿using StoreProject.Application.DTOs.Common;
+using StoreProject.Application.DTOs.ProductItem;
+using StoreProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +16,7 @@ namespace StoreProject.Application.DTOs.Product
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
         public string ImageUrl { get; set; }
+
+        public ICollection<ProductItemDto> ProductItems { get; }
     }
 }

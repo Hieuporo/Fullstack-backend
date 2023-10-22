@@ -17,5 +17,17 @@ namespace StoreProject.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
+
+        public Product GetProductWithProductItem(int productId)
+        {
+            return _dbContext.Products.Include(p => p.ProductItems)
+                .FirstOrDefault(p => p.Id == productId); ;
+        }
+    
+
+        public List<Product> GetProductsWithProductItem()
+        {
+            return _dbContext.Products.Include(p => p.ProductItems).ToList();
+        }
     }
 }

@@ -17,9 +17,8 @@ namespace StoreProject.Domain.Entities
         public Brand Brand { get; set; }
         public string ImageUrl { get; set; }
         public ICollection<ProductItem> ProductItems { get; }
-        public List<ProductTag> ProductTags  { get; }
-        public ICollection<OrderItem> OrderItems { get; }
-        public ICollection<CartItem> CartItems { get; }
+        public ICollection<ProductTag> ProductTags  { get; }
+
 
 
 

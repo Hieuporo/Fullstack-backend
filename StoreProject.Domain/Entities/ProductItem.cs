@@ -15,6 +15,8 @@ namespace StoreProject.Domain.Entities
         public int QuantityInStock { get; set; }
         public string ImageUrl { get; set; }
         public double Price { get; set; }
+        public ICollection<OrderItem> OrderItems { get; }
+        public ICollection<CartItem> CartItems { get; }
 
     }
 }

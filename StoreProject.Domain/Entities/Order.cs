@@ -23,7 +23,7 @@ namespace StoreProject.Domain.Entities
         public double OrderTotal { get; set; }
         public string Status { get; set; }
         public string PaymentIntentId { get; set; }
-        public string StripeSessionId { get; set;}
+        public string? StripeSessionId { get; set;}
 
         public ICollection<OrderItem> OrderItems { get; set; }
 

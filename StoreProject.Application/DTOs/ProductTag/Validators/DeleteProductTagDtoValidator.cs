@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.DTOs.ProductTag.Validators
 {
-    public class CreateProductTagDtoValidator : AbstractValidator<CreateProductTagDto>
+    public class DeleteProductTagDtoValidator : AbstractValidator<DeleteProductTagDto>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateProductTagDtoValidator(IUnitOfWork unitOfWork)
+        public DeleteProductTagDtoValidator(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
 

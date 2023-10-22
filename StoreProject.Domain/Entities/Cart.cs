@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Domain.Entities
 {
-    public class ProductTag 
+    public class Cart : BaseDomainEntity
     {
-        public int TagId {  get; set; }
-        public int ProductId { get; set; }
-        public Product Product { get; set; } 
-        public Tag Tag { get; set; } 
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
+        public ICollection<CartItem> CartItems { get; set; }
     }
 }

@@ -2,8 +2,14 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StoreProject.Application.DTOs.Product;
+using StoreProject.Application.DTOs.ProductItem;
+using StoreProject.Application.DTOs.ProductTag;
+using StoreProject.Application.Features.ProductItems.Requests.Commands;
+using StoreProject.Application.Features.ProductItems.Requests.Queries;
 using StoreProject.Application.Features.Products.Requests.Commands;
 using StoreProject.Application.Features.Products.Requests.Queries;
+using StoreProject.Application.Features.ProductTags.Requests.Commands;
+using StoreProject.Domain.Entities;
 
 namespace StoreProject.Api.Controllers
 {
@@ -22,17 +28,17 @@ namespace StoreProject.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ProductDto>>> Get()
         {
-            var coupons = await _mediator.Send(new GetProductListRequest());
-            return Ok(coupons);
+            var products = await _mediator.Send(new GetProductListRequest());
+            return Ok(products);
         }
 
         [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<ProductDto>> Get(int id)
         {
-            var coupon = await _mediator.Send(new GetProductRequest { Id = id });
+            var product = await _mediator.Send(new GetProductRequest { Id = id });
 
-            return Ok(coupon);
+            return Ok(product);
         }
 
         [HttpPost]
@@ -58,6 +64,75 @@ namespace StoreProject.Api.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteProductCommand { Id = id };
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpPost]
+        [Route("producttag")]
+        public async Task<ActionResult> Post([FromBody] CreateProductTagDto productTag)
+        {
+            var command = new CreateProductTagCommand { ProductTagDto = productTag };
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("producttag")]
+        public async Task<ActionResult> DeleteProductTag(DeleteProductTagDto deleteProductTagDto)
+        {
+            var command = new DeleteProductTagCommand { ProductTagDto = deleteProductTagDto };
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
+
+        //Product Item
+        [HttpGet]
+        [Route("productitem")]
+        public async Task<ActionResult<List<ProductItemDto>>> GetProductTags()
+        {
+            var tags = await _mediator.Send(new GetProductItemListRequest());
+            return Ok(tags);
+        }
+
+        [HttpGet]
+        [Route("productitem/{id}")]
+        public async Task<ActionResult<ProductItemDto>> GetProductTagById(int id)
+        {
+            var tag = await _mediator.Send(new GetProductItemRequest { Id = id });
+
+            return Ok(tag);
+        }
+
+        [HttpPost]
+        [Route("productitem")]
+        public async Task<ActionResult> Post([FromBody] CreateProductItemDto productItem)
+        {
+            var command = new CreateProductItemCommand { ProductItemDto = productItem };
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
+        [HttpPut]
+        [Route("productitem")]
+        public async Task<ActionResult> Put([FromBody] UpdateProductItemDto productItem)
+        {
+            var command = new UpdateProductItemCommand { ProductItemDto = productItem };
+            await _mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        [Route("productitem/{id}")]
+        public async Task<ActionResult> DeleteProductItem(int id)
+        {
+            var command = new DeleteProductItemCommand { Id = id };
             await _mediator.Send(command);
 
             return NoContent();
