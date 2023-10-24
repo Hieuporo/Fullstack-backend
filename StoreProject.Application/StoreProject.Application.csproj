@@ -20,20 +20,11 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Stripe.net" Version="43.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\StoreProject.Domain\StoreProject.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\OrderItem\Handlers\Commands\" />
-    <Folder Include="Features\OrderItem\Handlers\Queries\" />
-    <Folder Include="Features\OrderItem\Requests\Commands\" />
-    <Folder Include="Features\OrderItem\Requests\Queries\" />
-    <Folder Include="Features\Order\Handlers\Commands\" />
-    <Folder Include="Features\Order\Requests\Commands\" />
-    <Folder Include="Features\Order\Requests\Queries\" />
   </ItemGroup>
 
 </Project>

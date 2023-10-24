@@ -8,7 +8,7 @@ namespace StoreProject.Application.DTOs.Order
     public class OrderDto
     {
         public string UserId { get; set; }
-        public int CouponId { get; set; }
+        public int? CouponId { get; set; }
         public int ShippingMethodId { get; set; }
         public string CustomerName { get; set; }
         public string Address { get; set; }

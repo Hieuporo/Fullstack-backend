@@ -12,10 +12,11 @@ namespace StoreProject.Infrastructure.Repositories
 {
     public class OrderItemRepository : GenericRepository<OrderItem> , IOrderItemRepository
     {
-         private readonly ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
         public OrderItemRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
+       
     }
 }

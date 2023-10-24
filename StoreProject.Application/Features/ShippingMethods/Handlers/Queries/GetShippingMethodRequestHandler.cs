@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Order.Handlers.Queries
+namespace StoreProject.Application.Features.ShippingMethods.Handlers.Queries
 {
     public class GetShippingMethodRequestHandler : IRequestHandler<GetShippingMethodRequest, ShippingMethodDto>
     {

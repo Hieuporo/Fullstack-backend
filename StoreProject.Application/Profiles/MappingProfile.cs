@@ -63,7 +63,7 @@ namespace StoreProject.Application.Profiles
 
             CreateMap<Order, OrderDto>().ReverseMap();
             CreateMap<Order, CreateOrderDto>().ReverseMap();
-            CreateMap<Order, UpdateOrderDto>().ReverseMap();
+            CreateMap<Order, UpdateOrderStatusDto>().ReverseMap();
 
 
             CreateMap<OrderItem, OrderItemDto>().ReverseMap();

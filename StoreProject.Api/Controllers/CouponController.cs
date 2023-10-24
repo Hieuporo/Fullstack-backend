@@ -11,7 +11,7 @@ namespace StoreProject.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CouponController : Controller
+    public class CouponController : ControllerBase
     {
         IMediator _mediator;
         public CouponController(IMediator mediator)

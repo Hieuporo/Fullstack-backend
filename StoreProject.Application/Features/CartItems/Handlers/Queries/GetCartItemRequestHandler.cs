@@ -2,7 +2,6 @@
 using MediatR;
 using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Application.DTOs.CartItem;
-using StoreProject.Application.DTOs.Coupon;
 using StoreProject.Application.Features.CartItems.Requests.Queries;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Order.Handlers.Queries
+namespace StoreProject.Application.Features.CartItems.Handlers.Queries
 {
     public class GetCartItemRequestHandler : IRequestHandler<GetCartItemRequest, CartItemDto>
     {

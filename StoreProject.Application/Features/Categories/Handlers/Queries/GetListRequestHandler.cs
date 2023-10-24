@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Order.Handlers.Queries
+namespace StoreProject.Application.Features.CartItems.Handlers.Queries
 {
         public class GetCategoryRequestHandler : IRequestHandler<GetCategoryRequest, CategoryDto>
         {

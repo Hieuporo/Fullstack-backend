@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.DTOs.Order.Validators
 {
-    public class UpdateOrderDtoValidator : AbstractValidator<UpdateOrderDto>
+    public class UpdateOrderStatusDtoValidator : AbstractValidator<UpdateOrderStatusDto>
     {
 
     }

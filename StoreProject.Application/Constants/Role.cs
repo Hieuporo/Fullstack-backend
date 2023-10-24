@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.Constants
 {
-    public static class CustomClaimTypes
+    public static class Role
     {
-        public const string Uid = "uid";
-
-     
+        public const string RoleAdmin = "ADMIN";
+        public const string RoleCustomer = "CUSTOMER";
     }
 }

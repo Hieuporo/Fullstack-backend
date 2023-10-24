@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
-using StoreProject.Application.DTOs.Coupon;
 using StoreProject.Application.DTOs.Product;
-using StoreProject.Application.DTOs.ProductItem;
-using StoreProject.Application.Features.Coupons.Requests.Queries;
 using StoreProject.Application.Features.Products.Requests.Queries;
 using StoreProject.Domain.Entities;
 using System;
@@ -15,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Order.Handlers.Queries
+namespace StoreProject.Application.Features.Products.Handlers.Queries
 {
     public class GetProductRequestHandler : IRequestHandler<GetProductRequest, ProductDto>
     {
