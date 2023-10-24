@@ -8,13 +8,10 @@
 
   <ItemGroup>
     <Compile Remove="Features\Brand\**" />
-    <Compile Remove="Features\Carts\**" />
     <Compile Remove="Features\Product\**" />
     <EmbeddedResource Remove="Features\Brand\**" />
-    <EmbeddedResource Remove="Features\Carts\**" />
     <EmbeddedResource Remove="Features\Product\**" />
     <None Remove="Features\Brand\**" />
-    <None Remove="Features\Carts\**" />
     <None Remove="Features\Product\**" />
   </ItemGroup>
 
@@ -22,6 +19,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -12,8 +12,8 @@ using StoreProject.Infrastructure.Data;
 namespace StoreProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231021140808_updateEntities")]
-    partial class updateEntities
+    [Migration("20231023010310_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -262,16 +262,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "486be7f5-3ae4-4356-a0de-712fe7ee1bd4",
+                            ConcurrencyStamp = "52003da8-e724-477d-8a25-dd891709e090",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDsq1rCr913X4olS56LKJlrSCyX90G0wH317o68NbG+TiP/g6RPq0TcOD9QIITnX2w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF1tTKGwRodR+TCPTl9CVJ48aOP0YE45Qa/zeglCW1Rode5c54D6TQbw1tLdLpqLKw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a86f092b-a189-4319-9f18-6e4bca4c95d8",
+                            SecurityStamp = "2c7b81a7-26ac-4f68-bd32-d78095aa5684",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -280,16 +280,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "77474d1b-03c9-45e8-afdd-391282264e99",
+                            ConcurrencyStamp = "e9f013d7-4e48-4d1c-832d-3a424ebc0699",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "User",
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENjlx3m+S0rB94ZF83AVFFDeCKEDLI7kMYdZ8eZyzF+msyAWjdnMI6SNVZxuBf2PmA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA1OSbhdbyR5VgzN4Njvc93/h4F36DdE5jUO+aauivUABKwVU8UTczQrzgbtq0qhkQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b24e9dfc-0969-4014-9211-2d518070f6c3",
+                            SecurityStamp = "6228b741-1599-4a97-b05c-1796e868bf1f",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -352,7 +352,7 @@ namespace StoreProject.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Cart");
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("StoreProject.Domain.Entities.CartItem", b =>
@@ -666,6 +666,10 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -684,33 +688,13 @@ namespace StoreProject.Infrastructure.Migrations
 
             modelBuilder.Entity("StoreProject.Domain.Entities.ProductTag", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("TagId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
+                    b.HasKey("ProductId", "TagId");
 
                     b.HasIndex("TagId");
 

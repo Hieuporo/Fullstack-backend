@@ -20,14 +20,16 @@ namespace StoreProject.Application.DTOs.ProductItem.Validators
             .MustAsync(async (id, token) => {
                         var leaveTypeExists = await _productRepository.Exists(id);
                         return leaveTypeExists;
-                    })
-                .WithMessage("{PropertyName} does not exist.")
-                   ;
+            })
+            .WithMessage("{PropertyName} does not exist.");
+
+
+            RuleFor(p => p.Name)
+                   .NotNull().WithMessage("{PropertyName} is required");
 
             RuleFor(p => p.QuantityInStock)
                    .NotNull().WithMessage("{PropertyName} is required");
-
-            RuleFor(p => p.ImageUrl)
+                        RuleFor(p => p.ImageUrl)
              .NotNull().WithMessage("{PropertyName} is required");
 
             RuleFor(p => p.Price)

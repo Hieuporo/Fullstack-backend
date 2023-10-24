@@ -11,17 +11,10 @@ namespace StoreProject.Application.DTOs.CartItem.Validators
     {
         public UpdateCartItemDtoValidator()
         {
-            RuleFor(p => p.UserId)
-           .NotEmpty().WithMessage("{PropertyName} is required")
-           .NotNull();
-
-            RuleFor(p => p.ProductId)
+            RuleFor(p => p.Id)
               .NotEmpty().WithMessage("{PropertyName} is required")
               .NotNull();
 
-            RuleFor(p => p.Quantity)
-              .NotEmpty().WithMessage("{PropertyName} is required")
-              .GreaterThan(0).WithMessage("{PropertyName} must be at least 1");
         }
     }
 }

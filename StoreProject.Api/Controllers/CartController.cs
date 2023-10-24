@@ -8,6 +8,12 @@ using StoreProject.Application.Constants;
 using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Application.DTOs.Brand;
 using StoreProject.Application.DTOs.CartItem;
+using StoreProject.Application.Exceptions;
+using StoreProject.Application.Features.Brands.Requests.Commands;
+using StoreProject.Application.Features.Brands.Requests.Queries;
+using StoreProject.Application.Features.CartItems.Requests.Commands;
+using StoreProject.Application.Features.Carts.Requests.Commands;
+using StoreProject.Application.Features.Carts.Requests.Queries;
 using StoreProject.Domain.Entities;
 using StoreProject.Infrastructure.Repositories;
 using System.Security.Claims;
@@ -27,15 +33,58 @@ namespace StoreProject.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateCartItemDto createCartItemDto)
+        [HttpGet]
+        public async Task<ActionResult> Get()
         {
-            string userId = User.FindFirst(CustomClaimTypes.Uid)?.Value;
+            var cart = await _mediator.Send(new GetCartRequest());
 
+            return Ok(cart);
+        }
 
+        [HttpPost]
+        public async Task<ActionResult> AddToCart([FromBody] CreateCartItemDto createCartItemDto)
+        {
+            var cart = await _mediator.Send(new GetCartRequest());
+            if(cart.Id != createCartItemDto.CartId)
+            {
+                return BadRequest("Something went wrong");
+            }
+
+            var command = new CreateCartItemCommand { CartItemDto = createCartItemDto };
+            var response = await _mediator.Send(command);
            
+            return Ok(response);
+        }
 
-            return Ok();
+        [HttpPut]
+        [Route("minus")]
+        public async Task<ActionResult> Minus([FromBody] UpdateCartItemDto updateCartItemDto)
+        {
+
+            var command = new UpdateCartItemCommand { CartItemDto = updateCartItemDto, IsMinus = true };
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
+        [HttpPut]
+        [Route("plus")]
+        public async Task<ActionResult> Plus([FromBody] UpdateCartItemDto updateCartItemDto)
+        {
+            var command = new UpdateCartItemCommand { CartItemDto = updateCartItemDto, IsMinus = false };
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var command = new DeleteCartItemCommand { Id = id };
+            await _mediator.Send(command);
+
+            return NoContent();
         }
     }
 }

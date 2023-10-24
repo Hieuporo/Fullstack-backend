@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StoreProject.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddTable : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -313,7 +313,7 @@ namespace StoreProject.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CouponId = table.Column<int>(type: "int", nullable: false),
+                    CouponId = table.Column<int>(type: "int", nullable: true),
                     ShippingMethodId = table.Column<int>(type: "int", nullable: false),
                     CustomerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -322,7 +322,7 @@ namespace StoreProject.Infrastructure.Migrations
                     OrderTotal = table.Column<double>(type: "float", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StripeSessionId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StripeSessionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -341,44 +341,11 @@ namespace StoreProject.Infrastructure.Migrations
                         name: "FK_Orders_Coupons_CouponId",
                         column: x => x.CouponId,
                         principalTable: "Coupons",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_ShippingMethods_ShippingMethodId",
                         column: x => x.ShippingMethodId,
                         principalTable: "ShippingMethods",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CartItems",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CartId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartItems", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CartItems_Carts_CartId",
-                        column: x => x.CartId,
-                        principalTable: "Carts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CartItems_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -390,6 +357,7 @@ namespace StoreProject.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     QuantityInStock = table.Column<int>(type: "int", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
@@ -413,18 +381,12 @@ namespace StoreProject.Infrastructure.Migrations
                 name: "ProductTags",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     TagId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductTags", x => x.Id);
+                    table.PrimaryKey("PK_ProductTags", x => new { x.ProductId, x.TagId });
                     table.ForeignKey(
                         name: "FK_ProductTags_Products_ProductId",
                         column: x => x.ProductId,
@@ -440,13 +402,45 @@ namespace StoreProject.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CartItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CartId = table.Column<int>(type: "int", nullable: false),
+                    ProductItemId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Carts_CartId",
+                        column: x => x.CartId,
+                        principalTable: "Carts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartItems_ProductItems_ProductItemId",
+                        column: x => x.ProductItemId,
+                        principalTable: "ProductItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    ProductItemId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -464,9 +458,9 @@ namespace StoreProject.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderItems_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_OrderItems_ProductItems_ProductItemId",
+                        column: x => x.ProductItemId,
+                        principalTable: "ProductItems",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -485,8 +479,8 @@ namespace StoreProject.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "Ha Noi", "98df11ab-224a-4fa9-ac3c-968c239f80d8", "admin@gmail.com", true, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEEfPoupwz4VBYQGkjqScNz/cLlR3fjrNhp9D5d9h/rZmKaiyj15DnY2WK91//1UbPg==", null, false, "19e9c90c-5438-44df-9f2e-a8931ad6883d", false, "admin@gmail.com" },
-                    { "9e224968-33e4-4652-b7b7-8574d048cdb9", 0, "Ha Noi", "01cdc8c4-b40c-418f-b3ff-94d6cc9043e5", "user@gmail.com", true, false, null, "User", "USER@GMAIL.COM", "USER@GMAIL.COM", "AQAAAAIAAYagAAAAENfMqV8muSp1jyQsHwQILXpl+td1RvVmumQnyHxHq7uL1Qxvp63omvPn+nrrJC2Ieg==", null, false, "f3112fda-89aa-4bbc-9c2b-2924e77c6665", false, "user@gmail.com" }
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "Ha Noi", "52003da8-e724-477d-8a25-dd891709e090", "admin@gmail.com", true, false, null, "Admin", "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAIAAYagAAAAEF1tTKGwRodR+TCPTl9CVJ48aOP0YE45Qa/zeglCW1Rode5c54D6TQbw1tLdLpqLKw==", null, false, "2c7b81a7-26ac-4f68-bd32-d78095aa5684", false, "admin@gmail.com" },
+                    { "9e224968-33e4-4652-b7b7-8574d048cdb9", 0, "Ha Noi", "e9f013d7-4e48-4d1c-832d-3a424ebc0699", "user@gmail.com", true, false, null, "User", "USER@GMAIL.COM", "USER@GMAIL.COM", "AQAAAAIAAYagAAAAEA1OSbhdbyR5VgzN4Njvc93/h4F36DdE5jUO+aauivUABKwVU8UTczQrzgbtq0qhkQ==", null, false, "6228b741-1599-4a97-b05c-1796e868bf1f", false, "user@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -552,15 +546,14 @@ namespace StoreProject.Infrastructure.Migrations
                 column: "CartId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartItems_ProductId",
+                name: "IX_CartItems_ProductItemId",
                 table: "CartItems",
-                column: "ProductId");
+                column: "ProductItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_UserId",
                 table: "Carts",
-                column: "UserId",
-                unique: true);
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_OrderId",
@@ -568,9 +561,9 @@ namespace StoreProject.Infrastructure.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderItems_ProductId",
+                name: "IX_OrderItems_ProductItemId",
                 table: "OrderItems",
-                column: "ProductId");
+                column: "ProductItemId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CouponId",
@@ -603,11 +596,6 @@ namespace StoreProject.Infrastructure.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductTags_ProductId",
-                table: "ProductTags",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ProductTags_TagId",
                 table: "ProductTags",
                 column: "TagId");
@@ -638,9 +626,6 @@ namespace StoreProject.Infrastructure.Migrations
                 name: "OrderItems");
 
             migrationBuilder.DropTable(
-                name: "ProductItems");
-
-            migrationBuilder.DropTable(
                 name: "ProductTags");
 
             migrationBuilder.DropTable(
@@ -653,7 +638,7 @@ namespace StoreProject.Infrastructure.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "ProductItems");
 
             migrationBuilder.DropTable(
                 name: "Tags");
@@ -666,6 +651,9 @@ namespace StoreProject.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "ShippingMethods");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "Brands");

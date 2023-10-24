@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using StoreProject.Application.DTOs.Brand;
+using StoreProject.Application.DTOs.Cart;
 using StoreProject.Application.DTOs.CartItem;
 using StoreProject.Application.DTOs.Category;
 using StoreProject.Application.DTOs.Coupon;
@@ -47,6 +48,19 @@ namespace StoreProject.Application.Profiles
             CreateMap<CartItem, CreateCartItemDto>().ReverseMap();
             CreateMap<CartItem, UpdateCartItemDto>().ReverseMap();
 
+            CreateMap<Cart, CartDto>()
+                .ForMember(dest => dest.CartItems, opt => opt.MapFrom(src => src.CartItems.Select(item => new CartItemDto
+                {
+                    Id = item.Id,
+                    ProductItemId = item.ProductItemId,
+                    CartId = item.CartId,
+                    Quantity = item.Quantity,
+                })));
+
+            CreateMap<CartDto, Cart>();
+
+
+
             CreateMap<Order, OrderDto>().ReverseMap();
             CreateMap<Order, CreateOrderDto>().ReverseMap();
             CreateMap<Order, UpdateOrderDto>().ReverseMap();
@@ -58,8 +72,18 @@ namespace StoreProject.Application.Profiles
 
             CreateMap<ProductTag, ProductTagDto>().ReverseMap();
             CreateMap<ProductTag, CreateProductTagDto>().ReverseMap();
+            CreateMap<ProductDto, Product>();
+            CreateMap<Product, ProductDto>()
+              .ForMember(dest => dest.ProductItems, opt => opt.MapFrom(src => src.ProductItems.Select(item => new ProductItemDto
+              {
+                  Id = item.Id,
+                  ProductId = item.ProductId,
+                  Name = item.Name,
+                  ImageUrl = item.ImageUrl,
+                  QuantityInStock = item.QuantityInStock,
+                  Price = item.Price,
+              })));
 
-            CreateMap<ProductDto, Product>().ReverseMap();
             CreateMap<Product, CreateProductDto>().ReverseMap();
             CreateMap<Product, UpdateProductDto>().ReverseMap();
 

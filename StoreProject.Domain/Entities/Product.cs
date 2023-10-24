@@ -16,8 +16,8 @@ namespace StoreProject.Domain.Entities
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
         public string ImageUrl { get; set; }
-        public ICollection<ProductItem> ProductItems { get; }
-        public ICollection<ProductTag> ProductTags  { get; }
+        public ICollection<ProductItem> ProductItems { get; set; }
+        public ICollection<ProductTag> ProductTags  { get; set; }
 
 
 

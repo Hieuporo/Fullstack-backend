@@ -17,5 +17,25 @@ namespace StoreProject.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
+
+        public async Task<CartItem> GetCartItem(int cartId, int productItemId)
+        {
+            return await _dbContext.CartItems.FirstOrDefaultAsync(u => u.CartId == cartId && u.ProductItemId == productItemId);
+        }
+
+        public async Task<bool> IsItemOwnedByUser(int cartItemId, string userId)
+        {
+            var cartItem = await _dbContext.CartItems.Include(u => u.Cart).FirstOrDefaultAsync(u => u.Id == cartItemId);
+            if (cartItem == null)
+            {
+                return false;
+            }
+
+            if (cartItem.Cart.UserId == userId)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

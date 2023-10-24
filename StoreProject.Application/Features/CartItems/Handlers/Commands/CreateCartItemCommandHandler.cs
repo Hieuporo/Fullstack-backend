@@ -28,6 +28,20 @@ namespace StoreProject.Application.Features.CartItems.Handlers.Commands
             {
                 throw new ValidationException(validatorResult);
             }
+
+
+
+            var cartItemExist = await _unitOfWork.CartItemRepository
+                .GetCartItem(request.CartItemDto.CartId, request.CartItemDto.ProductItemId);
+
+            if(cartItemExist != null)
+            {
+                cartItemExist.Quantity = request.CartItemDto.Quantity + cartItemExist.Quantity;
+                await _unitOfWork.CartItemRepository.Update(cartItemExist);
+                await _unitOfWork.Save();
+                return cartItemExist.Id;
+            }
+
             var cartItem = _mapper.Map<CartItem>(request.CartItemDto);
             cartItem = await _unitOfWork.CartItemRepository.Add(cartItem);
             await _unitOfWork.Save();

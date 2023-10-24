@@ -2,7 +2,9 @@
 using MediatR;
 using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Application.DTOs.Product;
+using StoreProject.Application.DTOs.ProductItem;
 using StoreProject.Application.Features.Products.Requests.Queries;
+using StoreProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +28,7 @@ namespace StoreProject.Application.Features.Products.Handlers.Queries
             public async Task<List<ProductDto>> Handle(GetProductListRequest request, CancellationToken cancellationToken)
             {
                 var products = _unitOfWork.ProductRepository.GetProductsWithProductItem();
-
-                return _mapper.Map<List<ProductDto>>(products);
+            return _mapper.Map<List<ProductDto>>(products);
             }
         }
     }

@@ -19,6 +19,8 @@ namespace StoreProject.Application.Contracts.Infrastructure.IReposiotry
         IProductTagRepository ProductTagRepository { get; }
         ITagRepository TagRepository { get; }
         IShippingMethodRepository ShippingMethodRepository { get; }
+        ICartRepository CartRepository { get; }
+
 
 
         Task Save();

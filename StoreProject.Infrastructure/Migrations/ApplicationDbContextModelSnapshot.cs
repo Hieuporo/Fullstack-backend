@@ -259,16 +259,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "a89bef04-94cc-4cdc-b9f1-9ae0f07b4129",
+                            ConcurrencyStamp = "ca13a858-8aad-4faa-bf0c-e85f002844f9",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEySRa7vTahH80ixtnKPsUdtNU8GsTHKTZAKW+l8pqCV43j/RAG5KnwZpY3r6a/c6A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMfbEAAMIurFfLH90fw95WlZCR4LGyC9gnBXdfFHFus0/1Yhpo8JM/lLS/31SLushw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5cd6b360-1122-4a7a-9cb9-759915e9b715",
+                            SecurityStamp = "2a7a09cd-884a-486e-bdd0-c701ef121c1d",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -277,16 +277,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "c5fc0511-8e6f-4ac1-9683-045ec4c18373",
+                            ConcurrencyStamp = "0779aaea-ba24-4441-9d73-5e9432689181",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "User",
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDjWyOHXGketYT0ZGYYrth8uBJHu5qZaqVRffZFsJnauDzuoIA0984NLf0lYX3+wDg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJmOH4pmksFeDUdgMXyyUPpCtghoMX1P2dkCb6jTFUPA0JnxOWdyrd5TN/XvuQxANg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8cb0b254-2151-492f-a33a-b9cb9e6c6487",
+                            SecurityStamp = "df595650-c183-4646-9eed-a2f1b716484a",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -374,9 +374,6 @@ namespace StoreProject.Infrastructure.Migrations
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
 
                     b.Property<int>("ProductItemId")
                         .HasColumnType("int");
@@ -661,6 +658,10 @@ namespace StoreProject.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")

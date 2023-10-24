@@ -12,8 +12,8 @@ using StoreProject.Infrastructure.Data;
 namespace StoreProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231021172445_updateProductTagv2")]
-    partial class updateProductTagv2
+    [Migration("20231023134345_updateCartItemTable")]
+    partial class updateCartItemTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -262,16 +262,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "6755042c-5be4-42ab-b088-5d00e0ae73f6",
+                            ConcurrencyStamp = "ca13a858-8aad-4faa-bf0c-e85f002844f9",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDBaGjjS0Hejtrs4au0rSGgIHXetyFOAjZwwFSTc+MvSo1DwTZUOszAf6pxnRqasQg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMfbEAAMIurFfLH90fw95WlZCR4LGyC9gnBXdfFHFus0/1Yhpo8JM/lLS/31SLushw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "05f7afc3-c500-44aa-8027-b627243c5505",
+                            SecurityStamp = "2a7a09cd-884a-486e-bdd0-c701ef121c1d",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -280,16 +280,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "ef88820f-a56e-4356-aac0-76a5ec5f51d0",
+                            ConcurrencyStamp = "0779aaea-ba24-4441-9d73-5e9432689181",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "User",
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHXNq85zVAlejYqSsliLdQl7avsF2awbFZdvufFoJkETA99TiRc2VI5Uf3vEVogIcw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJmOH4pmksFeDUdgMXyyUPpCtghoMX1P2dkCb6jTFUPA0JnxOWdyrd5TN/XvuQxANg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fcd49148-c02b-4b1c-b854-4dcd234ea04e",
+                            SecurityStamp = "df595650-c183-4646-9eed-a2f1b716484a",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -377,9 +377,6 @@ namespace StoreProject.Infrastructure.Migrations
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
 
                     b.Property<int>("ProductItemId")
                         .HasColumnType("int");
@@ -664,6 +661,10 @@ namespace StoreProject.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")

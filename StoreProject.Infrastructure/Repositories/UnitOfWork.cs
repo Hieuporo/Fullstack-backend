@@ -66,6 +66,10 @@ namespace StoreProject.Infrastructure.Repositories
         public IProductTagRepository ProductTagRepository =>
             _productTagRepository ??= new ProductTagRepository(_context);
 
+        private ICartRepository _cartRepository;
+        public ICartRepository CartRepository =>
+         _cartRepository ??= new CartRepository(_context);
+
         public void Dispose()
         {
             _context.Dispose();

@@ -11,5 +11,6 @@ namespace StoreProject.Application.Features.CartItems.Requests.Commands
     public class UpdateCartItemCommand : IRequest<Unit>
     {
         public UpdateCartItemDto CartItemDto { get; set; }
+        public bool IsMinus { get; set; }
     }
 }

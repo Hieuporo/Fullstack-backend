@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.Contracts.Infrastructure.IReposiotry
 {
-    public interface ICartItemRepository : IGenericRepository<CartItem>
+    public interface ICartRepository : IGenericRepository<Cart>
     {
-        Task<CartItem> GetCartItem(int cartId, int productItemId);
-        Task<bool> IsItemOwnedByUser(int cartItemId, string userId);
-
+        Task<Cart> GetCartByUserId(string userId);
+        Task<Cart> CreateCart(string userId);
     }
 }

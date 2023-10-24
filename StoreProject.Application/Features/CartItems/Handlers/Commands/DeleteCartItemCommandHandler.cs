@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using StoreProject.Application.Constants;
 using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Exceptions;
 using StoreProject.Application.Features.CartItems.Requests.Commands;
 using StoreProject.Application.Features.Coupons.Requests.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,18 +19,24 @@ namespace StoreProject.Application.Features.CartItems.Handlers.Commands
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-
-        public DeleteCartItemCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public DeleteCartItemCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<Unit> Handle(DeleteCartItemCommand request, CancellationToken cancellationToken)
         {
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Uid).Value;
+
+            if (!await _unitOfWork.CartItemRepository.IsItemOwnedByUser(request.Id, userId))
+            {
+                throw new BadRequestException("Something went wrong");
+            }
 
             var cartItem = await _unitOfWork.CartItemRepository.Get(request.Id);
-
 
 
             await _unitOfWork.CartItemRepository.Delete(cartItem);

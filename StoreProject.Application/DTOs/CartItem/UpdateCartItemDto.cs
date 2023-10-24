@@ -9,8 +9,5 @@ namespace StoreProject.Application.DTOs.CartItem
 {
     public class UpdateCartItemDto : BaseDto
     {
-        public int UserId { get; set; }
-        public int ProductId { get; set; }
-        public int Quantity { get; set; }
     }
 }
