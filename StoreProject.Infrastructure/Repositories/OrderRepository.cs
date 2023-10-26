@@ -17,5 +17,33 @@ namespace StoreProject.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
+
+        public List<Order> ClientGetAllOrdersWithDetail(string userId)
+        {
+                return _dbContext.Orders.Include(u => u.ShippingMethod)
+                .Include(u => u.OrderItems).ThenInclude(u => u.ProductItem)
+                .Where(u => u.UserId == userId).ToList();
+        }
+
+        public Order GetOrderWithDetail(string userId, int orderId)
+        {
+            return _dbContext.Orders.Include(u => u.ShippingMethod)
+                .Include(u => u.OrderItems).ThenInclude(u => u.ProductItem)
+                .FirstOrDefault(u => u.UserId == userId && u.Id == orderId);
+        }
+
+        public List<Order> GetAllOrdersWithDetail()
+        {
+            return _dbContext.Orders.Include(u => u.ShippingMethod)
+                .Include(u => u.OrderItems).ThenInclude(u => u.ProductItem)
+                .Include(u => u.User).ToList();
+        }
+
+        public Order AdminGetOrderWithDetail(int orderId)
+        {
+            return _dbContext.Orders.Include(u => u.ShippingMethod)
+                .Include(u => u.OrderItems).ThenInclude(u => u.ProductItem)
+                .Include(u => u.User).FirstOrDefault(u => u.Id == orderId);
+        }
     }
 }

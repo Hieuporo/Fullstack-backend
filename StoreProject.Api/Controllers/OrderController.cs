@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StoreProject.Application.DTOs.Coupon;
+using StoreProject.Application.DTOs.Order;
 using StoreProject.Application.Features.Coupons.Requests.Queries;
+using StoreProject.Application.Features.Orders.Requests.Commands;
+using StoreProject.Application.Features.Orders.Requests.Queries;
 
 namespace StoreProject.Api.Controllers
 {
@@ -20,23 +23,77 @@ namespace StoreProject.Api.Controllers
 
         [HttpGet]
         public async Task<ActionResult> Get()
-        {   
+        {
+            var response = await _mediator.Send(new ClientGetOrderListRequest());
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<ActionResult> Get(int id)
+        {
+            var response = await _mediator.Send(new ClientGetOrderRequest { Id = id });
+            return Ok(response);
+        }
+
+
+        [HttpGet]
+        [Route("admin")]
+        public async Task<ActionResult> AdminGet()
+        {
+            var response = await _mediator.Send(new AdminGetOrderListRequest());
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("admin/{id}")]
+        public async Task<ActionResult> AdminGet(int id)
+        {
+            var response = await _mediator.Send(new AdminGetOrderRequest { Id = id });
+            return Ok(response);
+        }
+
+
+
+
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] CreateOrderWithStripeSetupDto createOrderWithStripeSetupDto)
+        {
+            var command = new CreateOrderCommand
+                { 
+                OrderDto = createOrderWithStripeSetupDto.CreateOrderDto 
+                };
+            var orderId = await _mediator.Send(command);
+
+            var url = await _mediator
+                .Send(new CreateCheckoutSessionCommand { StripeSetupDto = createOrderWithStripeSetupDto.StripeSetupDto, OrderId = orderId });
+
+            return Ok(url);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] UpdateOrderStatusDto updateOrderStatusCommand)
+        {
+            var command = new UpdateOrderStatusCommand { OrderDto = updateOrderStatusCommand };
+            var response = await _mediator.Send(command);
 
             return Ok();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post()
+        [Route("confirmpayment/{id}")]
+        public async Task<ActionResult> ConfirmPayment(int id)
         {
+            var command = new ValidateStripeSessionCommand
+            {
+                OrderId = id ,
+            };
 
-            return Ok();
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
         }
 
-        [HttpPut]
-        public async Task<ActionResult> Put()
-        {
-
-            return Ok();
-        }
+      
     }
 }

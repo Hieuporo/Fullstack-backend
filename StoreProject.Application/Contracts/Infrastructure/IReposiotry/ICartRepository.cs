@@ -10,6 +10,7 @@ namespace StoreProject.Application.Contracts.Infrastructure.IReposiotry
     public interface ICartRepository : IGenericRepository<Cart>
     {
         Task<Cart> GetCartByUserId(string userId);
+        Task<decimal> GetTotalMoney(string userId);
         Task<Cart> CreateCart(string userId);
     }
 }

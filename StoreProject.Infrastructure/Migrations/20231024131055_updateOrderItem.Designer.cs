@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreProject.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using StoreProject.Infrastructure.Data;
 namespace StoreProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231024131055_updateOrderItem")]
+    partial class updateOrderItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,16 +262,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "a9a6c0e8-0663-4cda-9012-365bdcd4e76d",
+                            ConcurrencyStamp = "3f98b81f-060d-4c65-9b8c-ac2eab3e3160",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEvS/dHmUM8BSZJyZlog7o5C/qMVryMXPBNdyVIm0rdrXyqocPjKuG/mjSCy4Jycug==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEChiNP6kA5Hbh6XybzqVrspJguso7hgKZbJNgkOOth4admGI8/H/czjtSc6sOW0FXg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "31d20878-afb7-4a90-8bdf-f036d5a2f032",
+                            SecurityStamp = "4cc04af3-51c7-4a6c-964e-f2bae586ad5e",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -277,16 +280,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "6cdbeb3c-150e-44bf-9800-83fbd88aabdd",
+                            ConcurrencyStamp = "b732cdf4-a322-446b-b94c-baa5afab689a",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "User",
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENt/qKVWJyRTYp5usiLFNkT8HaPQs/NcoIQhe0JcmOjLeT0wfJTGcgEzAFAERnhUDQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGyn/yNKtEm+BAOTKC+BcfmkAZaiYZ1GxPqVMZc0+AMtedTAkfYhJfKOmM6q8z/KZA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e0f1928-75ac-4231-9347-6a94847c7d19",
+                            SecurityStamp = "4a99ada2-2cdf-4cf2-bbb0-7e13a13ada1f",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -445,8 +448,8 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("DiscountAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("DiscountAmount")
+                        .HasColumnType("float");
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
@@ -454,8 +457,8 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("MinAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("MinAmount")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -466,15 +469,15 @@ namespace StoreProject.Infrastructure.Migrations
                         {
                             Id = 1,
                             CouponCode = "100FF",
-                            DiscountAmount = 10m,
-                            MinAmount = 100m
+                            DiscountAmount = 10.0,
+                            MinAmount = 100.0
                         },
                         new
                         {
                             Id = 2,
                             CouponCode = "200FF",
-                            DiscountAmount = 20m,
-                            MinAmount = 150m
+                            DiscountAmount = 20.0,
+                            MinAmount = 150.0
                         });
                 });
 
@@ -503,8 +506,8 @@ namespace StoreProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Discount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Discount")
+                        .HasColumnType("float");
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
@@ -512,10 +515,11 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("OrderTotal")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("OrderTotal")
+                        .HasColumnType("float");
 
                     b.Property<string>("PaymentIntentId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
@@ -660,8 +664,8 @@ namespace StoreProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -715,8 +719,8 @@ namespace StoreProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

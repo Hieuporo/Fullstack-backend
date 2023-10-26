@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreProject.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using StoreProject.Infrastructure.Data;
 namespace StoreProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231025142350_updateOrderTable")]
+    partial class updateOrderTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,16 +262,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "a9a6c0e8-0663-4cda-9012-365bdcd4e76d",
+                            ConcurrencyStamp = "40e7cf6d-211a-4967-b72d-4edb3196f128",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEvS/dHmUM8BSZJyZlog7o5C/qMVryMXPBNdyVIm0rdrXyqocPjKuG/mjSCy4Jycug==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFPgOk7FTWqlgP0eDrJf+MojzbTyuMXetpL/XaJQewswPz7MOgl1K1ys8U8obHlCOA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "31d20878-afb7-4a90-8bdf-f036d5a2f032",
+                            SecurityStamp = "0699b438-c0ee-467f-b631-e18f2369e9ec",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -277,16 +280,16 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "6cdbeb3c-150e-44bf-9800-83fbd88aabdd",
+                            ConcurrencyStamp = "f60ea9b8-ca54-4809-89c9-b57f34b1ffa0",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "User",
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENt/qKVWJyRTYp5usiLFNkT8HaPQs/NcoIQhe0JcmOjLeT0wfJTGcgEzAFAERnhUDQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKCfKNV+DIeB7Zkd6s3VNmn/vRcFsu8mW1w0m8cpGuf248916at4lyGOkoYpuWCXyw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e0f1928-75ac-4231-9347-6a94847c7d19",
+                            SecurityStamp = "8739f0a5-35d3-46f0-9481-a10ed7cb540d",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -530,6 +533,7 @@ namespace StoreProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StripeSessionId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")

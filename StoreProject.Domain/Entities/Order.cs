@@ -19,14 +19,13 @@ namespace StoreProject.Domain.Entities
         public string CustomerName { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
-        public double Discount { get; set; }
-        public double OrderTotal { get; set; }
+        public decimal Discount { get; set; }
+        public decimal OrderTotal { get; set; }
         public string Status { get; set; }
-        public string PaymentIntentId { get; set; }
+        public string? PaymentIntentId { get; set; }
         public string? StripeSessionId { get; set;}
 
         public ICollection<OrderItem> OrderItems { get; set; }
-
 
     }
 }

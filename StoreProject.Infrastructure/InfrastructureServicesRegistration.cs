@@ -14,6 +14,7 @@ using StoreProject.Infrastructure.Data;
 using StoreProject.Infrastructure.Mail;
 using StoreProject.Infrastructure.Repositories;
 using StoreProject.Infrastructure.Services;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace StoreProject.Infrastructure
                options.UseSqlServer(
                    configuration.GetConnectionString("DefaultConnection")));
 
+            StripeConfiguration.ApiKey = configuration.GetSection("Stripe:SecretKey").Get<string>();
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -61,6 +63,7 @@ namespace StoreProject.Infrastructure
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]))
                     };
                 });
+            
 
             return services;
         }

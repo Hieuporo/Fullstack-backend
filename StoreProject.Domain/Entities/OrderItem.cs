@@ -13,9 +13,6 @@ namespace StoreProject.Domain.Entities
         public Order Order { get; set; }
         public int ProductItemId { get; set; }
         public ProductItem ProductItem { get; set; }
-
         public int Quantity { get; set; }
-        public double Price { get; set; }
-
     }
 }

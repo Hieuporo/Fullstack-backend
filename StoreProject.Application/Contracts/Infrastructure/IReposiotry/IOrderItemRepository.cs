@@ -9,5 +9,6 @@ namespace StoreProject.Application.Contracts.Infrastructure.IReposiotry
 {
     public interface IOrderItemRepository : IGenericRepository<OrderItem>
     {
+        Task<List<OrderItem>> AddRange(List<OrderItem> orderItems);
     }
 }

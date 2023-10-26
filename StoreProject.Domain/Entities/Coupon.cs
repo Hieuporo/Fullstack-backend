@@ -11,8 +11,8 @@ namespace StoreProject.Domain.Entities
     {
 
         public string CouponCode { get; set; }
-        public double MinAmount { get; set; }
-        public double DiscountAmount { get; set; }
+        public decimal MinAmount { get; set; }
+        public decimal DiscountAmount { get; set; }
         public ICollection<Order> Orders { get; }
 
     }

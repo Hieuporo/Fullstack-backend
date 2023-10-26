@@ -24,6 +24,7 @@ namespace StoreProject.Application.Features.CartItems.Handlers.Queries
 
         public async Task<CartItemDto> Handle(GetCartItemRequest request, CancellationToken cancellationToken)
         {
+
             var cartItem = await _unitOfWork.CartItemRepository.Get(request.Id);
             return _mapper.Map<CartItemDto>(cartItem);
         }

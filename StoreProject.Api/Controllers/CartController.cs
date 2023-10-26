@@ -2,21 +2,11 @@
 using Azure.Core;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StoreProject.Application.Constants;
 using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
-using StoreProject.Application.DTOs.Brand;
 using StoreProject.Application.DTOs.CartItem;
-using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.Brands.Requests.Commands;
-using StoreProject.Application.Features.Brands.Requests.Queries;
 using StoreProject.Application.Features.CartItems.Requests.Commands;
-using StoreProject.Application.Features.Carts.Requests.Commands;
 using StoreProject.Application.Features.Carts.Requests.Queries;
-using StoreProject.Domain.Entities;
-using StoreProject.Infrastructure.Repositories;
-using System.Security.Claims;
 
 namespace StoreProject.Api.Controllers
 {

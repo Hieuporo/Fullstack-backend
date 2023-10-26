@@ -36,5 +36,21 @@ namespace StoreProject.Infrastructure.Repositories
 
             return cart;
         }
+
+        public async Task<decimal> GetTotalMoney(string userId)
+        {
+            var cart = await _dbContext.Carts.Include(u => u.CartItems)
+                .ThenInclude(u => u.ProductItem).FirstOrDefaultAsync(c => c.UserId == userId);
+
+
+            decimal total = 0;
+
+            foreach(var cartItem in cart.CartItems)
+            {
+                total +=  cartItem.ProductItem.Price * cartItem.Quantity;
+            }
+
+            return total;
+        }
     }
 }

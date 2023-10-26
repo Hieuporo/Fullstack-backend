@@ -17,6 +17,11 @@ namespace StoreProject.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
-       
+
+        public async Task<List<OrderItem>> AddRange(List<OrderItem> orderItems)
+        {
+            await _dbContext.OrderItems.AddRangeAsync(orderItems);
+            return orderItems;
+        }
     }
 }

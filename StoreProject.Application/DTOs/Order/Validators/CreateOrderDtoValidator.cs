@@ -16,32 +16,12 @@ namespace StoreProject.Application.DTOs.Order.Validators
               .NotEmpty().WithMessage("{PropertyName} is required")
               .NotNull();
 
-            RuleFor(p => p.UserId)
-             .NotEmpty().WithMessage("{PropertyName} is required")
-             .NotNull();
-
-            RuleFor(p => p.Status)
-              .NotEmpty().WithMessage("{PropertyName} is required")
-              .NotNull();
-
             RuleFor(p => p.ShippingMethodId)
-              .NotEmpty().WithMessage("{PropertyName} is required");
-
-            RuleFor(p => p.StripeSessionId)
-              .NotEmpty().WithMessage("{PropertyName} is required");
-
-            RuleFor(p => p.Status)
-              .NotEmpty().WithMessage("{PropertyName} is required")
-              .NotNull();
-
-            RuleFor(p => p.Discount)
               .NotEmpty().WithMessage("{PropertyName} is required");
 
             RuleFor(p => p.PhoneNumber)
               .NotEmpty().WithMessage("{PropertyName} is required");
 
-            RuleFor(p => p.OrderTotal)
-              .GreaterThan(0).WithMessage("{PropertyName} must be at least 1");
         }
     }
 }

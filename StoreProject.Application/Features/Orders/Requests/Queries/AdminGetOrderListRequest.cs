@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.Features.Orders.Requests.Queries
 {
-    public class GetOrderListRequest : IRequest<List<OrderDto>>
+    public class AdminGetOrderListRequest : IRequest<List<OrderDto>>
     {
+
     }
 }

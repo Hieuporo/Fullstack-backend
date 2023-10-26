@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.Features.Orders.Requests.Queries
 {
-    public class GetOrderRequest : IRequest<OrderDto>
+    public class ClientGetOrderRequest : IRequest<OrderClientDto>
     {
         public int Id { get; set; }
     }

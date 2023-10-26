@@ -11,6 +11,7 @@ using StoreProject.Application.DTOs.ProductItem;
 using StoreProject.Application.DTOs.ProductTag;
 using StoreProject.Application.DTOs.ShippingMethod;
 using StoreProject.Application.DTOs.Tag;
+using StoreProject.Application.DTOs.User;
 using StoreProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,12 @@ namespace StoreProject.Application.Profiles
     {
         public MappingProfile()
         {
+            CreateMap<ApplicationUser, UserDto>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
+                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email));
+
             CreateMap<Coupon, CouponDto>().ReverseMap();
             CreateMap<Coupon, CreateCouponDto>().ReverseMap();
             CreateMap<Coupon, UpdateCouponDto>().ReverseMap();
@@ -47,7 +54,6 @@ namespace StoreProject.Application.Profiles
             CreateMap<CartItem, CartItemDto>().ReverseMap();
             CreateMap<CartItem, CreateCartItemDto>().ReverseMap();
             CreateMap<CartItem, UpdateCartItemDto>().ReverseMap();
-
             CreateMap<Cart, CartDto>()
                 .ForMember(dest => dest.CartItems, opt => opt.MapFrom(src => src.CartItems.Select(item => new CartItemDto
                 {
@@ -59,15 +65,21 @@ namespace StoreProject.Application.Profiles
 
             CreateMap<CartDto, Cart>();
 
+            CreateMap<OrderDto, Order>();
+            CreateMap<Order, OrderDto>()
+              .ForMember(dest => dest.OrderItems, opt => opt.MapFrom(src => src.OrderItems))
+              .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User));
 
 
-            CreateMap<Order, OrderDto>().ReverseMap();
+            CreateMap<Order, OrderClientDto>().ReverseMap();
             CreateMap<Order, CreateOrderDto>().ReverseMap();
             CreateMap<Order, UpdateOrderStatusDto>().ReverseMap();
 
 
-            CreateMap<OrderItem, OrderItemDto>().ReverseMap();
-            CreateMap<OrderItem, CreateOrderItemDto>().ReverseMap();
+            CreateMap<OrderItem, OrderItemDto>()
+                .ForMember(dest => dest.ProductItem, opt => opt.MapFrom(src => src.ProductItem));
+            CreateMap<OrderItemDto, OrderItem>();
+
             CreateMap<OrderItem, UpdateOrderItemDto >().ReverseMap();
 
             CreateMap<ProductTag, ProductTagDto>().ReverseMap();

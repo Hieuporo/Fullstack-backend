@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
+using StoreProject.Application.Constants;
 using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Application.DTOs.Order.Validators;
 using StoreProject.Application.Exceptions;
 using StoreProject.Application.Features.Orders.Requests.Commands;
+using StoreProject.Domain.Entities;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,13 +36,27 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
                 throw new ValidationException(validatorResult);
             }
 
-            var order = await _unitOfWork.OrderRepository.Get(request.OrderDto.Id);
+            var order =  await _unitOfWork.OrderRepository.Get(request.OrderDto.Id);
+            if (order != null)
+            {
+                if (request.OrderDto.Status == OrderStatus.Status_Cancelled)
+                {
+                    //we will give refund
+                    var options = new RefundCreateOptions
+                    {
+                        Reason = RefundReasons.RequestedByCustomer,
+                        PaymentIntent = order.PaymentIntentId
+                    };
 
-            _mapper.Map(request.OrderDto, order);
-
-
-            await _unitOfWork.OrderRepository.Update(order);
-            await _unitOfWork.Save();
+                    var service = new RefundService();
+                    Refund refund = service.Create(options);
+                }
+                order.Status = request.OrderDto.Status;
+                await _unitOfWork.Save();
+            } else
+            {
+                throw new BadRequestException("Order is not exist");
+            }
 
             return Unit.Value;
         }

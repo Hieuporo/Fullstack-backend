@@ -10,23 +10,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+using StoreProject.Application.Constants;
 
 namespace StoreProject.Application.Features.Orders.Handlers.Queries
 {
-    public class GetOrderListRequestHandler : IRequestHandler<GetOrderListRequest, List<OrderDto>>
+    public class AdminGetOrderListRequestHandler : IRequestHandler<AdminGetOrderListRequest, List<OrderDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-
-        public GetOrderListRequestHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public AdminGetOrderListRequestHandler(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
+            _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
         }
 
-        public async Task<List<OrderDto>> Handle(GetOrderListRequest request, CancellationToken cancellationToken)
+
+        public async Task<List<OrderDto>> Handle(AdminGetOrderListRequest request, CancellationToken cancellationToken)
         {
-            var orders = await _unitOfWork.OrderRepository.GetAll();
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Uid).Value;
+
+            var orders = _unitOfWork.OrderRepository.GetAllOrdersWithDetail();
+
+
             return _mapper.Map<List<OrderDto>>(orders);
         }
     }
