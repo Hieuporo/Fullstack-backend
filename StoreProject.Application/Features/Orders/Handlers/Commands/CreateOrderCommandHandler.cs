@@ -75,6 +75,11 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
 
             var listOrderItems = new List<OrderItem>();
 
+            if(request.OrderDto.CartItemIdList.Count == 0)
+            {
+                throw new BadRequestException("Please Add to Cart before create order");
+            }
+
             foreach (var id in request.OrderDto.CartItemIdList)
             {
                 var cartItemDetail = await _unitOfWork.CartItemRepository.GetCartItemDetail(id);
