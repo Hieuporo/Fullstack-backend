@@ -8,7 +8,7 @@ namespace StoreProject.Application.Constants
 {
     public static class Role
     {
-        public const string RoleAdmin = "ADMIN";
-        public const string RoleCustomer = "CUSTOMER";
+        public const string RoleAdmin = "Admin";
+        public const string RoleCustomer = "User";
     }
 }

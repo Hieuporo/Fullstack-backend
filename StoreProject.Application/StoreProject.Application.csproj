@@ -27,4 +27,8 @@
     <ProjectReference Include="..\StoreProject.Domain\StoreProject.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Users\" />
+  </ItemGroup>
+
 </Project>

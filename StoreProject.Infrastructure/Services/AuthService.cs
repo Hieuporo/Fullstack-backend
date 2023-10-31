@@ -86,7 +86,7 @@ namespace StoreProject.Infrastructure.Services
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "User");
+                    await _userManager.AddToRoleAsync(user, Role.RoleCustomer);
                     return new RegistrationResponse() { UserId = user.Id };
                 }
                 else
@@ -99,6 +99,14 @@ namespace StoreProject.Infrastructure.Services
                 throw new Exception($"Email {request.Email} already exists.");
             }
         }
+
+        public async Task<IList<ApplicationUser>> ListUser()
+        {
+            var users = await _userManager.GetUsersInRoleAsync(Role.RoleCustomer);
+
+            return users;
+        }
+
 
         private async Task<JwtSecurityToken> GenerateToken(ApplicationUser user)
         {
@@ -133,5 +141,7 @@ namespace StoreProject.Infrastructure.Services
                 signingCredentials: signingCredentials);
             return jwtSecurityToken;
         }
+
+
     }
 }
