@@ -1,4 +1,5 @@
 ﻿using StoreProject.Application.DTOs.Common;
+using StoreProject.Application.DTOs.ProductItem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace StoreProject.Application.DTOs.CartItem
     {
         public int CartId { get; set; }
         public int ProductItemId { get; set; }
+        public ProductItemDto ProductItem{ get; set; }
         public int Quantity { get; set; }
     }
 }

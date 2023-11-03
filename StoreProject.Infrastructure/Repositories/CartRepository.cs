@@ -32,7 +32,7 @@ namespace StoreProject.Infrastructure.Repositories
 
         public async Task<Cart> GetCartByUserId(string userId)
         {
-            var cart = await _dbContext.Carts.Include(u => u.CartItems).FirstOrDefaultAsync(c => c.UserId == userId);
+            var cart = await _dbContext.Carts.Include(u => u.CartItems).ThenInclude(u => u.ProductItem).FirstOrDefaultAsync(c => c.UserId == userId);
 
             return cart;
         }

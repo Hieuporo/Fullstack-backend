@@ -65,6 +65,12 @@ namespace StoreProject.Api.Controllers
                 };
             var orderId = await _mediator.Send(command);
 
+            createOrderWithStripeSetupDto.StripeSetupDto = new StripeSetupDto
+            {
+                ApprovedUrl = createOrderWithStripeSetupDto.StripeSetupDto.ApprovedUrl  + orderId.ToString(),
+                CancelUrl = createOrderWithStripeSetupDto.StripeSetupDto.CancelUrl 
+            };
+
             var url = await _mediator
                 .Send(new CreateCheckoutSessionCommand { StripeSetupDto = createOrderWithStripeSetupDto.StripeSetupDto, OrderId = orderId });
 
@@ -84,6 +90,8 @@ namespace StoreProject.Api.Controllers
         [Route("confirmpayment/{id}")]
         public async Task<ActionResult> ConfirmPayment(int id)
         {
+            
+
             var command = new ValidateStripeSessionCommand
             {
                 OrderId = id ,

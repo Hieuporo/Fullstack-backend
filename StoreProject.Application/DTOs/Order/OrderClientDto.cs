@@ -1,5 +1,6 @@
 ﻿using StoreProject.Application.DTOs.Common;
 using StoreProject.Application.DTOs.Coupon;
+using StoreProject.Application.DTOs.OrderItem;
 using StoreProject.Application.DTOs.ShippingMethod;
 using StoreProject.Domain.Entities;
 using System;
@@ -21,5 +22,6 @@ namespace StoreProject.Application.DTOs.Order
         public decimal Discount { get; set; }
         public decimal OrderTotal { get; set; }
         public string Status { get; set; }
+        public ICollection<OrderItemDto> OrderItems { get; set; }
     }
 }

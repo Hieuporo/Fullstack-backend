@@ -136,6 +136,7 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
             Session session = service.Create(options);
             order.StripeSessionId = session.Id;
 
+            await _unitOfWork.Save();
 
             return session.Url;
         }

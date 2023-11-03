@@ -14,22 +14,6 @@ namespace StoreProject.Infrastructure.Configurations.Entities
         public void Configure(EntityTypeBuilder<Coupon> builder)
         {
 
-            builder.HasData(
-                new Coupon
-                {
-                    Id = 1,
-                    CouponCode = "100FF",
-                    MinAmount = 100,
-                    DiscountAmount = 10
-                },
-                 new Coupon
-                 {
-                     Id = 2,
-                     CouponCode = "200FF",
-                     MinAmount = 150,
-                     DiscountAmount = 20
-                 }
-            );
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.DTOs.Coupon;
 using StoreProject.Application.DTOs.Coupon.Validators;
 using StoreProject.Application.Exceptions;
 using StoreProject.Application.Features.Coupons.Requests.Commands;
@@ -37,6 +38,18 @@ namespace StoreProject.Application.Features.Coupons.Handlers.Commands
             var coupon = _mapper.Map<Coupon>(request.CouponDto);
             coupon = await _unitOfWork.CouponRepository.Add(coupon);
             await _unitOfWork.Save();
+
+            var options = new Stripe.CouponCreateOptions
+            {
+                AmountOff = (long)(request.CouponDto.DiscountAmount * 100),
+                Name = request.CouponDto.CouponCode,
+                Currency = "usd",
+                Id = request.CouponDto.CouponCode,
+            };
+            var service = new Stripe.CouponService();
+            service.Create(options);
+
+
 
             return coupon.Id;
         }

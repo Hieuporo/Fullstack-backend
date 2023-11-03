@@ -51,18 +51,18 @@ namespace StoreProject.Application.Profiles
             CreateMap<Tag, CreateTagDto>().ReverseMap();
             CreateMap<Tag, UpdateTagDto>().ReverseMap();
 
-            CreateMap<CartItem, CartItemDto>().ReverseMap();
+            CreateMap<CartItemDto, CartItem>();
+            CreateMap<CartItem, CartItemDto>()
+            .ForMember(dest => dest.ProductItem, opt => opt.MapFrom(src => src.ProductItem))
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.ProductItemId, opt => opt.MapFrom(src => src.ProductItemId))
+            .ForMember(dest => dest.CartId, opt => opt.MapFrom(src => src.CartId))
+            .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity));
+
             CreateMap<CartItem, CreateCartItemDto>().ReverseMap();
             CreateMap<CartItem, UpdateCartItemDto>().ReverseMap();
             CreateMap<Cart, CartDto>()
-                .ForMember(dest => dest.CartItems, opt => opt.MapFrom(src => src.CartItems.Select(item => new CartItemDto
-                {
-                    Id = item.Id,
-                    ProductItemId = item.ProductItemId,
-                    CartId = item.CartId,
-                    Quantity = item.Quantity,
-                })));
-
+                 .ForMember(dest => dest.CartItems, opt => opt.MapFrom(src => src.CartItems));
             CreateMap<CartDto, Cart>();
 
             CreateMap<OrderDto, Order>();
@@ -71,7 +71,9 @@ namespace StoreProject.Application.Profiles
               .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User));
 
 
-            CreateMap<Order, OrderClientDto>().ReverseMap();
+            CreateMap<Order, OrderClientDto>().
+                ForMember(dest => dest.OrderItems, opt => opt.MapFrom(src => src.OrderItems));
+
             CreateMap<Order, CreateOrderDto>().ReverseMap();
             CreateMap<Order, UpdateOrderStatusDto>().ReverseMap();
 
