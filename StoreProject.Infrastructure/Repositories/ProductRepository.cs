@@ -25,8 +25,13 @@ namespace StoreProject.Infrastructure.Repositories
         }
     
 
-        public List<Product> GetProductsWithProductItem()
+        public List<Product> GetProductsWithProductItem(string? SearchTerm)
         {
+            if (!String.IsNullOrEmpty(SearchTerm))
+            {
+                return _dbContext.Products.Include(p => p.ProductItems)
+                    .Where(u => u.Name.Contains(SearchTerm)).ToList();
+            }
             return _dbContext.Products.Include(p => p.ProductItems).ToList();
         }
     }

@@ -23,13 +23,19 @@ namespace StoreProject.Api.Controllers
             _mediator = mediator;
         }
 
-
-
         [HttpGet]
-        public async Task<ActionResult<List<ProductDto>>> Get()
-        {
-            var products = await _mediator.Send(new GetProductListRequest());
-            return Ok(products);
+        public async Task<ActionResult<List<ProductDto>>> Get([FromQuery] string? SearchTerm, [FromQuery] string? SortName,
+            [FromQuery] int Page, [FromQuery] int PageSize)
+        {   
+            var result = await _mediator.Send(new GetProductListRequest() 
+            {
+                Page = Page ,
+                PageSize = PageSize,
+                SearchTerm = SearchTerm,
+                SortName = SortName
+            });
+
+            return Ok(result);
         }
 
         [HttpGet]

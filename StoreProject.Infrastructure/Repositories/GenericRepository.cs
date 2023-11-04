@@ -4,6 +4,7 @@ using StoreProject.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,6 +23,7 @@ namespace StoreProject.Infrastructure.Repositories
             await _dbContext.AddAsync(entity);
             return entity;
         }
+
 
         public async Task Delete(T entity)
         {
@@ -44,6 +46,7 @@ namespace StoreProject.Infrastructure.Repositories
             return await _dbContext.Set<T>().ToListAsync();
         }
 
+       
         public async Task Update(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;

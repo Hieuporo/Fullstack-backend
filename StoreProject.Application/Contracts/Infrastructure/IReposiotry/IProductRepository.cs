@@ -10,6 +10,6 @@ namespace StoreProject.Application.Contracts.Infrastructure.IReposiotry
     public interface IProductRepository : IGenericRepository<Product>
     {
         Product GetProductWithProductItem(int productId);
-        List<Product> GetProductsWithProductItem();
+        List<Product> GetProductsWithProductItem(string? SearchTerm);
     }
 }

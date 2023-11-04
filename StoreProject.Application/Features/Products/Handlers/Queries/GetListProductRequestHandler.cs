@@ -4,6 +4,7 @@ using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Application.DTOs.Product;
 using StoreProject.Application.DTOs.ProductItem;
 using StoreProject.Application.Features.Products.Requests.Queries;
+using StoreProject.Application.Utils;
 using StoreProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ using System.Threading.Tasks;
 namespace StoreProject.Application.Features.Products.Handlers.Queries
 {
   
-        public class GetListProductRequestHandler : IRequestHandler<GetProductListRequest, List<ProductDto>>
+        public class GetListProductRequestHandler : IRequestHandler<GetProductListRequest, PagedResult>
         {
             private readonly IUnitOfWork _unitOfWork;
             private readonly IMapper _mapper;
@@ -25,10 +26,15 @@ namespace StoreProject.Application.Features.Products.Handlers.Queries
                 _mapper = mapper;
             }
 
-            public async Task<List<ProductDto>> Handle(GetProductListRequest request, CancellationToken cancellationToken)
+            public async Task<PagedResult> Handle(GetProductListRequest request, CancellationToken cancellationToken)
             {
-                var products = _unitOfWork.ProductRepository.GetProductsWithProductItem();
-            return _mapper.Map<List<ProductDto>>(products);
+
+                var products = _unitOfWork.ProductRepository.GetProductsWithProductItem(request.SearchTerm);
+                
+                PagedResult result = CommonUtility.ApplyPaging<Product>(request.Page, request.PageSize, products);
+                
+                result.Items =  _mapper.Map<List<ProductDto>>(result.Items);
+                return result;
             }
         }
     }
