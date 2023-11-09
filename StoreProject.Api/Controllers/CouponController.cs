@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoreProject.Application.Constants;
 using StoreProject.Application.DTOs.Coupon;
 using StoreProject.Application.Features.Coupons.Requests.Commands;
 using StoreProject.Application.Features.Coupons.Requests.Queries;
@@ -28,6 +29,15 @@ namespace StoreProject.Api.Controllers
             return Ok(coupons); 
         }
 
+
+        [HttpGet]
+        [Route("GetCouponByCode/{coupon}")]
+        public async Task<ActionResult<List<CouponDto>>> GetCouponByCode(string coupon)
+        {
+            var coupons = await _mediator.Send(new GetCouponByCouponCodeRequest() { CouponCode = coupon });
+            return Ok(coupons);
+        }
+
         [HttpGet]
         [Route("{id}")]
         public async Task<ActionResult<CouponDto>> Get(int id)
@@ -38,7 +48,7 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Post([FromBody] CreateCouponDto coupon)
         {
             var command = new CreateCouponCommand { CouponDto = coupon };
@@ -48,7 +58,7 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Put([FromBody] UpdateCouponDto coupon)
         {
             var command = new UpdateCouponCommand { CouponDto = coupon };
@@ -59,7 +69,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        [Authorize]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteCouponCommand { Id = id };

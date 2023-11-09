@@ -2,9 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StoreProject.Application.DTOs.Coupon;
+using StoreProject.Application.Constants;
 using StoreProject.Application.DTOs.Order;
-using StoreProject.Application.Features.Coupons.Requests.Queries;
 using StoreProject.Application.Features.Orders.Requests.Commands;
 using StoreProject.Application.Features.Orders.Requests.Queries;
 
@@ -39,6 +38,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpGet]
         [Route("admin")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> AdminGet()
         {
             var response = await _mediator.Send(new AdminGetOrderListRequest());
@@ -47,6 +47,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpGet]
         [Route("admin/{id}")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> AdminGet(int id)
         {
             var response = await _mediator.Send(new AdminGetOrderRequest { Id = id });
@@ -91,7 +92,6 @@ namespace StoreProject.Api.Controllers
         public async Task<ActionResult> ConfirmPayment(int id)
         {
             
-
             var command = new ValidateStripeSessionCommand
             {
                 OrderId = id ,
@@ -102,6 +102,22 @@ namespace StoreProject.Api.Controllers
             return Ok(response);
         }
 
-      
+
+        [HttpPost]
+        [Route("completeOrder/{id}")]
+        [Authorize(Roles = Role.RoleAdmin)]
+        public async Task<ActionResult> CompleteOrder(int id)
+        {
+
+            var command = new CompleteOrderCommand
+            {
+                Id = id,
+            };
+
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
     }
 }

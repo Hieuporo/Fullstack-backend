@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoreProject.Application.Constants;
 using StoreProject.Application.DTOs.Brand;
 
 using StoreProject.Application.Features.Brands.Requests.Commands;
@@ -11,7 +12,6 @@ namespace StoreProject.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class BrandController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -39,6 +39,7 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Post([FromBody] CreateBrandDto productItem)
         {
             var command = new CreateBrandCommand { BrandDto = productItem };
@@ -48,6 +49,7 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Put([FromBody] UpdateBrandDto productItem)
         {
             var command = new UpdateBrandCommand { BrandDto = productItem };
@@ -58,6 +60,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteBrandCommand { Id = id };

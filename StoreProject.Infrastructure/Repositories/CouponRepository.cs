@@ -1,4 +1,5 @@
-﻿using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+﻿using Microsoft.EntityFrameworkCore;
+using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Domain.Entities;
 using StoreProject.Infrastructure.Data;
 using System;
@@ -15,6 +16,14 @@ namespace StoreProject.Infrastructure.Repositories
         public CouponRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public async Task<Coupon?> GetCouponByCode(string code)
+        {
+            var coupon = await _dbContext.Coupons.FirstOrDefaultAsync(u => u.CouponCode == code);
+
+
+            return coupon;
         }
     }
 }

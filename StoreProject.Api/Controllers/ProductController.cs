@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoreProject.Application.Constants;
 using StoreProject.Application.DTOs.Product;
 using StoreProject.Application.DTOs.ProductItem;
 using StoreProject.Application.DTOs.ProductTag;
@@ -48,6 +50,7 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Post([FromBody] CreateProductDto product)
         {
             var command = new CreateProductCommand { ProductDto = product };
@@ -57,6 +60,7 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Put([FromBody] UpdateProductDto product)
         {
             var command = new UpdateProductCommand { ProductDto = product };
@@ -67,6 +71,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteProductCommand { Id = id };
@@ -77,6 +82,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpPost]
         [Route("producttag")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Post([FromBody] CreateProductTagDto productTag)
         {
             var command = new CreateProductTagCommand { ProductTagDto = productTag };
@@ -87,6 +93,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpDelete]
         [Route("producttag")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> DeleteProductTag(DeleteProductTagDto deleteProductTagDto)
         {
             var command = new DeleteProductTagCommand { ProductTagDto = deleteProductTagDto };
@@ -99,6 +106,7 @@ namespace StoreProject.Api.Controllers
         //Product Item
         [HttpGet]
         [Route("productitem")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult<List<ProductItemDto>>> GetProductTags()
         {
             var tags = await _mediator.Send(new GetProductItemListRequest());
@@ -107,6 +115,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpGet]
         [Route("productitem/{id}")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult<ProductItemDto>> GetProductTagById(int id)
         {
             var tag = await _mediator.Send(new GetProductItemRequest { Id = id });
@@ -116,6 +125,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpPost]
         [Route("productitem")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Post([FromBody] CreateProductItemDto productItem)
         {
             var command = new CreateProductItemCommand { ProductItemDto = productItem };
@@ -126,6 +136,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpPut]
         [Route("productitem")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Put([FromBody] UpdateProductItemDto productItem)
         {
             var command = new UpdateProductItemCommand { ProductItemDto = productItem };
@@ -136,6 +147,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpDelete]
         [Route("productitem/{id}")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> DeleteProductItem(int id)
         {
             var command = new DeleteProductItemCommand { Id = id };

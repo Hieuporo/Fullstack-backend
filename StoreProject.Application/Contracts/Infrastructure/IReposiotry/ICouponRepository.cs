@@ -9,5 +9,6 @@ namespace StoreProject.Application.Contracts.Infrastructure.IReposiotry
 {
     public interface ICouponRepository : IGenericRepository<Coupon>
     {
+        Task<Coupon?> GetCouponByCode(string code);
     }
 }

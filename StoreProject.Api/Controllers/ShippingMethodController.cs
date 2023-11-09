@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoreProject.Application.Constants;
 using StoreProject.Application.DTOs.ShippingMethod;
 
 using StoreProject.Application.Features.ShippingMethods.Requests.Commands;
@@ -37,18 +39,20 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] CreateShippingMethodDto productItem)
+        [Authorize(Roles = Role.RoleAdmin)]
+        public async Task<ActionResult> Post([FromBody] CreateShippingMethodDto createShippingMethodDto)
         {
-            var command = new CreateShippingMethodCommand { ShippingMethodDto = productItem };
+            var command = new CreateShippingMethodCommand { ShippingMethodDto = createShippingMethodDto };
             var response = await _mediator.Send(command);
 
             return Ok(response);
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put([FromBody] UpdateShippingMethodDto productItem)
+        [Authorize(Roles = Role.RoleAdmin)]
+        public async Task<ActionResult> Put([FromBody] UpdateShippingMethodDto updateShippingMethodDto)
         {
-            var command = new UpdateShippingMethodCommand { ShippingMethodDto = productItem };
+            var command = new UpdateShippingMethodCommand { ShippingMethodDto = updateShippingMethodDto };
             await _mediator.Send(command);
 
             return NoContent();
@@ -56,6 +60,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteShippingMethodCommand { Id = id };

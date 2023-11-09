@@ -62,6 +62,11 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
             if (request.OrderDto.CouponId != 0)
             {
                 var coupon = await _unitOfWork.CouponRepository.Get(request.OrderDto.CouponId);
+
+                if(order.OrderTotal < coupon.MinAmount)
+                {
+                    throw new BadRequestException("Not support coupon because total price is smaller than min amount of this coupon");
+                }
                 order.CouponId = request.OrderDto.CouponId;
                 order.Discount = coupon.DiscountAmount;
             }

@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoreProject.Application.Constants;
 using StoreProject.Application.DTOs.Tag;
 
 using StoreProject.Application.Features.Tags.Requests.Commands;
@@ -37,6 +39,7 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Post([FromBody] CreateTagDto tag)
         {
             var command = new CreateTagCommand { TagDto = tag };
@@ -46,6 +49,7 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Put([FromBody] UpdateTagDto tag)
         {
             var command = new UpdateTagCommand { TagDto = tag };
@@ -56,6 +60,7 @@ namespace StoreProject.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Delete(int id)
         {
             var command = new DeleteTagCommand { Id = id };

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StoreProject.Application.Constants;
 using StoreProject.Application.Contracts.Infrastructure.Identity;
 
 namespace StoreProject.Api.Controllers
@@ -18,6 +19,7 @@ namespace StoreProject.Api.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = Role.RoleAdmin)]
         public async Task<ActionResult> Get()
         {
             var users = await _authService.ListUser();
