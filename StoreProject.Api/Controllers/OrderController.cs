@@ -78,13 +78,13 @@ namespace StoreProject.Api.Controllers
             return Ok(url);
         }
 
-        [HttpPut]
-        public async Task<ActionResult> Put([FromBody] UpdateOrderStatusDto updateOrderStatusCommand)
+        [HttpPatch]
+        public async Task<ActionResult> Patch([FromBody] UpdateOrderStatusDto updateOrderStatusCommand)
         {
             var command = new UpdateOrderStatusCommand { OrderDto = updateOrderStatusCommand };
             var response = await _mediator.Send(command);
 
-            return Ok();
+            return Ok(response);
         }
 
         [HttpPost]

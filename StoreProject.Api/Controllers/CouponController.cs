@@ -57,9 +57,9 @@ namespace StoreProject.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Authorize(Roles = Role.RoleAdmin)]
-        public async Task<ActionResult> Put([FromBody] UpdateCouponDto coupon)
+        public async Task<ActionResult> Patch([FromBody] UpdateCouponDto coupon)
         {
             var command = new UpdateCouponCommand { CouponDto = coupon };
             await _mediator.Send(command);

@@ -41,7 +41,7 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
             var validator = new CreateOrderDtoValidator();
             var validatorResult = await validator.ValidateAsync(request.OrderDto);
 
-            if (validatorResult.IsValid == false)
+            if (!validatorResult.IsValid)
             {
                 throw new ValidationException(validatorResult);
             }

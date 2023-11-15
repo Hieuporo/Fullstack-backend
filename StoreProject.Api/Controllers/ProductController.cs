@@ -59,9 +59,9 @@ namespace StoreProject.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
+        [HttpPatch]
         [Authorize(Roles = Role.RoleAdmin)]
-        public async Task<ActionResult> Put([FromBody] UpdateProductDto product)
+        public async Task<ActionResult> Patch([FromBody] UpdateProductDto product)
         {
             var command = new UpdateProductCommand { ProductDto = product };
             await _mediator.Send(command);
