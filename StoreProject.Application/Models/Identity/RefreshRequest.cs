@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.Models.Identity
 {
-    public class AuthResponse
-    {
-        public string AccessToken { get; set; }
-		public string RefreshToken { get; set; }
-        public DateTime Expiration {  get; set; }
-
+	public class RefreshRequest
+	{
+		public required string AccessToken { get; set; }
+		public required string RefreshToken { get; set; }
 	}
 }

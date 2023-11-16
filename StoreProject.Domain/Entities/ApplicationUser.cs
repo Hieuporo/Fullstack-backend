@@ -13,6 +13,14 @@ namespace StoreProject.Domain.Entities
     {
         public string Address { get; set; }
         public string Name { get; set; }
-        public ICollection<Cart> Carts { get; set; }
+		public string? AvatarPictureUrl { get; set; }
+        
+        // refreshtoken
+        public string? RefreshToken {  get; set; }
+        public DateTime RefreshTokenExpiry {  get; set; }
+
+		public DateTime? LastLogin { get; set; }
+		public ICollection<Cart> Carts { get; set; }
+
     }
 }

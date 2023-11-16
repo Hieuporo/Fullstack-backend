@@ -14,7 +14,6 @@ namespace StoreProject.Infrastructure.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private ICouponRepository _couponRepository;
 
 
         public UnitOfWork(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
@@ -23,7 +22,9 @@ namespace StoreProject.Infrastructure.Repositories
             this._httpContextAccessor = httpContextAccessor;
         }
 
-        public ICouponRepository CouponRepository =>
+		private ICouponRepository _couponRepository;
+
+		public ICouponRepository CouponRepository =>
            _couponRepository ??= new CouponRepository(_context);
 
         private IBrandRepository _brandRepository;

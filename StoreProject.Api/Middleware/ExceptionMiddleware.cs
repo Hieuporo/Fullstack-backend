@@ -44,7 +44,10 @@ namespace StoreProject.Api.Middleware
                 case NotFoundException notFoundException:
                     statusCode = HttpStatusCode.NotFound;
                     break;
-                default:
+				case UnauthorizedException unauthorizedException:
+					statusCode = HttpStatusCode.Unauthorized;
+					break;
+				default:
                     break;
             }
 

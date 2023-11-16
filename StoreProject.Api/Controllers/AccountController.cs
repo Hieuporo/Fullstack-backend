@@ -22,13 +22,13 @@ namespace StoreProject.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<AuthResponse>> Login(AuthRequest request)
+        public async Task<ActionResult> Login(AuthRequest request)
         {
             return Ok(await _authService.Login(request));
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<RegistrationResponse>> Register(RegistrationRequest request)
+        public async Task<ActionResult> Register(RegistrationRequest request)
         {
             var responseLogin = await _authService.Register(request);
             await _mediator.Send(new CreateCartCommand { UserId = responseLogin.UserId }); 
