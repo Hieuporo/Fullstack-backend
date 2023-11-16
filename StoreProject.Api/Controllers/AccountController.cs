@@ -21,13 +21,14 @@ namespace StoreProject.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public async Task<ActionResult> Login(AuthRequest request)
         {
             return Ok(await _authService.Login(request));
         }
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
+
         public async Task<ActionResult> Register(RegistrationRequest request)
         {
             var responseLogin = await _authService.Register(request);
@@ -35,5 +36,21 @@ namespace StoreProject.Api.Controllers
 
             return Ok(responseLogin);
         }
-    }
+
+		[HttpPost("Refresh")]
+		public async Task<ActionResult> Refresh(RefreshRequest request)
+		{
+			var response = await _authService.Refresh(request);
+
+			return Ok(response);
+		}
+
+		[HttpPost("Revoke")]
+		public async Task<ActionResult> Revoke()
+		{
+			await _authService.Revoke();
+			return Ok();
+		}
+
+	}
 }

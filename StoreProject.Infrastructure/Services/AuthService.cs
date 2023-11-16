@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
@@ -60,6 +61,8 @@ namespace StoreProject.Infrastructure.Services
 			var refreshToken = GenerateRefreshToken();
 			user.RefreshToken = refreshToken;
 			user.RefreshTokenExpiry = DateTime.UtcNow.AddMonths(1);
+
+			await _userManager.UpdateAsync(user);
 
 			AuthResponse response = new AuthResponse
             {
@@ -165,7 +168,8 @@ namespace StoreProject.Infrastructure.Services
 			return Convert.ToBase64String(randomNumber);
 		}
 
-		
+
+        [Authorize]
 		public async Task<bool> Revoke()
 		{
 
@@ -188,18 +192,20 @@ namespace StoreProject.Infrastructure.Services
 		{
 			var secret = _jwtSettings.Issuer ?? throw new InvalidOperationException("Secret not configured");
 
+			var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
+
 			var validation = new TokenValidationParameters
 			{
 				ValidIssuer = _jwtSettings.Issuer,
 				ValidAudience = _jwtSettings.Audience,
-				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
+				IssuerSigningKey = symmetricSecurityKey,
 				ValidateLifetime = false
 			};
 
 			return new JwtSecurityTokenHandler().ValidateToken(token, validation, out _);
 		}
 
-		public async Task<object> Refresh(RefreshRequest model)
+		public async Task<AuthResponse> Refresh(RefreshRequest model)
 		{
 
 			var principal = GetPrincipalFromExpiredToken(model.AccessToken);
@@ -214,6 +220,7 @@ namespace StoreProject.Infrastructure.Services
 			var refreshToken = GenerateRefreshToken();
 			user.RefreshToken = refreshToken;
 			user.RefreshTokenExpiry = DateTime.UtcNow.AddMonths(1);
+			await _userManager.UpdateAsync(user);
 
 			return new AuthResponse
 			{
