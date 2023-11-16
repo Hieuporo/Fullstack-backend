@@ -8,7 +8,17 @@ namespace StoreProject.Application.Contracts.Infrastructure.IReposiotry
 {
     public interface IUnitOfWork : IDisposable
     {
-        IBrandRepository BrandRepository { get; }
+
+		//Start the database Transaction
+		void CreateTransaction();
+
+		//Commit the database Transaction
+		void Commit();
+
+		//Rollback the database Transaction
+		void Rollback();
+
+		IBrandRepository BrandRepository { get; }
         ICartItemRepository CartItemRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         ICouponRepository CouponRepository { get; }

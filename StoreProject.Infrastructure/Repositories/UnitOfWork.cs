@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Storage;
 using StoreProject.Application.Constants;
 using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Infrastructure.Data;
@@ -14,9 +15,9 @@ namespace StoreProject.Infrastructure.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
+		private IDbContextTransaction _objTran;
 
-
-        public UnitOfWork(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+		public UnitOfWork(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             this._httpContextAccessor = httpContextAccessor;
@@ -71,13 +72,54 @@ namespace StoreProject.Infrastructure.Repositories
         public ICartRepository CartRepository =>
          _cartRepository ??= new CartRepository(_context);
 
-        public void Dispose()
-        {
-            _context.Dispose();
-            GC.SuppressFinalize(this);
-        }
+		public void CreateTransaction()
+		{
+			//It will Begin the transaction on the underlying store connection
+			_objTran = _context.Database.BeginTransaction();
+		}
 
-        public async Task Save()
+		//If all the Transactions are completed successfully then we need to call this Commit() 
+		//method to Save the changes permanently in the database
+		public void Commit()
+		{
+			//Commits the underlying store transaction
+			_objTran.Commit();
+		}
+
+		//If at least one of the Transaction is Failed then we need to call this Rollback() 
+		//method to Rollback the database changes to its previous state
+		public void Rollback()
+		{
+			//Rolls back the underlying store transaction
+			_objTran.Rollback();
+			//The Dispose Method will clean up this transaction object and ensures Entity Framework
+			//is no longer using that transaction.
+			_objTran.Dispose();
+		}
+
+
+
+		private bool disposed = false;
+
+		protected void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					_context.Dispose();
+				}
+			}
+			this.disposed = true;
+		}
+
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		public async Task Save()
         {
             //var username = _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Uid);
             await _context.SaveChangesAsync();
