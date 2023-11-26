@@ -40,8 +40,12 @@ namespace StoreProject.Infrastructure
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            // use aspnetcore identity 
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+	            options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+
 
             services.AddTransient<IAuthService, AuthService>();
             services.AddAuthentication(options =>

@@ -1,13 +1,19 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using StoreProject.Application.Constants;
+using StoreProject.Application.Contracts.Infrastructure;
 using StoreProject.Application.Contracts.Infrastructure.Identity;
+using StoreProject.Application.DTOs.User;
 using StoreProject.Application.Exceptions;
+using StoreProject.Application.Models;
 using StoreProject.Application.Models.Identity;
 using StoreProject.Domain.Entities;
 using System;
@@ -27,34 +33,40 @@ namespace StoreProject.Infrastructure.Services
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly JwtSettings _jwtSettings;
 		private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IConfiguration _configuration;
+		private readonly IEmailSender _emailSender;
+		private readonly IMapper _mapper;
+
 		public AuthService(UserManager<ApplicationUser> userManager,
             IOptions<JwtSettings> jwtSettings,
             SignInManager<ApplicationUser> signInManager,
-			IHttpContextAccessor httpContextAccessor
+			IHttpContextAccessor httpContextAccessor,
+			IEmailSender emailSender,
+			IConfiguration configuration,
+            IMapper mapper
 			)
         {
             _userManager = userManager;
             _jwtSettings = jwtSettings.Value;
             _signInManager = signInManager;
 			_httpContextAccessor = httpContextAccessor;
-
+            _configuration = configuration;
+			_mapper = mapper;
+            _emailSender = emailSender;
 		}
 
 		public async Task<AuthResponse> Login(AuthRequest request)
         {
-            var user = await _userManager.FindByEmailAsync(request.Email);
-
-            if (user == null)
-            {
-                throw new Exception($"User with {request.Email} not found.");
-            }
-
+            var user = await _userManager.FindByEmailAsync(request.Email) ?? throw new Exception($"User with {request.Email} not found.");
+			
             var result = await _signInManager.PasswordSignInAsync(user.UserName, request.Password, false, lockoutOnFailure: false);
 
             if (!result.Succeeded)
             {
-                throw new Exception($"Credentials for '{request.Email} aren't valid'.");
+                throw new UnauthorizedException("Email or password is not valid. If not please confirm your email before login");
             }
+            
+
 
 
 			JwtSecurityToken jwtSecurityToken = await GenerateAccessToken(user);
@@ -64,11 +76,12 @@ namespace StoreProject.Infrastructure.Services
 
 			await _userManager.UpdateAsync(user);
 
-			AuthResponse response = new AuthResponse
+            AuthResponse response = new AuthResponse
             {
-               RefreshToken = refreshToken,
-			   AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-			   Expiration = jwtSecurityToken.ValidTo,
+                RefreshToken = refreshToken,
+                AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+                Expiration = jwtSecurityToken.ValidTo,
+                User = _mapper.Map<UserDto>(user)
 			};
 
             return response;
@@ -90,19 +103,32 @@ namespace StoreProject.Infrastructure.Services
                 PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
                 UserName = request.UserName,
-                EmailConfirmed = true
             };
 
             var existingEmail = await _userManager.FindByEmailAsync(request.Email);
 
-            if (existingEmail == null)
+           
+
+			if (existingEmail == null)
             {
                 var result = await _userManager.CreateAsync(user, request.Password);
 
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, Role.RoleCustomer);
-                    return new RegistrationResponse() { UserId = user.Id };
+
+					var domainName = _configuration.GetValue<string>("Client:Host");
+
+					var uri = await GenerateEmailConfirmationTokenAsync(user, domainName);
+
+					await _emailSender.SendEmail(new Email
+					{
+						Body = uri,
+						Subject = "Email confirm",
+						To = user.Email
+					});
+
+					return new RegistrationResponse() { UserId = user.Id };
                 }
                 else
                 {
@@ -230,33 +256,31 @@ namespace StoreProject.Infrastructure.Services
 			};
 		}
 
-		private async Task<string> SendVerificationEmail(ApplicationUser user, string origin)
+		private async Task<string> GenerateEmailConfirmationTokenAsync(ApplicationUser user, string origin)
 		{
 			var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
 			code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-			var route = "api/Auth/confirm-email/";
 
-			var _enpointUri = new Uri(string.Concat($"{origin}/", route));
+			var _enpointUri = new Uri(origin);
 			var verificationUri = QueryHelpers.AddQueryString(_enpointUri.ToString(), "userId", user.Id);
 			verificationUri = QueryHelpers.AddQueryString(verificationUri, "code", code);
 			//Email Service Call Here
 			return verificationUri;
 		}
 
-		public async Task<string> ConfirmEmailAsync(string userId, string code)
+		public async Task<bool> ConfirmEmailAsync(string userId, string code)
 		{
 			var user = await _userManager.FindByIdAsync(userId);
 			code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
 			var result = await _userManager.ConfirmEmailAsync(user, code);
-			if (result.Succeeded)
-			{
-				return $"Account Confirmed for {user.Email}. You can now use the /api/Account/authenticate endpoint.";
-			}
-			else
-			{
-				throw new Exception($"An error occured while confirming {user.Email}.");
-			}
+
+            if (result.Succeeded)
+            {
+                return true;
+            }
+
+            return false;
 		}
 
 	}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StoreProject.Application.DTOs.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace StoreProject.Application.Models.Identity
     {
         public string AccessToken { get; set; }
 		public string RefreshToken { get; set; }
+        public UserDto User { get; set; }
         public DateTime Expiration {  get; set; }
 
 	}

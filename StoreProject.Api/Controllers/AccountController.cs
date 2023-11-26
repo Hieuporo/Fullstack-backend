@@ -37,6 +37,19 @@ namespace StoreProject.Api.Controllers
             return Ok(responseLogin);
         }
 
+
+		[HttpPost("ConfirmEmail")]
+
+		public async Task<ActionResult> ConfirmEmail(ConfirmAccountRequest request)
+		{
+			var response = await _authService.ConfirmEmailAsync(request.UserId, request.Token);
+            if (response)
+            {
+				return Ok();
+			}
+            return BadRequest();
+		}
+
 		[HttpPost("Refresh")]
 		public async Task<ActionResult> Refresh(RefreshRequest request)
 		{

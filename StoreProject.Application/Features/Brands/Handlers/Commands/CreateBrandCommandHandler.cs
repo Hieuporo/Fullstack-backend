@@ -45,7 +45,7 @@ namespace StoreProject.Application.Features.Brands.Handlers.Commands
 
             var email = new Email
             {
-                To = emailAddress,
+                To = "hieucobappp@gmail.com",
                 Body = $"Created" +
                     $"successfully.",
                 Subject = "Test email"

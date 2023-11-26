@@ -15,6 +15,6 @@ namespace StoreProject.Application.Contracts.Infrastructure.Identity
         Task<IList<ApplicationUser>> ListUser();
 		Task<bool> Revoke();
 		Task<AuthResponse> Refresh(RefreshRequest model);
-		Task<string> ConfirmEmailAsync(string userId, string code);
+        Task<bool> ConfirmEmailAsync(string userId, string code);
 	}
 }
