@@ -76,12 +76,23 @@ namespace StoreProject.Infrastructure.Services
 
 			await _userManager.UpdateAsync(user);
 
-            AuthResponse response = new AuthResponse
+			var roles = await _userManager.GetRolesAsync(user);
+
+			AuthResponse response = new AuthResponse
             {
                 RefreshToken = refreshToken,
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                 Expiration = jwtSecurityToken.ValidTo,
-                User = _mapper.Map<UserDto>(user)
+                User = new UserDetailDto
+				{
+                    Address = user.Address,
+					PhoneNumber = user.PhoneNumber,
+					Email = user.Email,
+					Name = user.Name,
+					Id = user.Id,
+					UserName = user.UserName,
+                    Roles = roles
+				}
 			};
 
             return response;
@@ -247,12 +258,23 @@ namespace StoreProject.Infrastructure.Services
 			user.RefreshToken = refreshToken;
 			user.RefreshTokenExpiry = DateTime.UtcNow.AddMonths(1);
 			await _userManager.UpdateAsync(user);
+			var roles = await _userManager.GetRolesAsync(user);
 
 			return new AuthResponse
 			{
 				AccessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
 				Expiration = jwtSecurityToken.ValidTo,
-				RefreshToken = refreshToken
+				RefreshToken = refreshToken,
+                User = new UserDetailDto
+				{
+					Address = user.Address,
+					PhoneNumber = user.PhoneNumber,
+					Email = user.Email,
+					Id = user.Id,
+					UserName = user.UserName,
+					Name = user.Name,
+					Roles = roles
+				}
 			};
 		}
 
