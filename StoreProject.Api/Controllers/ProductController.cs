@@ -27,15 +27,16 @@ namespace StoreProject.Api.Controllers
 
         [HttpGet]
         public async Task<ActionResult<List<ProductDto>>> Get([FromQuery] string? SearchTerm, [FromQuery] string? SortName,
-            [FromQuery] int Page, [FromQuery] int PageSize)
+            [FromQuery] int Page, [FromQuery] int PageSize, [FromQuery] int? CategoryId)
         {   
             var result = await _mediator.Send(new GetProductListRequest() 
             {
                 Page = Page ,
                 PageSize = PageSize,
                 SearchTerm = SearchTerm,
-                SortName = SortName
-            });
+                SortName = SortName,
+				CategoryId = CategoryId
+			});
 
             return Ok(result);
         }

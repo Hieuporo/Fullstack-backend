@@ -52,14 +52,7 @@ builder.Services.AddAuthentication();
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddCors(o =>
-{
-    o.AddPolicy("CorsPolicy",
-        builder => builder.AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader()
-        );
-});
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -76,7 +69,11 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseCors("CorsPolicy");
+app.UseCors(x => x
+			   .AllowAnyMethod()
+			   .AllowAnyHeader()
+			   .SetIsOriginAllowed(origin => true) // allow any origin
+			   .AllowCredentials()); // allow credentials
 
 app.MapControllers();
 

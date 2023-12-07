@@ -11,6 +11,7 @@ namespace StoreProject.Application.Features.Products.Requests.Queries
 {
     public class GetProductListRequest : IRequest<PagedResult>
     {
+        public int? CategoryId { get; set; } 
         public string? SearchTerm { get; set; }
         public string? SortName { get; set; }
         public int Page { get; set; }

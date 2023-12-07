@@ -29,7 +29,7 @@ namespace StoreProject.Application.Features.Products.Handlers.Queries
             public async Task<PagedResult> Handle(GetProductListRequest request, CancellationToken cancellationToken)
             {
 
-                var products = _unitOfWork.ProductRepository.GetProductsWithProductItem(request.SearchTerm);
+                var products = _unitOfWork.ProductRepository.GetProductsWithProductItem(request.SearchTerm, request.CategoryId);
                 
                 PagedResult result = CommonUtility.ApplyPaging<Product>(request.Page, request.PageSize, products);
                 

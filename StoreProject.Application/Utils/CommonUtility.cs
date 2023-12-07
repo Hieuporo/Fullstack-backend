@@ -15,6 +15,7 @@ namespace StoreProject.Application.Utils
             //var query = schema.AsQueryable();
             //var items = await query.ToListAsync();  
 
+
             var filteredItems = items.Where(item => GetItemId(item) > cursor);
 
             var pageItems = filteredItems.Take(pageSize).ToList();

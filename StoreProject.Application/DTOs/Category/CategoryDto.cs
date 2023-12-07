@@ -12,5 +12,7 @@ namespace StoreProject.Application.DTOs.Category
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-    }
+		public DateTime? CreatedAt { get; set; }
+		public string? LastModifiedBy { get; set; }
+	}
 }
