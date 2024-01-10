@@ -23,5 +23,6 @@ namespace StoreProject.Application.DTOs.Order
         public decimal OrderTotal { get; set; }
         public string Status { get; set; }
         public ICollection<OrderItemDto> OrderItems { get; set; }
-    }
+		public DateTime? CreatedAt { get; set; }
+	}
 }

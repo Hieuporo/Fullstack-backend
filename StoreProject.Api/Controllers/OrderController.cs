@@ -75,7 +75,7 @@ namespace StoreProject.Api.Controllers
             var url = await _mediator
                 .Send(new CreateCheckoutSessionCommand { StripeSetupDto = createOrderWithStripeSetupDto.StripeSetupDto, OrderId = orderId });
 
-            return Ok(url);
+            return Ok(new {url= url});
         }
 
         [HttpPatch]

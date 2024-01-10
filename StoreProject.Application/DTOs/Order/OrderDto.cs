@@ -24,6 +24,7 @@ namespace StoreProject.Application.DTOs.Order
         public string Status { get; set; }
         public string PaymentIntentId { get; set; }
         public string StripeSessionId { get; set; }
+        public DateTime? CreatedAt { get; set; }
         public ICollection<OrderItemDto> OrderItems { get; set; }
     }
 }
