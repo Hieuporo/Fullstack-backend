@@ -1,11 +1,5 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Versioning;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using StoreProject.Api.Extensions;
 using StoreProject.Api.Middleware;
 using StoreProject.Application;
 using StoreProject.Infrastructure;
