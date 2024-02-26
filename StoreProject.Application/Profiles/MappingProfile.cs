@@ -10,14 +10,9 @@ using StoreProject.Application.DTOs.Product;
 using StoreProject.Application.DTOs.ProductItem;
 using StoreProject.Application.DTOs.ProductTag;
 using StoreProject.Application.DTOs.ShippingMethod;
-using StoreProject.Application.DTOs.Tag;
 using StoreProject.Application.DTOs.User;
 using StoreProject.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace StoreProject.Application.Profiles
 {
@@ -48,10 +43,6 @@ namespace StoreProject.Application.Profiles
             CreateMap<ShippingMethod, ShippingMethodDto>().ReverseMap();
             CreateMap<ShippingMethod, CreateShippingMethodDto>().ReverseMap();
             CreateMap<ShippingMethod, UpdateShippingMethodDto>().ReverseMap();
-
-            CreateMap<Tag, TagDto>().ReverseMap();
-            CreateMap<Tag, CreateTagDto>().ReverseMap();
-            CreateMap<Tag, UpdateTagDto>().ReverseMap();
 
             CreateMap<CartItemDto, CartItem>();
             CreateMap<CartItem, CartItemDto>()
