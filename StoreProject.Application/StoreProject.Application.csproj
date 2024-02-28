@@ -9,10 +9,13 @@
   <ItemGroup>
     <Compile Remove="Features\Brand\**" />
     <Compile Remove="Features\Product\**" />
+    <Compile Remove="Features\Users\**" />
     <EmbeddedResource Remove="Features\Brand\**" />
     <EmbeddedResource Remove="Features\Product\**" />
+    <EmbeddedResource Remove="Features\Users\**" />
     <None Remove="Features\Brand\**" />
     <None Remove="Features\Product\**" />
+    <None Remove="Features\Users\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,10 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StoreProject.Domain\StoreProject.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Users\" />
   </ItemGroup>
 
 </Project>

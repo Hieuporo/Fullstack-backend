@@ -26,8 +26,6 @@ namespace StoreProject.Application.Contracts.Infrastructure.IReposiotry
         IOrderRepository OrderRepository { get; }
         IProductItemRepository ProductItemRepository { get; }
         IProductRepository ProductRepository { get; }
-        IProductTagRepository ProductTagRepository { get; }
-        ITagRepository TagRepository { get; }
         IShippingMethodRepository ShippingMethodRepository { get; }
         ICartRepository CartRepository { get; }
 

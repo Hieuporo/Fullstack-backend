@@ -8,7 +8,6 @@ using StoreProject.Application.DTOs.Order;
 using StoreProject.Application.DTOs.OrderItem;
 using StoreProject.Application.DTOs.Product;
 using StoreProject.Application.DTOs.ProductItem;
-using StoreProject.Application.DTOs.ProductTag;
 using StoreProject.Application.DTOs.ShippingMethod;
 using StoreProject.Application.DTOs.User;
 using StoreProject.Domain.Entities;
@@ -77,8 +76,6 @@ namespace StoreProject.Application.Profiles
 
             CreateMap<OrderItem, UpdateOrderItemDto >().ReverseMap();
 
-            CreateMap<ProductTag, ProductTagDto>().ReverseMap();
-            CreateMap<ProductTag, CreateProductTagDto>().ReverseMap();
             CreateMap<ProductDto, Product>();
             CreateMap<Product, ProductDto>()
               .ForMember(dest => dest.ProductItems, opt => opt.MapFrom(src => src.ProductItems.Select(item => new ProductItemDto

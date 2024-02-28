@@ -1,11 +1,14 @@
-﻿using MediatR;
+﻿using Azure.Core;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StoreProject.Application.Constants;
+using StoreProject.Application.Contracts.Infrastructure.Payment;
 using StoreProject.Application.DTOs.Order;
 using StoreProject.Application.Features.Orders.Requests.Commands;
 using StoreProject.Application.Features.Orders.Requests.Queries;
+using StoreProject.Infrastructure.Services.PaymentService.VnPay;
 
 namespace StoreProject.Api.Controllers
 {
@@ -15,12 +18,18 @@ namespace StoreProject.Api.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public OrderController(IMediator mediator)
+		private readonly IVnPayService _vnPayService;
+		private readonly IConfiguration _configuration;
+
+		public OrderController(IMediator mediator, IConfiguration configuration, IVnPayService vnPayService)
         {
             _mediator = mediator;
-        }
+            _configuration = configuration;
+            _vnPayService = vnPayService;
 
-        [HttpGet]
+		}
+
+		[HttpGet]
         public async Task<ActionResult> Get()
         {
             var response = await _mediator.Send(new ClientGetOrderListRequest());
@@ -119,5 +128,14 @@ namespace StoreProject.Api.Controllers
             return Ok(response);
         }
 
-    }
+		[HttpGet]
+		[Route("getpayment")]
+        [AllowAnonymous]
+		public async Task<ActionResult> GetPayment()
+		{
+            var a = _vnPayService.CreatePayment();
+			return Ok(a);
+		}
+
+	}
 }

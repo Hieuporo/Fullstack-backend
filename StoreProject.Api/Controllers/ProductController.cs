@@ -1,17 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StoreProject.Application.Constants;
 using StoreProject.Application.DTOs.Product;
 using StoreProject.Application.DTOs.ProductItem;
-using StoreProject.Application.DTOs.ProductTag;
 using StoreProject.Application.Features.ProductItems.Requests.Commands;
 using StoreProject.Application.Features.ProductItems.Requests.Queries;
 using StoreProject.Application.Features.Products.Requests.Commands;
 using StoreProject.Application.Features.Products.Requests.Queries;
-using StoreProject.Application.Features.ProductTags.Requests.Commands;
-using StoreProject.Domain.Entities;
 
 namespace StoreProject.Api.Controllers
 {
@@ -81,28 +77,6 @@ namespace StoreProject.Api.Controllers
             return NoContent();
         }
 
-        [HttpPost]
-        [Route("producttag")]
-        [Authorize(Roles = Role.RoleAdmin)]
-        public async Task<ActionResult> Post([FromBody] CreateProductTagDto productTag)
-        {
-            var command = new CreateProductTagCommand { ProductTagDto = productTag };
-            var response = await _mediator.Send(command);
-
-            return Ok(response);
-        }
-
-        [HttpDelete]
-        [Route("producttag")]
-        [Authorize(Roles = Role.RoleAdmin)]
-        public async Task<ActionResult> DeleteProductTag(DeleteProductTagDto deleteProductTagDto)
-        {
-            var command = new DeleteProductTagCommand { ProductTagDto = deleteProductTagDto };
-            var response = await _mediator.Send(command);
-
-            return Ok(response);
-        }
-
 
         //Product Item
         [HttpGet]
@@ -117,7 +91,7 @@ namespace StoreProject.Api.Controllers
         [HttpGet]
         [Route("productitem/{id}")]
         [Authorize(Roles = Role.RoleAdmin)]
-        public async Task<ActionResult<ProductItemDto>> GetProductTagById(int id)
+        public async Task<ActionResult<ProductItemDto>> GetProductItemById(int id)
         {
             var tag = await _mediator.Send(new GetProductItemRequest { Id = id });
 

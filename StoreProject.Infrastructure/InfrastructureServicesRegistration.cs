@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using StoreProject.Application.Contracts.Infrastructure;
 using StoreProject.Application.Contracts.Infrastructure.Identity;
 using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.Infrastructure.Payment;
 using StoreProject.Application.Models;
 using StoreProject.Application.Models.Identity;
 using StoreProject.Domain.Entities;
@@ -14,12 +15,10 @@ using StoreProject.Infrastructure.Data;
 using StoreProject.Infrastructure.Mail;
 using StoreProject.Infrastructure.Repositories;
 using StoreProject.Infrastructure.Services;
+using StoreProject.Infrastructure.Services.PaymentService.VnPay;
 using Stripe;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace StoreProject.Infrastructure
 {
@@ -36,8 +35,9 @@ namespace StoreProject.Infrastructure
                    configuration.GetConnectionString("DefaultConnection")));
 
             StripeConfiguration.ApiKey = configuration.GetSection("Stripe:SecretKey").Get<string>();
-
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+			services.Configure<VnpayConfig>(
+			  configuration.GetSection(VnpayConfig.ConfigName));
+			services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             // use aspnetcore identity 
@@ -46,8 +46,8 @@ namespace StoreProject.Infrastructure
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 
-
-            services.AddTransient<IAuthService, AuthService>();
+			services.AddTransient<IVnPayService, VnPayService>();
+			services.AddTransient<IAuthService, AuthService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
