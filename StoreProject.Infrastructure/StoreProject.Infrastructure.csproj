@@ -25,4 +25,8 @@
     <ProjectReference Include="..\StoreProject.Application\StoreProject.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\PaymentService\Paypal\" />
+  </ItemGroup>
+
 </Project>

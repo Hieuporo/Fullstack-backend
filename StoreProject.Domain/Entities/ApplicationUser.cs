@@ -12,8 +12,9 @@ namespace StoreProject.Domain.Entities
     public class ApplicationUser : IdentityUser
     {
         public string Address { get; set; }
-        public string Name { get; set; }
-		public string? AvatarPictureUrl { get; set; }
+        public string? FirstName { get; set; }
+		public string? LastName { get; set; }
+		public string? AvatarUrl { get; set; }
         
         // refreshtoken
         public string? RefreshToken {  get; set; }

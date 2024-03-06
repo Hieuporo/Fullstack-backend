@@ -12,8 +12,8 @@ using StoreProject.Infrastructure.Data;
 namespace StoreProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231116092412_AddRefreshTokenInUse")]
-    partial class AddRefreshTokenInUse
+    [Migration("20240304121348_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -274,17 +274,17 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "aeb9403f-1b79-42ae-a2ff-5735f1b107f4",
+                            ConcurrencyStamp = "f284fe46-6036-4e53-a634-5793a91516fc",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDgc2drFeHzmqh4hPIJY/Hg3pznc7syexgsmOlnnIxeyF35QW74OghdjPJ7pelwdWw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJNLztXg7M1CnZfP1Dfv6/bEOjV1Dc3C2CaeQbzUyC+BEECplr7/BwqaeZvUu4PuXg==",
                             PhoneNumberConfirmed = false,
                             RefreshTokenExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "8e4aaa24-299b-4fc1-b53b-45f92be12cf0",
+                            SecurityStamp = "2cdf5f6f-68a0-4f17-99a9-0094818748fd",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -293,17 +293,17 @@ namespace StoreProject.Infrastructure.Migrations
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
                             Address = "Ha Noi",
-                            ConcurrencyStamp = "4006b810-e4f8-40fb-9f33-43c7c9df2345",
+                            ConcurrencyStamp = "406bb60b-738a-4009-8f52-c7775b90cb81",
                             Email = "user@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Name = "User",
                             NormalizedEmail = "USER@GMAIL.COM",
                             NormalizedUserName = "USER@GMAIL.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENFNtuImD3pPGZYay6WHxpifkXfJeie55Whx+TfjeFt7Fu4r4Xiefx5KTtv2cdGXaQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGESu3edP3QPHUTkXV+e+73g6X4+LFlDelS/d9QXZ+jflsHKxLb9yeRNAlxt7gFdRA==",
                             PhoneNumberConfirmed = false,
                             RefreshTokenExpiry = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "c7cc543c-91df-4ee5-86bb-48e58e7beb6b",
+                            SecurityStamp = "bdd22c6d-efb8-4e0b-a516-8ad2c182ca8c",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com"
                         });
@@ -677,21 +677,6 @@ namespace StoreProject.Infrastructure.Migrations
                     b.ToTable("ProductItems");
                 });
 
-            modelBuilder.Entity("StoreProject.Domain.Entities.ProductTag", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProductId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("ProductTags");
-                });
-
             modelBuilder.Entity("StoreProject.Domain.Entities.ShippingMethod", b =>
                 {
                     b.Property<int>("Id")
@@ -722,35 +707,6 @@ namespace StoreProject.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ShippingMethods");
-                });
-
-            modelBuilder.Entity("StoreProject.Domain.Entities.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -908,25 +864,6 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("StoreProject.Domain.Entities.ProductTag", b =>
-                {
-                    b.HasOne("StoreProject.Domain.Entities.Product", "Product")
-                        .WithMany("ProductTags")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("StoreProject.Domain.Entities.Tag", "Tag")
-                        .WithMany("ProductTags")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Tag");
-                });
-
             modelBuilder.Entity("StoreProject.Domain.Entities.ApplicationUser", b =>
                 {
                     b.Navigation("Carts");
@@ -960,8 +897,6 @@ namespace StoreProject.Infrastructure.Migrations
             modelBuilder.Entity("StoreProject.Domain.Entities.Product", b =>
                 {
                     b.Navigation("ProductItems");
-
-                    b.Navigation("ProductTags");
                 });
 
             modelBuilder.Entity("StoreProject.Domain.Entities.ProductItem", b =>
@@ -974,11 +909,6 @@ namespace StoreProject.Infrastructure.Migrations
             modelBuilder.Entity("StoreProject.Domain.Entities.ShippingMethod", b =>
                 {
                     b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("StoreProject.Domain.Entities.Tag", b =>
-                {
-                    b.Navigation("ProductTags");
                 });
 #pragma warning restore 612, 618
         }

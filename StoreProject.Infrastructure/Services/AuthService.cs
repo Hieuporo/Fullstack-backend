@@ -88,9 +88,10 @@ namespace StoreProject.Infrastructure.Services
                     Address = user.Address,
 					PhoneNumber = user.PhoneNumber,
 					Email = user.Email,
-					Name = user.Name,
+					FirstName = user.FirstName,
+					LastName = user.LastName,
+					AvatarUrl = user.AvatarUrl,
 					Id = user.Id,
-					UserName = user.UserName,
                     Roles = roles
 				}
 			};
@@ -100,25 +101,15 @@ namespace StoreProject.Infrastructure.Services
 
         public async Task<RegistrationResponse> Register(RegistrationRequest request)
         {
-            var existingUser = await _userManager.FindByNameAsync(request.UserName);
-
-            if (existingUser != null)
-            {
-                throw new Exception($"Username '{request.UserName}' already exists.");
-            }
 
             var user = new ApplicationUser
             {
                 Email = request.Email,
-                Name = request.Name,
                 PhoneNumber = request.PhoneNumber,
-                Address = request.Address,
-                UserName = request.UserName,
+                UserName = request.Email,
             };
 
             var existingEmail = await _userManager.FindByEmailAsync(request.Email);
-
-           
 
 			if (existingEmail == null)
             {
@@ -270,9 +261,10 @@ namespace StoreProject.Infrastructure.Services
 					Address = user.Address,
 					PhoneNumber = user.PhoneNumber,
 					Email = user.Email,
+					AvatarUrl = user.AvatarUrl,
 					Id = user.Id,
-					UserName = user.UserName,
-					Name = user.Name,
+					FirstName = user.FirstName,
+					LastName = user.LastName,
 					Roles = roles
 				}
 			};
