@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Orders.Requests.Commands
+namespace StoreProject.Application.Orders.Requests.Commands
 {
     public class UpdateOrderStatusCommand : IRequest<Unit>
     {

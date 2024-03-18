@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using StoreProject.Application.Contracts.Infrastructure;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Brands.Requests.Commands;
+using StoreProject.Application.Contracts.IReposiotry;
+using StoreProject.Application.Contracts.Service;
 using StoreProject.Application.DTOs.Brand.Validators;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.Brands.Requests.Commands;
 using StoreProject.Application.Models;
 using StoreProject.Domain.Entities;
 using System.Security.Claims;
 
-namespace StoreProject.Application.Features.Brands.Handlers.Commands
+namespace StoreProject.Application.Brands.Handlers.Commands
 {
     public class CreateBrandCommandHandler : IRequestHandler<CreateBrandCommand, int>
     {

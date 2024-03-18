@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Domain.Entities;
 using StoreProject.Infrastructure.Data;
 using System;

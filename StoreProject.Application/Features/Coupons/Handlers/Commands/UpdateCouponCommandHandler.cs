@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
+using StoreProject.Application.Coupons.Requests.Commands;
 using StoreProject.Application.DTOs.Coupon.Validators;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.Coupons.Requests.Commands;
 using StoreProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Coupons.Handlers.Commands
+namespace StoreProject.Application.Coupons.Handlers.Commands
 {
     public class UpdateCouponCommandHandler : IRequestHandler<UpdateCouponCommand, Unit>
     {

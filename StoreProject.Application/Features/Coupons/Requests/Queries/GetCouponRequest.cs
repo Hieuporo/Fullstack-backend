@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Coupons.Requests.Queries
+namespace StoreProject.Application.Coupons.Requests.Queries
 {
     public class GetCouponRequest : IRequest<CouponDto>
     {

@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using StoreProject.Application.Constants;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.Orders.Requests.Commands;
+using StoreProject.Application.Orders.Requests.Commands;
 using StoreProject.Domain.Entities;
 using Stripe;
 using Stripe.Checkout;
@@ -14,14 +14,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Orders.Handlers.Commands
+namespace StoreProject.Application.Orders.Handlers.Commands
 {
     public class CreateCheckoutSessionCommandHandler : IRequestHandler<CreateCheckoutSessionCommand, string>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IHttpContextAccessor _httpContextAccessor;
         public CreateCheckoutSessionCommandHandler(
-            IUnitOfWork unitOfWork, 
+            IUnitOfWork unitOfWork,
             IHttpContextAccessor httpContextAccessor
             )
         {
@@ -50,11 +50,11 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
             };
 
 
-            if (order.CouponId != 0 && order.CouponId != null )
+            if (order.CouponId != 0 && order.CouponId != null)
             {
                 var coupon = await _unitOfWork.CouponRepository.Get(order.CouponId.GetValueOrDefault());
 
-                if(coupon == null)
+                if (coupon == null)
                 {
                     throw new BadRequestException("Something went wrong");
                 }

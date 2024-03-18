@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
-using StoreProject.Application.Contracts.Infrastructure;
-using StoreProject.Application.Features.Orders.Requests.Commands;
 using Stripe;
 using Stripe.Checkout;
 using StoreProject.Application.Constants;
+using StoreProject.Application.Orders.Requests.Commands;
+using StoreProject.Application.Contracts.IReposiotry;
+using StoreProject.Application.Contracts.Service;
 
-namespace StoreProject.Application.Features.Orders.Handlers.Commands
+namespace StoreProject.Application.Orders.Handlers.Commands
 {
     public class ValidateStripeSessionCommandHandler : IRequestHandler<ValidateStripeSessionCommand>
     {
@@ -19,9 +19,9 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
         private readonly string _stripeApiKey;
         public ValidateStripeSessionCommandHandler
         (
-            IUnitOfWork unitOfWork, 
-            IMapper mapper, 
-            IEmailSender emailSender, 
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IEmailSender emailSender,
             IHttpContextAccessor httpContextAccessor
         )
         {
@@ -37,7 +37,7 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
             var service = new SessionService();
             Session session = await service.GetAsync(order.StripeSessionId);
 
-            if(session.PaymentIntentId != null)
+            if (session.PaymentIntentId != null)
             {
                 var paymentIntentService = new PaymentIntentService();
                 PaymentIntent paymentIntent = paymentIntentService.Get(session.PaymentIntentId);

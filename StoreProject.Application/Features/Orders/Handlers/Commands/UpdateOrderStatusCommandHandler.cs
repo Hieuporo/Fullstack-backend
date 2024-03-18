@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using StoreProject.Application.Constants;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.Order.Validators;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.Orders.Requests.Commands;
+using StoreProject.Application.Orders.Requests.Commands;
 using StoreProject.Domain.Entities;
 using Stripe;
 using System;
@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Orders.Handlers.Commands
+namespace StoreProject.Application.Orders.Handlers.Commands
 {
     public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderStatusCommand, Unit>
     {
@@ -36,7 +36,7 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
                 throw new ValidationException(validatorResult);
             }
 
-            var order =  await _unitOfWork.OrderRepository.Get(request.OrderDto.Id);
+            var order = await _unitOfWork.OrderRepository.Get(request.OrderDto.Id);
             if (order != null)
             {
                 if (request.OrderDto.Status == OrderStatus.Status_Cancelled)
@@ -53,7 +53,8 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
                 }
                 order.Status = request.OrderDto.Status;
                 await _unitOfWork.Save();
-            } else
+            }
+            else
             {
                 throw new BadRequestException("Order is not exist");
             }

@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
+using StoreProject.Application.Coupons.Requests.Queries;
 using StoreProject.Application.DTOs.Coupon;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.Coupons.Requests.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Coupons.Handlers.Queries
+namespace StoreProject.Application.Coupons.Handlers.Queries
 {
     public class GetCouponByCouponCodeRequestHandler : IRequestHandler<GetCouponByCouponCodeRequest, CouponDto>
     {
@@ -27,7 +27,7 @@ namespace StoreProject.Application.Features.Coupons.Handlers.Queries
         {
             var coupon = await _unitOfWork.CouponRepository.GetCouponByCode(request.CouponCode);
 
-            if(coupon == null)
+            if (coupon == null)
             {
                 throw new BadRequestException("Coupon is not exist");
             }

@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Application.DTOs.Order;
 using StoreProject.Application.DTOs.Coupon;
-using StoreProject.Application.Features.Orders.Requests.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +10,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using StoreProject.Application.Constants;
+using StoreProject.Application.Orders.Requests.Queries;
+using StoreProject.Application.Contracts.IReposiotry;
 
-namespace StoreProject.Application.Features.Orders.Handlers.Queries
+namespace StoreProject.Application.Orders.Handlers.Queries
 {
     public class GetOrderListRequestHandler : IRequestHandler<ClientGetOrderListRequest, List<OrderClientDto>>
     {

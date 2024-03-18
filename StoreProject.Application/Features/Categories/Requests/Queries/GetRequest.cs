@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Categories.Requests.Queries
+namespace StoreProject.Application.Categories.Requests.Queries
 {
     public class GetCategoryRequest : IRequest<CategoryDto>
     {

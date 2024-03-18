@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.ShippingMethods.Requests.Queries
+namespace StoreProject.Application.ShippingMethods.Requests.Queries
 {
     public class GetShippingMethodListRequest : IRequest<List<ShippingMethodDto>>
     {

@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using StoreProject.Application.Carts.Requests.Commands;
 using StoreProject.Application.Constants;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.Cart;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.Carts.Requests.Commands;
 using StoreProject.Domain.Entities;
 using System.Security.Claims;
 
-namespace StoreProject.Application.Features.Carts.Handlers.Commands
+namespace StoreProject.Application.Carts.Handlers.Commands
 {
     public class CreateCartCommandHandler : IRequestHandler<CreateCartCommand, CartDto>
     {
@@ -26,7 +26,7 @@ namespace StoreProject.Application.Features.Carts.Handlers.Commands
         {
 
             var cart = await _unitOfWork.CartRepository.CreateCart(request.UserId);
-            
+
             await _unitOfWork.Save();
 
             return _mapper.Map<CartDto>(cart);

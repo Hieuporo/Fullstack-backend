@@ -1,25 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using StoreProject.Application.Contracts.Infrastructure;
-using StoreProject.Application.Contracts.Infrastructure.Identity;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
+using StoreProject.Application.Contracts.Service;
 using StoreProject.Application.Models;
 using StoreProject.Application.Models.Identity;
-using StoreProject.Domain.Entities;
 using StoreProject.Infrastructure.Data;
-using StoreProject.Infrastructure.Mail;
 using StoreProject.Infrastructure.Repositories;
-using StoreProject.Infrastructure.Services;
+using StoreProject.Infrastructure.Services.Mail;
 using Stripe;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StoreProject.Infrastructure
 {
@@ -40,14 +32,6 @@ namespace StoreProject.Infrastructure
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            // use aspnetcore identity 
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-	            options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-
-
-
-            services.AddTransient<IAuthService, AuthService>();
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -3,19 +3,19 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using StoreProject.Application.Constants;
-using StoreProject.Application.Contracts.Infrastructure;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
+using StoreProject.Application.Contracts.Service;
 using StoreProject.Application.DTOs.Order.Validators;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.Orders.Requests.Commands;
 using StoreProject.Application.Models;
+using StoreProject.Application.Orders.Requests.Commands;
 using StoreProject.Domain.Entities;
 using Stripe;
 using Stripe.Checkout;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace StoreProject.Application.Features.Orders.Handlers.Commands
+namespace StoreProject.Application.Orders.Handlers.Commands
 {
     public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, int>
     {
@@ -24,9 +24,9 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
         private readonly IEmailSender _emailSender;
         private readonly IMapper _mapper;
         public CreateOrderCommandHandler(
-            IUnitOfWork unitOfWork, 
-            IMapper mapper, 
-            IEmailSender emailSender, 
+            IUnitOfWork unitOfWork,
+            IMapper mapper,
+            IEmailSender emailSender,
             IHttpContextAccessor httpContextAccessor
         )
         {
@@ -63,7 +63,7 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
             {
                 var coupon = await _unitOfWork.CouponRepository.Get(request.OrderDto.CouponId);
 
-                if(order.OrderTotal < coupon.MinAmount)
+                if (order.OrderTotal < coupon.MinAmount)
                 {
                     throw new BadRequestException("Not support coupon because total price is smaller than min amount of this coupon");
                 }
@@ -80,7 +80,7 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
 
             var listOrderItems = new List<OrderItem>();
 
-            if(request.OrderDto.CartItemIdList.Count == 0)
+            if (request.OrderDto.CartItemIdList.Count == 0)
             {
                 throw new BadRequestException("Please Add to Cart before create order");
             }
@@ -105,7 +105,7 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
             }
 
             await _unitOfWork.Save();
-           
+
 
             //var emailAddress = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
 

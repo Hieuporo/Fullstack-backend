@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using StoreProject.Application.CartItems.Requests.Commands;
 using StoreProject.Application.Constants;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.CartItems.Requests.Commands;
 using StoreProject.Application.Features.Coupons.Requests.Commands;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.CartItems.Handlers.Commands
+namespace StoreProject.Application.CartItems.Handlers.Commands
 {
     public class DeleteCartItemCommandHandler : IRequestHandler<DeleteCartItemCommand>
     {

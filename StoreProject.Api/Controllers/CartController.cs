@@ -3,7 +3,7 @@ using Azure.Core;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.CartItem;
 using StoreProject.Application.Features.CartItems.Requests.Commands;
 using StoreProject.Application.Features.Carts.Requests.Queries;

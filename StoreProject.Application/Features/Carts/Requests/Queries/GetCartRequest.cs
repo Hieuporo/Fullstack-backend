@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Carts.Requests.Queries
+namespace StoreProject.Application.Carts.Requests.Queries
 {
     public class GetCartRequest : IRequest<CartDto>
     {

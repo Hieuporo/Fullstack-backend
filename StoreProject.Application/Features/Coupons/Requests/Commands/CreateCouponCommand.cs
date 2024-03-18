@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Coupons.Requests.Commands
+namespace StoreProject.Application.Coupons.Requests.Commands
 {
     public class CreateCouponCommand : IRequest<int>
     {

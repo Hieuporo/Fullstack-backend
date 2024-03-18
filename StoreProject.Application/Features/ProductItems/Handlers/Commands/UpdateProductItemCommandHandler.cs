@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.ProductItem.Validators;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.ProductItems.Requests.Commands;
+using StoreProject.Application.ProductItems.Requests.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.ProductItems.Handlers.Commands
+namespace StoreProject.Application.ProductItems.Handlers.Commands
 {
     public class UpdateProductItemCommandHandler : IRequestHandler<UpdateProductItemCommand, Unit>
     {

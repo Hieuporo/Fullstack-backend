@@ -10,7 +10,7 @@ namespace StoreProject.Domain.Entities
     public class Order : BaseDomainEntity
     {
         public string UserId {  get; set; }
-        public ApplicationUser User { get; set; }
+        public User User { get; set; }
         public int? CouponId { get; set; }
         public Coupon Coupon { get; set; }
         public int ShippingMethodId { get; set; }

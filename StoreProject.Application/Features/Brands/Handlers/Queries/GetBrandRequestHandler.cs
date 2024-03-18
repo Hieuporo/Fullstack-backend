@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Brands.Requests.Queries;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.Brand;
 using StoreProject.Application.DTOs.Coupon;
-using StoreProject.Application.Features.Brands.Requests.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Brands.Handlers.Queries
+namespace StoreProject.Application.Brands.Handlers.Queries
 {
     public class GetListProductRequestHandler
     {

@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.CartItems.Requests.Commands;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.CartItem.Validators;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.CartItems.Requests.Commands;
 using StoreProject.Domain.Entities;
 
-namespace StoreProject.Application.Features.CartItems.Handlers.Commands
+namespace StoreProject.Application.CartItems.Handlers.Commands
 {
     public class CreateCartItemCommandHandler : IRequestHandler<CreateCartItemCommand, int>
     {
@@ -34,7 +34,7 @@ namespace StoreProject.Application.Features.CartItems.Handlers.Commands
             var cartItemExist = await _unitOfWork.CartItemRepository
                 .GetCartItem(request.CartItemDto.CartId, request.CartItemDto.ProductItemId);
 
-            if(cartItemExist != null)
+            if (cartItemExist != null)
             {
                 cartItemExist.Quantity = request.CartItemDto.Quantity + cartItemExist.Quantity;
                 await _unitOfWork.CartItemRepository.Update(cartItemExist);

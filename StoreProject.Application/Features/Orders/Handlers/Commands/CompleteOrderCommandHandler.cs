@@ -1,15 +1,15 @@
 ﻿using MediatR;
 using StoreProject.Application.Constants;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.Orders.Requests.Commands;
+using StoreProject.Application.Orders.Requests.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Orders.Handlers.Commands
+namespace StoreProject.Application.Orders.Handlers.Commands
 {
     public class CompleteOrderCommandHandler : IRequestHandler<CompleteOrderCommand, Unit>
     {
@@ -20,8 +20,8 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
         }
         public async Task<Unit> Handle(CompleteOrderCommand request, CancellationToken cancellationToken)
         {
-           var order = _unitOfWork.OrderRepository.AdminGetOrderWithDetail(request.Id);
-            if(order == null   )
+            var order = _unitOfWork.OrderRepository.AdminGetOrderWithDetail(request.Id);
+            if (order == null)
             {
                 throw new BadRequestException("Order is not exist");
             }
@@ -32,7 +32,7 @@ namespace StoreProject.Application.Features.Orders.Handlers.Commands
 
             foreach (var orderItem in order.OrderItems)
             {
-                if(orderItem.Quantity > orderItem.ProductItem.QuantityInStock)
+                if (orderItem.Quantity > orderItem.ProductItem.QuantityInStock)
                 {
                     throw new BadRequestException("Quantity of " + orderItem.ProductItem.Name + " is not enough");
                 }

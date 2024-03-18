@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.ProductItems.Requests.Commands
+namespace StoreProject.Application.ProductItems.Requests.Commands
 {
     public class DeleteProductItemCommand : IRequest
     {

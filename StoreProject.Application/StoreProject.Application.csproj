@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -6,16 +6,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Features\Brand\**" />
-    <Compile Remove="Features\Product\**" />
-    <EmbeddedResource Remove="Features\Brand\**" />
-    <EmbeddedResource Remove="Features\Product\**" />
-    <None Remove="Features\Brand\**" />
-    <None Remove="Features\Product\**" />
-  </ItemGroup>
-
-  <ItemGroup>
+	<ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
@@ -27,8 +18,5 @@
     <ProjectReference Include="..\StoreProject.Domain\StoreProject.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Users\" />
-  </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.CartItems.Requests.Commands
+namespace StoreProject.Application.CartItems.Requests.Commands
 {
     public class DeleteCartItemCommand : IRequest
     {

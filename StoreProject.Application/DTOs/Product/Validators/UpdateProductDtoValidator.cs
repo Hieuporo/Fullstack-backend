@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using System;
 using System.Collections.Generic;
 using System.Linq;

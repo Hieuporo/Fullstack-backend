@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Products.Requests.Queries
+namespace StoreProject.Application.Products.Requests.Queries
 {
     public class GetProductRequest : IRequest<ProductDto>
     {
-        public int Id { get; set;}
+        public int Id { get; set; }
     }
 }

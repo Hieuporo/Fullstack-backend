@@ -1,18 +1,18 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using StoreProject.Application.CartItems.Requests.Commands;
 using StoreProject.Application.Constants;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.CartItem.Validators;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.CartItems.Requests.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.CartItems.Handlers.Commands
+namespace StoreProject.Application.CartItems.Handlers.Commands
 {
     public class UpdateCartItemCommandHandler : IRequestHandler<UpdateCartItemCommand, Unit>
     {
@@ -31,7 +31,7 @@ namespace StoreProject.Application.Features.CartItems.Handlers.Commands
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Uid).Value;
 
-            if (!(await _unitOfWork.CartItemRepository.IsItemOwnedByUser(request.CartItemDto.Id, userId)))
+            if (!await _unitOfWork.CartItemRepository.IsItemOwnedByUser(request.CartItemDto.Id, userId))
             {
                 throw new BadRequestException("Something went wrong");
             }
@@ -47,11 +47,11 @@ namespace StoreProject.Application.Features.CartItems.Handlers.Commands
             var cartItem = await _unitOfWork.CartItemRepository.Get(request.CartItemDto.Id);
 
 
-            if(request.IsMinus == true && cartItem.Quantity > 0)
+            if (request.IsMinus == true && cartItem.Quantity > 0)
             {
                 cartItem.Quantity--;
             }
-            else if(request.IsMinus == false && cartItem.Quantity > 0) 
+            else if (request.IsMinus == false && cartItem.Quantity > 0)
             {
                 cartItem.Quantity++;
             }

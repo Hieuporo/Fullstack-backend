@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
-using StoreProject.Application.Features.ProductItems.Requests.Commands;
 using StoreProject.Application.Features.Coupons.Requests.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StoreProject.Application.ProductItems.Requests.Commands;
+using StoreProject.Application.Contracts.IReposiotry;
 
-namespace StoreProject.Application.Features.ProductItems.Handlers.Commands
+namespace StoreProject.Application.ProductItems.Handlers.Commands
 {
     public class DeleteProductItemCommandHandler : IRequestHandler<DeleteProductItemCommand>
     {

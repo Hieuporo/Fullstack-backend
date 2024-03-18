@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.CartItems.Requests.Queries;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.CartItem;
 using StoreProject.Application.DTOs.Coupon;
-using StoreProject.Application.Features.CartItems.Requests.Queries;
 using StoreProject.Application.Features.Coupons.Requests.Queries;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.CartItems.Handlers.Queries
+namespace StoreProject.Application.CartItems.Handlers.Queries
 {
     public class GetCartItemListRequestHandler : IRequestHandler<GetCartItemListRequest, List<CartItemDto>>
     {

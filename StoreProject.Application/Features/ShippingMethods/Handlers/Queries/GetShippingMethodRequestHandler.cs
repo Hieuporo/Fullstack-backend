@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Application.DTOs.ShippingMethod;
 using StoreProject.Application.DTOs.Coupon;
-using StoreProject.Application.Features.ShippingMethods.Requests.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StoreProject.Application.ShippingMethods.Requests.Queries;
+using StoreProject.Application.Contracts.IReposiotry;
 
-namespace StoreProject.Application.Features.ShippingMethods.Handlers.Queries
+namespace StoreProject.Application.ShippingMethods.Handlers.Queries
 {
     public class GetShippingMethodRequestHandler : IRequestHandler<GetShippingMethodRequest, ShippingMethodDto>
     {

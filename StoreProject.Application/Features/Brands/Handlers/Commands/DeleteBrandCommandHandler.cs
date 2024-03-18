@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
-using StoreProject.Application.Features.Brands.Requests.Commands;
+using StoreProject.Application.Brands.Requests.Commands;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.Features.Coupons.Requests.Commands;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Brands.Handlers.Commands
+namespace StoreProject.Application.Brands.Handlers.Commands
 {
     public class DeleteBrandCommandHandler : IRequestHandler<DeleteBrandCommand>
     {

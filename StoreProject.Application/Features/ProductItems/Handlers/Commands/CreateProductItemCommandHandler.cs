@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.ProductItem.Validators;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.ProductItems.Requests.Commands;
+using StoreProject.Application.ProductItems.Requests.Commands;
 using StoreProject.Domain.Entities;
 
-namespace StoreProject.Application.Features.ProductItems.Handlers.Commands
+namespace StoreProject.Application.ProductItems.Handlers.Commands
 {
     public class CreateProductItemCommandHandler : IRequestHandler<CreateProductItemCommand, int>
     {

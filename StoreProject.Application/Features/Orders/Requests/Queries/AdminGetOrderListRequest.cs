@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Orders.Requests.Queries
+namespace StoreProject.Application.Orders.Requests.Queries
 {
     public class AdminGetOrderListRequest : IRequest<List<OrderDto>>
     {

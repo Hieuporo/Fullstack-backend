@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.ShippingMethod.Validators;
 using StoreProject.Application.Exceptions;
-using StoreProject.Application.Features.ShippingMethods.Requests.Commands;
+using StoreProject.Application.ShippingMethods.Requests.Commands;
 using StoreProject.Domain.Entities;
 
-namespace StoreProject.Application.Features.ShippingMethods.Handlers.Commands
+namespace StoreProject.Application.ShippingMethods.Handlers.Commands
 {
     public class CreateShippingMethodCommandHandler : IRequestHandler<CreateShippingMethodCommand, int>
     {

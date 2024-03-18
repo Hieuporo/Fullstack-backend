@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Brands.Requests.Commands
+namespace StoreProject.Application.Brands.Requests.Commands
 {
     public class UpdateBrandCommand : IRequest<Unit>
     {

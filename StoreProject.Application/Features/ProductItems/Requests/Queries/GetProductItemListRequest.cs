@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.ProductItems.Requests.Queries
+namespace StoreProject.Application.ProductItems.Requests.Queries
 {
     public class GetProductItemListRequest : IRequest<List<ProductItemDto>>
     {

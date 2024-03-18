@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Brands.Requests.Queries
+namespace StoreProject.Application.Brands.Requests.Queries
 {
     public class GetBrandListRequest : IRequest<List<BrandDto>>
     {

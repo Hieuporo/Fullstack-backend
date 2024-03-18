@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
 using StoreProject.Application.DTOs.Order;
 using StoreProject.Application.DTOs.Coupon;
-using StoreProject.Application.Features.Orders.Requests.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +10,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using StoreProject.Application.Constants;
 using StoreProject.Application.Exceptions;
+using StoreProject.Application.Orders.Requests.Queries;
+using StoreProject.Application.Contracts.IReposiotry;
 
-namespace StoreProject.Application.Features.Orders.Handlers.Queries
+namespace StoreProject.Application.Orders.Handlers.Queries
 {
     public class ClientGetOrderRequestHandler : IRequestHandler<ClientGetOrderRequest, OrderClientDto>
     {
@@ -30,9 +30,9 @@ namespace StoreProject.Application.Features.Orders.Handlers.Queries
         public async Task<OrderClientDto> Handle(ClientGetOrderRequest request, CancellationToken cancellationToken)
         {
             var userId = _httpContextAccessor.HttpContext.User.FindFirst(CustomClaimTypes.Uid).Value;
-            var order = _unitOfWork.OrderRepository.GetOrderWithDetail(userId ,request.Id);
+            var order = _unitOfWork.OrderRepository.GetOrderWithDetail(userId, request.Id);
 
-            if(order == null)
+            if (order == null)
             {
                 throw new BadRequestException("Order is not exist");
             }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.ShippingMethods.Requests.Commands
+namespace StoreProject.Application.ShippingMethods.Requests.Commands
 {
     public class CreateShippingMethodCommand : IRequest<int>
     {

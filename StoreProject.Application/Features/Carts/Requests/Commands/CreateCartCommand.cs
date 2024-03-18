@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Carts.Requests.Commands
+namespace StoreProject.Application.Carts.Requests.Commands
 {
     public class CreateCartCommand : IRequest<CartDto>
     {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
-using StoreProject.Application.Features.Categories.Requests.Commands;
+using StoreProject.Application.Categories.Requests.Commands;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.Features.Coupons.Requests.Commands;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Categories.Handlers.Commands
+namespace StoreProject.Application.Categories.Handlers.Commands
 {
     public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand>
     {

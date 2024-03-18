@@ -1,18 +1,18 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using StoreProject.Application.Carts.Requests.Queries;
 using StoreProject.Application.Constants;
-using StoreProject.Application.Contracts.Infrastructure.IReposiotry;
+using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.Cart;
 using StoreProject.Application.DTOs.Coupon;
-using StoreProject.Application.Features.Carts.Requests.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Features.Cart.Handlers.Queries
+namespace StoreProject.Application.Carts.Handlers.Queries
 {
     public class GetCartRequestHandler : IRequestHandler<GetCartRequest, CartDto>
     {
