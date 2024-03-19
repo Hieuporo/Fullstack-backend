@@ -5,6 +5,7 @@ using StoreProject.Domain.Constants;
 using StoreProject.Domain.Entities;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 
@@ -57,6 +58,15 @@ namespace StoreProject.Infrastructure.Authentication
 			return tokenValue;
 		}
 
-		
-	}
+        public string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                return Convert.ToBase64String(randomNumber);
+            }
+        }
+
+    }
 }

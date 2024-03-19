@@ -30,13 +30,13 @@ namespace StoreProject.Infrastructure.Repositories
             _dbContext.Set<T>().Remove(entity);
         }
 
-        public async Task<bool> Exists(int id)
+        public async Task<bool> Exists(string id)
         {
             var entity = await Get(id);
             return entity != null;
         }
 
-        public async Task<T> Get(int id)
+        public async Task<T> Get(string id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }

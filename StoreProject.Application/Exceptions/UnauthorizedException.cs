@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.Exceptions
 {
-    public class UnauthorizedException : ApplicationException
+    public class UnauthorizedException : Exception
     {
         public UnauthorizedException(string message) : base(message)
         {

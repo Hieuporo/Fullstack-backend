@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.Contracts.IReposiotry
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
-
-    
+        Task SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

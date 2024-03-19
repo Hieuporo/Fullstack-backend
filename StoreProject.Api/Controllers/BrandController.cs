@@ -1,13 +1,6 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using StoreProject.Application.Constants;
-using StoreProject.Application.DTOs.Brand;
-
-using StoreProject.Application.Features.Brands.Requests.Commands;
-using StoreProject.Application.Features.Brands.Requests.Queries;
-
+using StoreProject.Application.Brands.Commands.CreateBrand;
 namespace StoreProject.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -22,52 +15,48 @@ namespace StoreProject.Api.Controllers
 
 
 
-        [HttpGet]
-        public async Task<ActionResult<List<BrandDto>>> Get()
-        {
-            var coupons = await _mediator.Send(new GetBrandListRequest());
-            return Ok(coupons);
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<List<BrandDto>>> Get()
+        //{
+        //    var coupons = await _mediator.Send(new GetBrandListRequest());
+        //    return Ok(coupons);
+        //}
 
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<ActionResult<BrandDto>> Get(int id)
-        {
-            var coupon = await _mediator.Send(new GetBrandRequest { Id = id });
+        //[HttpGet]
+        //[Route("{id}")]
+        //public async Task<ActionResult<BrandDto>> Get(int id)
+        //{
+        //    var coupon = await _mediator.Send(new GetBrandRequest { Id = id });
 
-            return Ok(coupon);
-        }
-
+        //    return Ok(coupon);
+        //}
         [HttpPost]
-        [Authorize(Roles = Role.RoleAdmin)]
-        public async Task<ActionResult> Post([FromBody] CreateBrandDto productItem)
+        public async Task<ActionResult> Post([FromBody] CreateBrandCommand command)
         {
-            var command = new CreateBrandCommand { BrandDto = productItem };
             var response = await _mediator.Send(command);
 
             return Ok(response);
         }
 
-        [HttpPut]
-        [Authorize(Roles = Role.RoleAdmin)]
-        public async Task<ActionResult> Put([FromBody] UpdateBrandDto productItem)
-        {
-            var command = new UpdateBrandCommand { BrandDto = productItem };
-            await _mediator.Send(command);
+        //[HttpPut]
+        //[Authorize(Roles = Role.RoleAdmin)]
+        //public async Task<ActionResult> Put([FromBody] UpdateBrandDto productItem)
+        //{
+        //    var command = new UpdateBrandCommand { BrandDto = productItem };
+        //    await _mediator.Send(command);
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
-        [HttpDelete]
-        [Route("{id}")]
-        [Authorize(Roles = Role.RoleAdmin)]
-        public async Task<ActionResult> Delete(int id)
-        {
-            var command = new DeleteBrandCommand { Id = id };
-            await _mediator.Send(command);
+        //[HttpDelete]
+        //[Route("{id}")]
+        //[Authorize(Roles = Role.RoleAdmin)]
+        //public async Task<ActionResult> Delete(int id)
+        //{
+        //    var command = new DeleteBrandCommand { Id = id };
+        //    await _mediator.Send(command);
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
     }
 }
-    

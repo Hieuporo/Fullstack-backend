@@ -28,8 +28,8 @@ namespace StoreProject.Api.Middleware
             HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
             string result = JsonConvert.SerializeObject(new ErrorDetails
             {
-                ErrorMessage = exception.Message,
-                ErrorType = "Failure"
+                Message = exception.Message,
+                Status = "Error"
             });
 
             switch (exception)
@@ -58,7 +58,7 @@ namespace StoreProject.Api.Middleware
 
     public class ErrorDetails
     {
-        public string ErrorType { get; set; }
-        public string ErrorMessage { get; set; }
+        public string Status { get; set; }
+        public string Message { get; set; }
     }
 }

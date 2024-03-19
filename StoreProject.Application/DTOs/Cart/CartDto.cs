@@ -1,5 +1,4 @@
 ﻿using StoreProject.Application.DTOs.CartItem;
-using StoreProject.Application.DTOs.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;

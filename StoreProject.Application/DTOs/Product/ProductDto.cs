@@ -1,5 +1,4 @@
-﻿using StoreProject.Application.DTOs.Common;
-using StoreProject.Application.DTOs.ProductItem;
+﻿using StoreProject.Application.DTOs.ProductItem;
 using StoreProject.Domain.Entities;
 using System;
 using System.Collections.Generic;

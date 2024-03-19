@@ -1,11 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StoreProject.Application.DTOs.User
+﻿namespace StoreProject.Application.DTOs.User
 {
 	public class UserDetailDto
 	{

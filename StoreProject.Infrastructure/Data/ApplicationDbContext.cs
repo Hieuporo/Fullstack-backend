@@ -1,14 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using StoreProject.Domain.Common;
 using StoreProject.Domain.Entities;
-using StoreProject.Infrastructure.Configurations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StoreProject.Infrastructure.Data
 {
@@ -18,22 +11,24 @@ namespace StoreProject.Infrastructure.Data
         {
             
         }
+        public IMongoCollection<Brand> Brands { get; set; }
+        public IMongoCollection<Role> Roles { get; set; }
+        public IMongoCollection<User> Users { get; set; }
+        public IMongoCollection<UserRole> UserRoles { get; set; }
+        public IMongoCollection<Permission> Permissions { get; set; }
+        public IMongoCollection<RolePermission> RolePermissions { get; set; }
 
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
-        public DbSet<RolePermission> RolePermissions { get; set; }
-        public DbSet<Coupon> Coupons { get; set; }
-        public DbSet<Brand> Brands { get; set; }
-        public DbSet<ShippingMethod> ShippingMethods { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Cart> Carts { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<ProductItem> ProductItems { get; set; }
+        //public IMongoCollection<Product> Products { get; }
+
+        //public IMongoCollection<Coupon> Coupons { get; set; }
+
+        //public IMongoCollection<ShippingMethod> ShippingMethods { get; set; }
+        //public IMongoCollection<Category> Categories { get; set; }
+        //public IMongoCollection<Cart> Carts { get; set; }
+        //public IMongoCollection<CartItem> CartItems { get; set; }
+        //public IMongoCollection<Order> Orders { get; set; }
+        //public IMongoCollection<OrderItem> OrderItems { get; set; }
+        //public IMongoCollection<ProductItem> ProductItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
