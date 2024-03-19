@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using StoreProject.Application.Contracts.Authentication;
 using StoreProject.Application.Contracts.IReposiotry;
@@ -26,9 +25,9 @@ namespace StoreProject.Infrastructure
             services.AddTransient<IEmailSender, EmailSender>();
 
 
-            services.AddHealthChecks()
-             .AddMongoDb(configuration["DatabaseSettings:ConnectionString"], "Catalog  Mongo Db Health Check",
-                 HealthStatus.Degraded);
+            services.AddDbContext<ApplicationDbContext>(options =>
+               options.UseSqlServer(
+                   configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
