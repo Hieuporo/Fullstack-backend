@@ -1,7 +1,12 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StoreProject.Application.Auth.Commands.Login;
+using StoreProject.Application.Auth.Commands.Logout;
 using StoreProject.Application.Auth.Commands.Register;
+using StoreProject.Domain.Constants;
+using StoreProject.Domain.Entities;
+using StoreProject.Infrastructure.Authentication;
 
 namespace StoreProject.Api.Controllers
 {
@@ -50,10 +55,15 @@ namespace StoreProject.Api.Controllers
 			return Ok();
 		}
 
-		[HttpPost("Revoke")]
-		public async Task<ActionResult> Revoke()
+		[HttpPost("Logout")]
+        [HasPermission(PermissionList.CreateBrand)]
+        public async Task<ActionResult> Logout()
 		{
-			return Ok();
+
+
+            var response = await _mediator.Send(new LogoutCommand());
+
+            return Ok(response);
 		}
 
 	}

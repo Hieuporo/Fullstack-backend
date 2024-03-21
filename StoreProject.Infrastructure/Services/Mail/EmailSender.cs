@@ -2,11 +2,6 @@
 using SendGrid.Helpers.Mail;
 using SendGrid;
 using StoreProject.Application.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using StoreProject.Application.Contracts.Service;
 
 namespace StoreProject.Infrastructure.Services.Mail

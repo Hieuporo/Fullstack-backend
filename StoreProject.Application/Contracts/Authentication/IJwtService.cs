@@ -2,9 +2,10 @@
 
 namespace StoreProject.Application.Contracts.Authentication
 {
-    public interface IJwtTokenGenerator
+    public interface IJwtService
     {
         Task<string> GenerateAccessToken(User user);
         string GenerateRefreshToken();
+        int GetCurrentUserId();
     }
 }

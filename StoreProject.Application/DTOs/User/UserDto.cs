@@ -8,7 +8,5 @@ namespace StoreProject.Application.DTOs.User
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Avatar { get; set; }
-        public string? RefreshToken { get; set; }
-
     }
 }

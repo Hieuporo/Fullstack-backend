@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Domain.Constants
 {
-    public enum PermissionList
+    public enum OtpStatus
     {
-        CreateBrand = 1,
-        CreateCategory = 2,
-        CreateOrder = 3,
-        UpdateMe = 4,
+        Pending = 1,
+        Active = 2,
+        Block = 3
     }
 }

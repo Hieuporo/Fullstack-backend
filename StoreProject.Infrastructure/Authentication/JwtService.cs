@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using StoreProject.Application.Contracts.Authentication;
 using StoreProject.Domain.Constants;
@@ -12,16 +14,19 @@ using System.Text;
 namespace StoreProject.Infrastructure.Authentication
 {
 	
-	public class JwtTokenGenerator : IJwtTokenGenerator
+	public class JwtService : IJwtService
 	{
 		private readonly JwtOptions _options;
 		private readonly IPermissionService _permissionService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-		public JwtTokenGenerator(IOptions<JwtOptions> options, IPermissionService permissionService)
+
+        public JwtService(IOptions<JwtOptions> options, IPermissionService permissionService, IHttpContextAccessor httpContextAccessor)
 		{
 			_options = options.Value;
 			_permissionService = permissionService;
-		}
+			_httpContextAccessor = httpContextAccessor;
+        }
 
 
 		public async Task<string> GenerateAccessToken(User user)
@@ -68,5 +73,16 @@ namespace StoreProject.Infrastructure.Authentication
             }
         }
 
+        public int GetCurrentUserId()
+        {
+            var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.FindFirst(JwtRegisteredClaimNames.Sub).Value);
+
+			if(userId != null)
+			{
+                return userId;
+            }
+
+			return 0;
+        }
     }
 }

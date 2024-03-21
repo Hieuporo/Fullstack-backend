@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using StoreProject.Application.Brands.Commands.CreateBrand;
+using StoreProject.Domain.Constants;
+using StoreProject.Infrastructure.Authentication;
 namespace StoreProject.Api.Controllers
 {
     [Route("api/[controller]")]
@@ -31,6 +33,7 @@ namespace StoreProject.Api.Controllers
         //    return Ok(coupon);
         //}
         [HttpPost]
+        [HasPermission(PermissionList.CreateBrand)]
         public async Task<ActionResult> Post([FromBody] CreateBrandCommand command)
         {
             var response = await _mediator.Send(command);

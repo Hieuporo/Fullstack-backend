@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Auth.Commands.Register
+namespace StoreProject.Application.Auth.Commands.Logout
 {
-    public class RegisterCommand : IRequest<int>
+    public class LogoutCommand : IRequest<Unit>
     {
-        public string Email { get; set; }
     }
 }

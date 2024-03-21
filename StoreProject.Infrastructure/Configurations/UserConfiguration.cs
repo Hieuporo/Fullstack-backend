@@ -1,6 +1,7 @@
 ﻿using StoreProject.Domain.Entities;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using StoreProject.Application.Utils;
 
 
 namespace Eshopz.Infrastructure.Configurations
@@ -14,7 +15,7 @@ namespace Eshopz.Infrastructure.Configurations
 			 {
 				 Id = 1,
 				 Email = "admin@gmail.com",
-				 Password = "Admin123*"
+				 Password = PasswordUtil.MD5Hash("Admin123*")
 			 }
 		 );
 		}

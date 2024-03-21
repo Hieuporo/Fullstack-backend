@@ -11,6 +11,7 @@ namespace StoreProject.Infrastructure.Data
         {
             
         }
+        public DbSet<Otp> Otps { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }

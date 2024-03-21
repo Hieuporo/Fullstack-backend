@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StoreProject.Application.Auth.Commands.Register
+namespace StoreProject.Application.Auth.Commands.CreatePassword
 {
-    public class RegisterCommand : IRequest<int>
+    public class CreatePasswordCommand : IRequest<int>
     {
         public string Email { get; set; }
+        public string Password { get; set; }
     }
 }

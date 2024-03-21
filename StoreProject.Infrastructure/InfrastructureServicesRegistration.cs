@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Hangfire;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -10,9 +11,9 @@ using StoreProject.Application.Contracts.Service;
 using StoreProject.Application.Models;
 using StoreProject.Infrastructure.Authentication;
 using StoreProject.Infrastructure.Data;
+using StoreProject.Infrastructure.Hangfire;
 using StoreProject.Infrastructure.Repositories;
 using StoreProject.Infrastructure.Services.Mail;
-using Stripe;
 using System.Text;
 
 namespace StoreProject.Infrastructure
@@ -31,15 +32,14 @@ namespace StoreProject.Infrastructure
 
             services.AddScoped<IBrandRepository, BrandRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IOtpRepository, OtpRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.Configure<JwtOptions>(configuration.GetSection("Jwt"));
-
-       
             services.AddSingleton<IAuthorizationHandler, PermissionAuthorizationHandler>();
             services.AddSingleton<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
-            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IPermissionService, PermissionService>();
 
             services.AddAuthentication(options =>
@@ -61,6 +61,12 @@ namespace StoreProject.Infrastructure
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:SecretKey"]))
                    };
                });
+
+            // hangfire setup 
+            services.AddHangfire(x => x.UseSqlServerStorage(configuration.GetConnectionString("DefaultConnection")));
+            services.AddHangfireServer();
+            services.AddScoped<IHangfireService, HangFireService>();
+
             return services;
 
         }

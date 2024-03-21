@@ -1,3 +1,4 @@
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using StoreProject.Api.Middleware;
@@ -60,7 +61,7 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
-
+app.UseHangfireDashboard("/dash");
 app.UseAuthorization();
 
 app.UseCors(x => x
