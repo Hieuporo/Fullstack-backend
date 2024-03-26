@@ -1,11 +1,9 @@
 ﻿using MediatR;
-using StoreProject.Application.Brands.Commands.CreateBrand;
 using StoreProject.Application.Contracts.Authentication;
 using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.User;
 using StoreProject.Application.Exceptions;
 using StoreProject.Application.Utils;
-using StoreProject.Domain.Entities;
 
 
 namespace StoreProject.Application.Auth.Commands.Login

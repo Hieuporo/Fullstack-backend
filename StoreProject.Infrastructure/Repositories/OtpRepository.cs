@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StoreProject.Application.Contracts.IReposiotry;
-using StoreProject.Domain.Constants;
 using StoreProject.Domain.Entities;
+using StoreProject.Domain.Enums;
 using StoreProject.Infrastructure.Data;
 using System;
 using System.Collections.Generic;

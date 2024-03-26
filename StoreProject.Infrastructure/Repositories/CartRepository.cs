@@ -18,7 +18,7 @@ namespace StoreProject.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<Cart> CreateCart(string userId)
+        public async Task<Cart> CreateCart(int userId)
         {
             var cart = new Cart()
             {
@@ -30,27 +30,42 @@ namespace StoreProject.Infrastructure.Repositories
             return cart;
         }
 
-        public async Task<Cart> GetCartByUserId(string userId)
+        public Task<Cart> CreateCart(string userId)
         {
-            var cart = await _dbContext.Carts.Include(u => u.CartItems).ThenInclude(u => u.ProductItem).FirstOrDefaultAsync(c => c.UserId == userId);
+            throw new NotImplementedException();
+        }
+
+        public async Task<Cart> GetCartByUserId(int userId)
+        {
+            var cart = await _dbContext.Carts.Include(u => u.CartItems).ThenInclude(u => u.Product).FirstOrDefaultAsync(c => c.UserId == userId);
 
             return cart;
         }
 
-        public async Task<decimal> GetTotalMoney(string userId)
+        public Task<Cart> GetCartByUserId(string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<decimal> GetTotalMoney(int userId)
         {
             var cart = await _dbContext.Carts.Include(u => u.CartItems)
-                .ThenInclude(u => u.ProductItem).FirstOrDefaultAsync(c => c.UserId == userId);
+                .ThenInclude(u => u.Product).FirstOrDefaultAsync(c => c.UserId == userId);
 
 
             decimal total = 0;
 
             foreach(var cartItem in cart.CartItems)
             {
-                total +=  cartItem.ProductItem.Price * cartItem.Quantity;
+                total +=  cartItem.Product.BaseCost * cartItem.Quantity;
             }
 
             return total;
+        }
+
+        public Task<decimal> GetTotalMoney(string userId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

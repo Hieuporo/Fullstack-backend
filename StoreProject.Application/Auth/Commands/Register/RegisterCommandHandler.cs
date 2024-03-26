@@ -4,6 +4,7 @@ using StoreProject.Domain.Entities;
 using StoreProject.Application.Utils;
 using StoreProject.Application.Contracts.Service;
 using StoreProject.Application.Exceptions;
+using StoreProject.Domain.Enums;
 
 
 namespace StoreProject.Application.Auth.Commands.Register
@@ -45,7 +46,7 @@ namespace StoreProject.Application.Auth.Commands.Register
             {
                 OtpToken = random.Next(100000, 999999),
                 OtpEmail = request.Email,
-                OtpStatus = Domain.Constants.OtpStatus.Pending
+                OtpStatus = OtpStatus.Pending
             };
 
             await _otpRepository.Add(newOtp);

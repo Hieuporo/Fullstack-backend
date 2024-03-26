@@ -2,10 +2,6 @@
 //using Microsoft.AspNetCore.Authorization;
 //using Microsoft.AspNetCore.Http;
 //using Microsoft.AspNetCore.Mvc;
-//using StoreProject.Application.Constants;
-//using StoreProject.Application.DTOs.Order;
-//using StoreProject.Application.Features.Orders.Requests.Commands;
-//using StoreProject.Application.Features.Orders.Requests.Queries;
 
 //namespace StoreProject.Api.Controllers
 //{
@@ -21,103 +17,82 @@
 //        }
 
 //        [HttpGet]
-//        public async Task<ActionResult> Get()
+//        public async Task<ActionResult> GetOrders()
 //        {
-//            var response = await _mediator.Send(new ClientGetOrderListRequest());
-//            return Ok(response);
+//            return Ok();
 //        }
 
 //        [HttpGet]
 //        [Route("{id}")]
-//        public async Task<ActionResult> Get(int id)
+//        public async Task<ActionResult> GetOrderById(int id)
 //        {
-//            var response = await _mediator.Send(new ClientGetOrderRequest { Id = id });
-//            return Ok(response);
+//            return Ok();
 //        }
 
 
 //        [HttpGet]
-//        [Route("admin")]
-//        [Authorize(Roles = Role.RoleAdmin)]
-//        public async Task<ActionResult> AdminGet()
+//        [Route("all-order")]
+//        public async Task<ActionResult> GetAllOrder()
 //        {
-//            var response = await _mediator.Send(new AdminGetOrderListRequest());
-//            return Ok(response);
+//            return Ok();
 //        }
 
 //        [HttpGet]
-//        [Route("admin/{id}")]
-//        [Authorize(Roles = Role.RoleAdmin)]
-//        public async Task<ActionResult> AdminGet(int id)
+//        [Route("get-order-detail/{id}")]
+//        public async Task<ActionResult> GetOrderDetailById(int id)
 //        {
-//            var response = await _mediator.Send(new AdminGetOrderRequest { Id = id });
-//            return Ok(response);
+//            return Ok();
 //        }
 
 
 
 
 //        [HttpPost]
-//        public async Task<ActionResult> Post([FromBody] CreateOrderWithStripeSetupDto createOrderWithStripeSetupDto)
+//        public async Task<ActionResult> CreateOrder()
 //        {
-//            var command = new CreateOrderCommand
-//                { 
-//                OrderDto = createOrderWithStripeSetupDto.CreateOrderDto 
-//                };
-//            var orderId = await _mediator.Send(command);
-
-//            createOrderWithStripeSetupDto.StripeSetupDto = new StripeSetupDto
-//            {
-//                ApprovedUrl = createOrderWithStripeSetupDto.StripeSetupDto.ApprovedUrl  + orderId.ToString(),
-//                CancelUrl = createOrderWithStripeSetupDto.StripeSetupDto.CancelUrl 
-//            };
-
-//            var url = await _mediator
-//                .Send(new CreateCheckoutSessionCommand { StripeSetupDto = createOrderWithStripeSetupDto.StripeSetupDto, OrderId = orderId });
-
-//            return Ok(new {url= url});
+//            return Ok();
 //        }
 
 //        [HttpPatch]
-//        public async Task<ActionResult> Patch([FromBody] UpdateOrderStatusDto updateOrderStatusCommand)
+//        public async Task<ActionResult> UpdateOrder()
 //        {
-//            var command = new UpdateOrderStatusCommand { OrderDto = updateOrderStatusCommand };
-//            var response = await _mediator.Send(command);
 
-//            return Ok(response);
+//            return Ok();
+//        }
+
+//        [HttpDelete]
+//        [Route("delete-order/{id}")]
+//        public async Task<ActionResult> DeleteOrder()
+//        {
+//            return Ok();
 //        }
 
 //        [HttpPost]
-//        [Route("confirmpayment/{id}")]
+//        [Route("confirm-payment/{id}")]
 //        public async Task<ActionResult> ConfirmPayment(int id)
 //        {
-            
-//            var command = new ValidateStripeSessionCommand
-//            {
-//                OrderId = id ,
-//            };
 
-//            var response = await _mediator.Send(command);
-
-//            return Ok(response);
+//            return Ok();
 //        }
 
 
 //        [HttpPost]
-//        [Route("completeOrder/{id}")]
-//        [Authorize(Roles = Role.RoleAdmin)]
+//        [Route("complete-order/{id}")]
 //        public async Task<ActionResult> CompleteOrder(int id)
 //        {
 
-//            var command = new CompleteOrderCommand
-//            {
-//                Id = id,
-//            };
-
-//            var response = await _mediator.Send(command);
-
-//            return Ok(response);
+       
+//            return Ok();
 //        }
 
+
+//        [HttpPost]
+//        [Route("cancel-order/{id}")]
+//        public async Task<ActionResult> CancelOrder(int id)
+//        {
+
+
+//            return Ok();
+//        }
 //    }
 //}

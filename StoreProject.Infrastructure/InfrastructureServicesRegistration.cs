@@ -30,7 +30,7 @@ namespace StoreProject.Infrastructure
                options.UseSqlServer(
                    configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IOtpRepository, OtpRepository>();
 

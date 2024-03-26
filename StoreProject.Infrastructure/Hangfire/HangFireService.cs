@@ -1,6 +1,6 @@
 ﻿using Hangfire;
 using StoreProject.Application.Contracts.Service;
-using StoreProject.Domain.Constants;
+using StoreProject.Domain.Enums;
 using StoreProject.Infrastructure.Data;
 
 

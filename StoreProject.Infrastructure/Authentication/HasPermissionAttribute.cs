@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
-using StoreProject.Domain.Constants;
+using StoreProject.Domain.Enums;
 
 
 namespace StoreProject.Infrastructure.Authentication

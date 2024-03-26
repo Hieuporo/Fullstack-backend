@@ -2,7 +2,6 @@
 using MediatR;
 using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Application.DTOs.Product;
-using StoreProject.Application.DTOs.ProductItem;
 using StoreProject.Application.Products.Requests.Queries;
 using StoreProject.Application.Utils;
 using StoreProject.Domain.Entities;

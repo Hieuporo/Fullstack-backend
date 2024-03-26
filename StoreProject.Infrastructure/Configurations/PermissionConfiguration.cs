@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using StoreProject.Domain.Constants;
 using StoreProject.Domain.Entities;
+using StoreProject.Domain.Enums;
 
 namespace StoreProject.Infrastructure.Configurations
 {

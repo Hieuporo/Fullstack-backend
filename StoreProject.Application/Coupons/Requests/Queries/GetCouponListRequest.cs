@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.Coupons.Requests.Queries
 {
-    public class GetCouponListRequest : IRequest<List<CouponDto>>
+    public class GetCouponListRequest : IRequest<List<DiscountDto>>
     {
 
     }

@@ -1,13 +1,11 @@
 ﻿//using MediatR;
 //using Microsoft.AspNetCore.Authorization;
-//using Microsoft.AspNetCore.Http;
 //using Microsoft.AspNetCore.Mvc;
-//using StoreProject.Application.Constants;
 //using StoreProject.Application.DTOs.Category;
-
-//using StoreProject.Application.Features.Categories.Requests.Commands;
-//using StoreProject.Application.Features.Categories.Requests.Queries;
+//using StoreProject.Domain.Constants;
 //using StoreProject.Domain.Entities;
+//using StoreProject.Domain.Enums;
+//using StoreProject.Infrastructure.Authentication;
 
 //namespace StoreProject.Api.Controllers
 //{
@@ -21,51 +19,39 @@
 //            _mediator = mediator;
 //        }
 
-
-
 //        [HttpGet]
-//        public async Task<ActionResult<List<CategoryDto>>> Get()
+//        public async Task<ActionResult> GetCategories()
 //        {
-//            var coupons = await _mediator.Send(new GetCategoryListRequest());
-//            return Ok(coupons);
+//            return Ok();
 //        }
 
 //        [HttpGet]
 //        [Route("{id}")]
-//        public async Task<ActionResult<CategoryDto>> Get(int id)
+//        public async Task<ActionResult> GetCategoryById(int id)
 //        {
-//            var coupon = await _mediator.Send(new GetCategoryRequest { Id = id });
-
-//            return Ok(coupon);
+//            return Ok();
 //        }
 
 //        [HttpPost]
-//        [Authorize(Roles = Role.RoleAdmin)]
-//        public async Task<ActionResult> Post([FromBody] CreateCategoryDto productItem)
+//        [HasPermission(PermissionList.CreateCategory)]
+//        public async Task<ActionResult> CreateCategory()
 //        {
-//            var command = new CreateCategoryCommand { CategoryDto = productItem };
-//            var response = await _mediator.Send(command);
-
-//            return Ok(response);
+//            return Ok();
 //        }
 
 //        [HttpPut]
-//        [Authorize(Roles = Role.RoleAdmin)]
-//        public async Task<ActionResult> Put([FromBody] UpdateCategoryDto productItem)
+//        [HasPermission(PermissionList.UpdateCategory)]
+//        public async Task<ActionResult> UpdateCategory()
 //        {
-//            var command = new UpdateCategoryCommand { CategoryDto = productItem };
-//            await _mediator.Send(command);
-
+          
 //            return NoContent();
 //        }
 
 //        [HttpDelete]
 //        [Route("{id}")]
-//        [Authorize(Roles = Role.RoleAdmin)]
-//        public async Task<ActionResult> Delete(int id)
+//        [HasPermission(PermissionList.DeleteCategory)]
+//        public async Task<ActionResult> DeleteCategory(int id)
 //        {
-//            var command = new DeleteCategoryCommand { Id = id };
-//            await _mediator.Send(command);
 
 //            return NoContent();
 //        }

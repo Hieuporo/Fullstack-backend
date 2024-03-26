@@ -22,35 +22,6 @@ namespace StoreProject.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("StoreProject.Domain.Entities.Brand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastModified")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Brands");
-                });
-
             modelBuilder.Entity("StoreProject.Domain.Entities.Cart", b =>
                 {
                     b.Property<int>("Id")
@@ -71,16 +42,12 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId1")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Carts");
                 });
@@ -108,7 +75,7 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductItemId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -118,7 +85,7 @@ namespace StoreProject.Infrastructure.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("ProductItemId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("CartItems");
                 });
@@ -141,10 +108,6 @@ namespace StoreProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 
@@ -160,7 +123,7 @@ namespace StoreProject.Infrastructure.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("StoreProject.Domain.Entities.Coupon", b =>
+            modelBuilder.Entity("StoreProject.Domain.Entities.Discount", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -168,18 +131,28 @@ namespace StoreProject.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CouponCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("DiscountAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiscountCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("DiscountValue")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
@@ -187,12 +160,60 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("MinAmount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("MaxUses")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("MinOrderValue")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UsesCount")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Coupons");
+                    b.ToTable("Discounts");
+                });
+
+            modelBuilder.Entity("StoreProject.Domain.Entities.FavoriteProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("FavoriteProducts");
                 });
 
             modelBuilder.Entity("StoreProject.Domain.Entities.Order", b =>
@@ -207,9 +228,6 @@ namespace StoreProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CouponId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -221,7 +239,7 @@ namespace StoreProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Discount")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
@@ -230,10 +248,10 @@ namespace StoreProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("OrderTotal")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
-                    b.Property<string>("PaymentIntentId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime?>("PaymentAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -242,27 +260,17 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<int>("ShippingMethodId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
-                    b.Property<string>("StripeSessionId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("UserId1")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CouponId");
-
                     b.HasIndex("ShippingMethodId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -290,7 +298,10 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductItemId")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -300,7 +311,7 @@ namespace StoreProject.Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductItemId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
                 });
@@ -375,22 +386,142 @@ namespace StoreProject.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "CreateBrand"
-                        },
-                        new
-                        {
-                            Id = 2,
                             Name = "CreateCategory"
                         },
                         new
                         {
+                            Id = 2,
+                            Name = "UpdateCategory"
+                        },
+                        new
+                        {
                             Id = 3,
-                            Name = "CreateOrder"
+                            Name = "DeleteCategory"
                         },
                         new
                         {
                             Id = 4,
-                            Name = "UpdateMe"
+                            Name = "ViewOrder"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "UpdateOrder"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "DeleteOrder"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "ViewProduct"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "DeleteProduct"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "UpdateProduct"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "ViewUser"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "UpdateUser"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "DeleteUser"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "CreateUser"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "CreateRole"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "UpdateRole"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "DeleteRole"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "ViewRole"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "ViewPermission"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "UpdateRolePermission"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "ViewRolePermission"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = "ViewDiscount"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = "UpdateDiscount"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = "DeleteDiscount"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Name = "UpdateShippingMethod"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = "DeleteShippingMethod"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Name = "CreateShippingMethod"
+                        },
+                        new
+                        {
+                            Id = 100,
+                            Name = "Client"
+                        },
+                        new
+                        {
+                            Id = 101,
+                            Name = "All"
                         });
                 });
 
@@ -402,10 +533,14 @@ namespace StoreProject.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
+                    b.Property<decimal>("BaseCost")
+                        .HasColumnType("decimal(18, 2)");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -415,10 +550,12 @@ namespace StoreProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<decimal>("DiscountCost")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -432,16 +569,23 @@ namespace StoreProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
-                    b.HasIndex("BrandId");
+                    b.Property<string>("Slug")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ViewCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("StoreProject.Domain.Entities.ProductItem", b =>
+            modelBuilder.Entity("StoreProject.Domain.Entities.ProductAttribute", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -455,7 +599,7 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("Key")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -465,24 +609,18 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuantityInStock")
-                        .HasColumnType("int");
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductItems");
+                    b.ToTable("ProductAttributes");
                 });
 
             modelBuilder.Entity("StoreProject.Domain.Entities.Role", b =>
@@ -545,6 +683,146 @@ namespace StoreProject.Infrastructure.Migrations
                         {
                             RoleId = 1,
                             PermissionId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 2
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 3
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 4
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 5
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 6
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 7
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 8
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 9
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 10
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 11
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 12
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 13
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 14
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 15
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 16
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 17
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 18
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 19
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 20
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 21
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 22
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 23
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 24
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 25
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 26
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PermissionId = 101
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            PermissionId = 100
+                        },
+                        new
+                        {
+                            RoleId = 2,
+                            PermissionId = 101
                         });
                 });
 
@@ -573,7 +851,7 @@ namespace StoreProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.HasKey("Id");
 
@@ -635,6 +913,41 @@ namespace StoreProject.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("StoreProject.Domain.Entities.UserDiscount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DiscountId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiscountId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserDiscounts");
+                });
+
             modelBuilder.Entity("StoreProject.Domain.Entities.UserRole", b =>
                 {
                     b.Property<int>("RoleId")
@@ -661,7 +974,7 @@ namespace StoreProject.Infrastructure.Migrations
                 {
                     b.HasOne("StoreProject.Domain.Entities.User", "User")
                         .WithMany("Carts")
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -676,23 +989,38 @@ namespace StoreProject.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StoreProject.Domain.Entities.ProductItem", "ProductItem")
-                        .WithMany("CartItems")
-                        .HasForeignKey("ProductItemId")
+                    b.HasOne("StoreProject.Domain.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cart");
 
-                    b.Navigation("ProductItem");
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("StoreProject.Domain.Entities.FavoriteProduct", b =>
+                {
+                    b.HasOne("StoreProject.Domain.Entities.Product", "Product")
+                        .WithMany("FavoriteProducts")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StoreProject.Domain.Entities.User", "User")
+                        .WithMany("FavoriteProducts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StoreProject.Domain.Entities.Order", b =>
                 {
-                    b.HasOne("StoreProject.Domain.Entities.Coupon", "Coupon")
-                        .WithMany("Orders")
-                        .HasForeignKey("CouponId");
-
                     b.HasOne("StoreProject.Domain.Entities.ShippingMethod", "ShippingMethod")
                         .WithMany("Orders")
                         .HasForeignKey("ShippingMethodId")
@@ -701,11 +1029,9 @@ namespace StoreProject.Infrastructure.Migrations
 
                     b.HasOne("StoreProject.Domain.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Coupon");
 
                     b.Navigation("ShippingMethod");
 
@@ -720,40 +1046,28 @@ namespace StoreProject.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StoreProject.Domain.Entities.ProductItem", "ProductItem")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("ProductItemId")
+                    b.HasOne("StoreProject.Domain.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Order");
 
-                    b.Navigation("ProductItem");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("StoreProject.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("StoreProject.Domain.Entities.Brand", "Brand")
+                    b.HasOne("StoreProject.Domain.Entities.Category", null)
                         .WithMany("Products")
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("StoreProject.Domain.Entities.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Brand");
-
-                    b.Navigation("Category");
+                        .HasForeignKey("CategoryId");
                 });
 
-            modelBuilder.Entity("StoreProject.Domain.Entities.ProductItem", b =>
+            modelBuilder.Entity("StoreProject.Domain.Entities.ProductAttribute", b =>
                 {
                     b.HasOne("StoreProject.Domain.Entities.Product", "Product")
-                        .WithMany("ProductItems")
+                        .WithMany("ProductAttributes")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -780,6 +1094,25 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("StoreProject.Domain.Entities.UserDiscount", b =>
+                {
+                    b.HasOne("StoreProject.Domain.Entities.Discount", "Discount")
+                        .WithMany("UserDiscounts")
+                        .HasForeignKey("DiscountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StoreProject.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Discount");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("StoreProject.Domain.Entities.UserRole", b =>
                 {
                     b.HasOne("StoreProject.Domain.Entities.Role", "Role")
@@ -799,11 +1132,6 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("StoreProject.Domain.Entities.Brand", b =>
-                {
-                    b.Navigation("Products");
-                });
-
             modelBuilder.Entity("StoreProject.Domain.Entities.Cart", b =>
                 {
                     b.Navigation("CartItems");
@@ -814,9 +1142,9 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("StoreProject.Domain.Entities.Coupon", b =>
+            modelBuilder.Entity("StoreProject.Domain.Entities.Discount", b =>
                 {
-                    b.Navigation("Orders");
+                    b.Navigation("UserDiscounts");
                 });
 
             modelBuilder.Entity("StoreProject.Domain.Entities.Order", b =>
@@ -831,14 +1159,9 @@ namespace StoreProject.Infrastructure.Migrations
 
             modelBuilder.Entity("StoreProject.Domain.Entities.Product", b =>
                 {
-                    b.Navigation("ProductItems");
-                });
+                    b.Navigation("FavoriteProducts");
 
-            modelBuilder.Entity("StoreProject.Domain.Entities.ProductItem", b =>
-                {
-                    b.Navigation("CartItems");
-
-                    b.Navigation("OrderItems");
+                    b.Navigation("ProductAttributes");
                 });
 
             modelBuilder.Entity("StoreProject.Domain.Entities.Role", b =>
@@ -856,6 +1179,8 @@ namespace StoreProject.Infrastructure.Migrations
             modelBuilder.Entity("StoreProject.Domain.Entities.User", b =>
                 {
                     b.Navigation("Carts");
+
+                    b.Navigation("FavoriteProducts");
 
                     b.Navigation("UserRoles");
                 });

@@ -13,7 +13,8 @@ namespace StoreProject.Domain.Entities
 		public string? Avatar { get; set; }
 		public string? RefreshToken { get; set; }
 		public ICollection<UserRole> UserRoles { get; set; }
-		public ICollection<Cart> Carts { get; set; }
+		public ICollection<Cart>? Carts { get; set; }
+        public ICollection<FavoriteProduct>? FavoriteProducts { get; set; }
 
     }
 }

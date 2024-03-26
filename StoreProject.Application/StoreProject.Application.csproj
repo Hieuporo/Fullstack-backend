@@ -20,8 +20,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Auth\Queries\" />
-    <Folder Include="Brands\Queries\" />
+    <Folder Include="Carts\Handlers\Commands\" />
+    <Folder Include="Categories\Commands\Delete\" />
+    <Folder Include="Categories\Commands\Update\" />
+    <Folder Include="Categories\Queries\" />
+    <Folder Include="ProductItems\Handlers\Commands\" />
+    <Folder Include="ProductItems\Handlers\Queries\" />
+    <Folder Include="ProductItems\Requests\Commands\" />
+    <Folder Include="ProductItems\Requests\Queries\" />
   </ItemGroup>
 
 

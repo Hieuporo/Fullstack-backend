@@ -3,6 +3,8 @@ using StoreProject.Application.Contracts.IReposiotry;
 using StoreProject.Domain.Entities;
 using StoreProject.Application.Utils;
 using StoreProject.Application.Contracts.Service;
+using StoreProject.Application.Exceptions;
+using StoreProject.Domain.Enums;
 
 
 namespace StoreProject.Application.Auth.Commands.CreatePassword
@@ -23,22 +25,21 @@ namespace StoreProject.Application.Auth.Commands.CreatePassword
 
         public async Task<int> Handle(CreatePasswordCommand request, CancellationToken cancellationToken)
         {
+            var tokenExists = _otpRepository.FindPendingOtpByCodeAndEmail(request.Token ,request.Email);
+
+
+            if (tokenExists == null)
+            {
+                throw new BadRequestException("Something went wrong! Please try again");
+            };
 
             User user = new User
             {
                 Email = request.Email,
                 Password = PasswordUtil.MD5Hash(request.Password),
             };
-            //Random random = new Random();
-            //Otp newOtp = new Otp
-            //{
-            //    OtpToken = random.Next(0, (int)Math.Pow(2, 24)),
-            //    OtpEmail = request.Email,
-
-            //};
-            //await _otpRepository.Add(newOtp);
-
-            //_hangfireService.CheckExpireEmail(newOtp.Id);
+            tokenExists.OtpStatus = OtpStatus.Active;
+            await _otpRepository.Update(tokenExists);
             await _userRepository.Add(user);
             await _unitOfWork.SaveChangesAsync();
             return user.Id;

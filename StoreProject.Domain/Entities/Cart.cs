@@ -9,7 +9,7 @@ namespace StoreProject.Domain.Entities
 {
     public class Cart : BaseDomainEntity
     {
-        public string UserId { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; }
         public ICollection<CartItem> CartItems { get; set; }
     }

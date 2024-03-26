@@ -1,5 +1,5 @@
 ﻿using StoreProject.Domain.Common;
-using StoreProject.Domain.Constants;
+using StoreProject.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,6 @@ namespace StoreProject.Domain.Entities
         public long OtpToken { get; set; }
         public string OtpEmail { get; set; }
         public OtpStatus OtpStatus { get; set; }
-        public DateTime  ExpireAt { get; set; }
+        public DateTime ExpireAt { get; set; }
     }
 }

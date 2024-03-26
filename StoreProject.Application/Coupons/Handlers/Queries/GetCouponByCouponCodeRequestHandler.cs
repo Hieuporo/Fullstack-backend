@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.Coupons.Handlers.Queries
 {
-    public class GetCouponByCouponCodeRequestHandler : IRequestHandler<GetCouponByCouponCodeRequest, CouponDto>
+    public class GetCouponByCouponCodeRequestHandler : IRequestHandler<GetCouponByCouponCodeRequest, DiscountDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace StoreProject.Application.Coupons.Handlers.Queries
             _mapper = mapper;
         }
 
-        public async Task<CouponDto> Handle(GetCouponByCouponCodeRequest request, CancellationToken cancellationToken)
+        public async Task<DiscountDto> Handle(GetCouponByCouponCodeRequest request, CancellationToken cancellationToken)
         {
             //var coupon = await _unitOfWork.CouponRepository.GetCouponByCode(request.CouponCode);
 

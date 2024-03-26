@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace StoreProject.Application.Coupons.Handlers.Queries
 {
-    public class GetCouponListRequestHandler : IRequestHandler<GetCouponListRequest, List<CouponDto>>
+    public class GetCouponListRequestHandler : IRequestHandler<GetCouponListRequest, List<DiscountDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace StoreProject.Application.Coupons.Handlers.Queries
             _mapper = mapper;
         }
 
-        public async Task<List<CouponDto>> Handle(GetCouponListRequest request, CancellationToken cancellationToken)
+        public async Task<List<DiscountDto>> Handle(GetCouponListRequest request, CancellationToken cancellationToken)
         {
             //var coupons = await _unitOfWork.CouponRepository.GetAll();
             //return _mapper.Map<List<CouponDto>>(coupons);

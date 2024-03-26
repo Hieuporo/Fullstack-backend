@@ -1,16 +1,17 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StoreProject.Application.Auth.Commands.CreatePassword;
 using StoreProject.Application.Auth.Commands.Login;
 using StoreProject.Application.Auth.Commands.Logout;
 using StoreProject.Application.Auth.Commands.Register;
+using StoreProject.Application.Auth.Queries.CheckValidToken;
 using StoreProject.Domain.Constants;
-using StoreProject.Domain.Entities;
+using StoreProject.Domain.Enums;
 using StoreProject.Infrastructure.Authentication;
 
 namespace StoreProject.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -21,7 +22,7 @@ namespace StoreProject.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<ActionResult> Login(LoginCommand command)
         {
             var response = await _mediator.Send(command);
@@ -29,7 +30,7 @@ namespace StoreProject.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
 
         public async Task<ActionResult> Register(RegisterCommand command)
         {
@@ -38,29 +39,44 @@ namespace StoreProject.Api.Controllers
             return Ok(response);
         }
 
+        [HttpGet("check-token")]
+        public async Task<ActionResult> CheckToken([FromQuery] CheckValidTokenRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
 
-		[HttpPost("ConfirmEmail")]
+        [HttpPost("create-password")]
+        public async Task<ActionResult> CreatePassword(CreatePasswordCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
 
-		public async Task<ActionResult> ConfirmEmail()
-		{
-		
-            return BadRequest();
-		}
+        [HttpPost("forgot-password")]
+        public async Task<ActionResult> ForgotPassword()
+        {
+            return Ok();
+        }
 
-		[HttpPost("Refresh")]
-		public async Task<ActionResult> Refresh()
-		{
+        [HttpPatch("update-password")]
+        [HasPermission(PermissionList.All)]
+        public async Task<ActionResult> UpdatePassword()
+        {
+            return Ok();
+        }
 
+        [HttpPost("reset-password")]
+        [HasPermission(PermissionList.All)]
+        public async Task<ActionResult> ResetPassword()
+        {
+            return Ok();
+        }
 
-			return Ok();
-		}
-
-		[HttpPost("Logout")]
-        [HasPermission(PermissionList.CreateBrand)]
+        [HttpPost("logout")]
+        [HasPermission(PermissionList.All)]
         public async Task<ActionResult> Logout()
 		{
-
-
             var response = await _mediator.Send(new LogoutCommand());
 
             return Ok(response);

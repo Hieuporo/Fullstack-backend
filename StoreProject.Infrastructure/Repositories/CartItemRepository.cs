@@ -33,15 +33,15 @@ namespace StoreProject.Infrastructure.Repositories
 
         public async Task<CartItem> GetCartItem(int cartId, int productItemId)
         {
-            return await _dbContext.CartItems.FirstOrDefaultAsync(u => u.CartId == cartId && u.ProductItemId == productItemId);
+            return await _dbContext.CartItems.FirstOrDefaultAsync(u => u.CartId == cartId && u.ProductId == productItemId);
         }
 
         public async Task<CartItem> GetCartItemDetail(int cartItemId)
         {
-            return await _dbContext.CartItems.Include(u => u.ProductItem).FirstOrDefaultAsync(u => u.Id == cartItemId);
+            return await _dbContext.CartItems.Include(u => u.Product).FirstOrDefaultAsync(u => u.Id == cartItemId);
         }
 
-        public async Task<bool> IsItemOwnedByUser(int cartItemId, string userId)
+        public async Task<bool> IsItemOwnedByUser(int cartItemId, int userId)
         {
             var cartItem = await _dbContext.CartItems.Include(u => u.Cart).FirstOrDefaultAsync(u => u.Id == cartItemId);
             if (cartItem == null)
@@ -54,6 +54,11 @@ namespace StoreProject.Infrastructure.Repositories
                 return true;
             }
             return false;
+        }
+
+        public Task<bool> IsItemOwnedByUser(int cartItemId, string userId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
