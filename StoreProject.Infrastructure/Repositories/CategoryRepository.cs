@@ -17,5 +17,10 @@ namespace StoreProject.Infrastructure.Repositories
         {
             _dbContext = dbContext;
         }
+
+        public Category FindByName(string name)
+        {
+            return _dbContext.Categories.FirstOrDefault(c => c.Name == name);
+        }
     }
 }

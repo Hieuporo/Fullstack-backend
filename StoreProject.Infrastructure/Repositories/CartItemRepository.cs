@@ -12,7 +12,7 @@ namespace StoreProject.Infrastructure.Repositories
 {
     public class CartItemRepository : GenericRepository<CartItem> , ICartItemRepository
     {
-         private readonly ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
         public CartItemRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;

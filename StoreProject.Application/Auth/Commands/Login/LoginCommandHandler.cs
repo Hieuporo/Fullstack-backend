@@ -29,14 +29,15 @@ namespace StoreProject.Application.Auth.Commands.Login
 
             var truePassword = PasswordUtil.Compare(request.Password, user.Password);
 
-            if(truePassword == false)
+            if (truePassword == false)
             {
                 throw new BadRequestException("Password is incorrect");
             }
-            var accessToken = await _jwtTokenGenerator.GenerateAccessToken(user);
-            user.RefreshToken = _jwtTokenGenerator.GenerateRefreshToken();
 
-            await _unitOfWork.SaveChangesAsync();
+            var accessToken = await _jwtTokenGenerator.GenerateAccessToken(user);
+            var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
+
+            user.RefreshToken = refreshToken;
 
             var userResponse = new UserDto()
             {
@@ -49,11 +50,12 @@ namespace StoreProject.Application.Auth.Commands.Login
 
             var auth = new AuthDto
             {
-                RefreshToken = user.RefreshToken,
+                RefreshToken = refreshToken,
                 AccessToken = accessToken,
                 User = userResponse
             };
 
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
             return auth;
 
         }

@@ -9,5 +9,6 @@ namespace StoreProject.Application.Contracts.IReposiotry
 {
     public interface ICategoryRepository : IGenericRepository<Category>
     {
+        Category FindByName (string name);
     }
 }

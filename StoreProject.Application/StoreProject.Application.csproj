@@ -21,9 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Carts\Handlers\Commands\" />
-    <Folder Include="Categories\Commands\Delete\" />
-    <Folder Include="Categories\Commands\Update\" />
-    <Folder Include="Categories\Queries\" />
+    <Folder Include="Discount\" />
     <Folder Include="ProductItems\Handlers\Commands\" />
     <Folder Include="ProductItems\Handlers\Queries\" />
     <Folder Include="ProductItems\Requests\Commands\" />

@@ -5,25 +5,25 @@ namespace StoreProject.Infrastructure.Authentication
 {
 	public class PermissionService : IPermissionService
 	{
-		private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _dbContext;
 
-		public PermissionService(ApplicationDbContext context)
+        public PermissionService(ApplicationDbContext dbContext)
 		{
-			_context = context;
-		}
+            _dbContext = dbContext;
+        }
 
 		public async Task<HashSet<string>> GetPermissionsAsync(int userId)
 		{
-			var roles = _context.UserRoles
+			var roles = await _dbContext.UserRoles
 				   .Where(x => x.UserId == userId)
 				   .Include(x => x.Role)
-				   .Select(x => x.Role);
+				   .Select(x => x.Role).ToListAsync();;
 
 			var perms = new HashSet<string>();
 
 			foreach(var role in roles)
 			{
-				var perm = _context.RolePermissions
+				var perm = _dbContext.RolePermissions
 					.Where(x => x.RoleId == role.Id)
 					.Include(x => x.Permission)
 					.Select(x => x.Permission.Name)
@@ -31,7 +31,6 @@ namespace StoreProject.Infrastructure.Authentication
 
 				perms.UnionWith(perm);
 			}
-
 
 			return perms;
 
