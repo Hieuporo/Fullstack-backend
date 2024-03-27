@@ -1,10 +1,6 @@
 ﻿using StoreProject.Domain.Common;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace StoreProject.Domain.Entities
 {
@@ -23,7 +19,6 @@ namespace StoreProject.Domain.Entities
         public DateTime EndDate { get; set; }
         public int MaxUses { get; set; }
         public int UsesCount { get; set; }
-        public bool IsActive { get; set; }
         public ICollection<UserDiscount> UserDiscounts { get; set; }
     }
 }

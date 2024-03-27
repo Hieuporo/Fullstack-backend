@@ -33,6 +33,8 @@ namespace StoreProject.Infrastructure
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IOtpRepository, OtpRepository>();
+            services.AddScoped<IShippingMethodRepository, ShippingMethodRepository>();
+            services.AddScoped<IDiscountRepository, DiscountRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
