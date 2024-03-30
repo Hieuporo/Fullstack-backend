@@ -11,7 +11,7 @@
         UpdateOrder = 5,
         DeleteOrder = 6,
         // Product
-        ViewProduct = 7,
+        CreateProduct = 7,
         DeleteProduct = 8,
         UpdateProduct = 9,
         // User

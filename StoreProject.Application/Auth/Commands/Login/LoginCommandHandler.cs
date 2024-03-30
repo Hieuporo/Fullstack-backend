@@ -37,7 +37,8 @@ namespace StoreProject.Application.Auth.Commands.Login
             var accessToken = await _jwtTokenGenerator.GenerateAccessToken(user);
             var refreshToken = _jwtTokenGenerator.GenerateRefreshToken();
 
-            user.RefreshToken = refreshToken;
+            user.RefreshToken = refreshToken.Token;
+            user.TokenExpires = refreshToken.Expires;
 
             var userResponse = new UserDto()
             {
@@ -50,7 +51,7 @@ namespace StoreProject.Application.Auth.Commands.Login
 
             var auth = new AuthDto
             {
-                RefreshToken = refreshToken,
+                RefreshToken = refreshToken.Token,
                 AccessToken = accessToken,
                 User = userResponse
             };

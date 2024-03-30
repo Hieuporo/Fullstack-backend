@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using StoreProject.Application.Contracts.Authentication;
+using StoreProject.Application.Models;
 using StoreProject.Domain.Constants;
 using StoreProject.Domain.Entities;
 using System.IdentityModel.Tokens.Jwt;
@@ -33,7 +34,7 @@ namespace StoreProject.Infrastructure.Authentication
 		{
 			var claims = new  List<Claim>
 			{
-				new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+				new("Id", user.Id.ToString()),
 				new(JwtRegisteredClaimNames.Email, user.Email)
 			};
 
@@ -63,21 +64,36 @@ namespace StoreProject.Infrastructure.Authentication
 			return tokenValue;
 		}
 
-        public string GenerateRefreshToken()
+        public RefreshToken GenerateRefreshToken()
         {
-			return Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
+			var refreshToken = new RefreshToken();
+            refreshToken.Expires = DateTime.UtcNow.AddDays(30);
+            refreshToken.Created = DateTime.UtcNow;
+			refreshToken.Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
+
+            return refreshToken;
         }
 
         public int GetCurrentUserId()
         {
-            var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.FindFirst(JwtRegisteredClaimNames.Sub).Value);
+            var userId = Int32.Parse(_httpContextAccessor.HttpContext.User.FindFirst("Id").Value);
 
-			if(userId != null)
-			{
+            if (userId != null)
+            {
                 return userId;
             }
 
-			return 0;
+            return 0;
+        }
+
+        public RefreshToken Refresh(string accessToken, string refreshToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RevokeToken(int userId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

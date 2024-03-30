@@ -21,6 +21,10 @@ namespace StoreProject.Application.Profiles
             CreateMap<CreateShippingMethodCommand, ShippingMethod>().ReverseMap();
             CreateMap<UpdateShippingMethodCommand, ShippingMethod>().ReverseMap();
             CreateMap<ShippingMethodDto, ShippingMethod>().ReverseMap();
+
+            CreateMap<CreateShippingMethodCommand, ShippingMethod>().ReverseMap();
+            CreateMap<UpdateShippingMethodCommand, ShippingMethod>().ReverseMap();
+            CreateMap<ShippingMethodDto, ShippingMethod>().ReverseMap();
         }
     }
 }

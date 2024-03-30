@@ -417,7 +417,7 @@ namespace StoreProject.Infrastructure.Migrations
                         new
                         {
                             Id = 7,
-                            Name = "ViewProduct"
+                            Name = "CreateProduct"
                         },
                         new
                         {
@@ -541,7 +541,7 @@ namespace StoreProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -553,7 +553,7 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("DiscountCost")
+                    b.Property<decimal?>("DiscountCost")
                         .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("Image")
@@ -574,6 +574,7 @@ namespace StoreProject.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Slug")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ViewCount")
@@ -901,6 +902,9 @@ namespace StoreProject.Infrastructure.Migrations
                     b.Property<string>("RefreshToken")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("TokenExpires")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
@@ -1060,9 +1064,13 @@ namespace StoreProject.Infrastructure.Migrations
 
             modelBuilder.Entity("StoreProject.Domain.Entities.Product", b =>
                 {
-                    b.HasOne("StoreProject.Domain.Entities.Category", null)
+                    b.HasOne("StoreProject.Domain.Entities.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("StoreProject.Domain.Entities.ProductAttribute", b =>

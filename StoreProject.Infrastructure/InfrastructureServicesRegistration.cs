@@ -35,6 +35,7 @@ namespace StoreProject.Infrastructure
             services.AddScoped<IOtpRepository, OtpRepository>();
             services.AddScoped<IShippingMethodRepository, ShippingMethodRepository>();
             services.AddScoped<IDiscountRepository, DiscountRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

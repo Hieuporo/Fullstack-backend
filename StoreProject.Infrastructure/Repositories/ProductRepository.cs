@@ -19,19 +19,19 @@ namespace StoreProject.Infrastructure.Repositories
         }
 
 
-   //     public List<Product> GetProductsWithProductItem(string? SearchTerm, int? CategoryId)
-   //     {
-   //         IQueryable<Product> query = _dbContext.Products;
-            
-			//if (CategoryId != null)
-			//{
-			//	query = query.Where(u => u.CategoryId == CategoryId);
-			//}
-			//if (!String.IsNullOrEmpty(SearchTerm))
-   //         {
-			//	query = query.Where(u => u.Name.Contains(SearchTerm));
-			//}
-   //         return query.Include(p => p.ProductItems).ToList();
-   //     }
+        public IQueryable<Product> GetProductsWithProductAttribute(string? SearchTerm, int? CategoryId)
+        {
+            IQueryable<Product> query = _dbContext.Products;
+
+            if (CategoryId != null)
+            {
+                query = query.Where(u => u.CategoryId == CategoryId);
+            }
+            if (!String.IsNullOrEmpty(SearchTerm))
+            {
+                query = query.Where(u => u.Name.Contains(SearchTerm));
+            }
+            return query.Include(p => p.ProductAttributes);
+        }
     }
 }

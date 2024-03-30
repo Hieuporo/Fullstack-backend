@@ -9,5 +9,6 @@ namespace StoreProject.Application.Contracts.IReposiotry
 {
     public interface IProductRepository : IGenericRepository<Product>
     {
+        IQueryable<Product> GetProductsWithProductAttribute(string? SearchTerm, int? CategoryId);
     }
 }

@@ -11,6 +11,7 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Slugify.Core" Version="4.0.1" />
     <PackageReference Include="Stripe.net" Version="43.0.0" />
     <PackageReference Include="System.Security.Cryptography.Cng" Version="5.0.0" />
   </ItemGroup>
@@ -21,11 +22,9 @@
 
   <ItemGroup>
     <Folder Include="Carts\Handlers\Commands\" />
-    <Folder Include="Discount\" />
-    <Folder Include="ProductItems\Handlers\Commands\" />
-    <Folder Include="ProductItems\Handlers\Queries\" />
-    <Folder Include="ProductItems\Requests\Commands\" />
-    <Folder Include="ProductItems\Requests\Queries\" />
+    <Folder Include="Discount\Handlers\" />
+    <Folder Include="Discount\Requests\" />
+    <Folder Include="Products\Commands\DeleteProduct\" />
   </ItemGroup>
 
 
