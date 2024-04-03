@@ -31,9 +31,9 @@ namespace StoreProject.Infrastructure.Repositories
 
         }
 
-        public async Task<CartItem> GetCartItem(int cartId, int productItemId)
+        public async Task<CartItem> GetCartItem(int cartId, int productId)
         {
-            return await _dbContext.CartItems.FirstOrDefaultAsync(u => u.CartId == cartId && u.ProductId == productItemId);
+            return await _dbContext.CartItems.FirstOrDefaultAsync(u => u.CartId == cartId && u.ProductId == productId);
         }
 
         public async Task<CartItem> GetCartItemDetail(int cartItemId)

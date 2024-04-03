@@ -31,7 +31,7 @@ namespace StoreProject.Infrastructure.Repositories
             {
                 query = query.Where(u => u.Name.Contains(SearchTerm));
             }
-            return query.Include(p => p.ProductAttributes);
+            return query;
         }
     }
 }

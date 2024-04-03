@@ -30,6 +30,7 @@
         ViewRolePermission = 20,
         // Discount
         ViewDiscount = 21,
+        CreateDiscount = 21,
         UpdateDiscount = 22,
         DeleteDiscount = 23,
         // Shipping Method

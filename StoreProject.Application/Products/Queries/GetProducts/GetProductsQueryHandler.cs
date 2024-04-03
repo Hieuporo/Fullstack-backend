@@ -18,8 +18,8 @@ namespace StoreProject.Application.Products.Queries.GetProducts
 
         public async Task<List<ProductDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
         {
-            var a = _productRepository.GetProductsWithProductAttribute(null, null).ToList();
-            return _mapper.Map<List<ProductDto>>(a);
+            var products = await _productRepository.GetAll ();
+            return _mapper.Map<List<ProductDto>>(products);
         }
     }
 }

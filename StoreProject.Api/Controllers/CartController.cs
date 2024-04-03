@@ -1,56 +1,68 @@
-﻿//using AutoMapper;
-//using MediatR;
-//using Microsoft.AspNetCore.Mvc;
-//using StoreProject.Application.Contracts.IReposiotry;
-//using StoreProject.Domain.Enums;
-//using StoreProject.Infrastructure.Authentication;
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using StoreProject.Application.Carts.Commands.AddCartItem;
+using StoreProject.Application.Carts.Commands.MinusProduct;
+using StoreProject.Application.Carts.Commands.PlusProduct;
+using StoreProject.Application.Carts.Queries.GetCart;
+using StoreProject.Application.Contracts.IReposiotry;
+using StoreProject.Domain.Enums;
+using StoreProject.Infrastructure.Authentication;
 
 
-//namespace StoreProject.Api.Controllers
-//{
-//    [Route("api/[controller]")]
-//    [ApiController]
-//    public class CartController : ControllerBase
-//    {
-//        private readonly IMediator _mediator;
+namespace StoreProject.Api.Controllers
+{
+    [Route("api/cart")]
+    [ApiController]
+    public class CartController : ControllerBase
+    {
+        private readonly IMediator _mediator;
 
 
-//        public CartController(IMediator mediator, IUnitOfWork unitOfWork, IMapper mapper)
-//        {
-//            _mediator = mediator;
-//        }
+        public CartController(IMediator mediator, IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _mediator = mediator;
+        }
 
-//        [HttpGet]
-//        [HasPermission(PermissionList.Client)]
-//        public async Task<ActionResult> GetCart()
-//        {
+        [HttpGet]
+        [HasPermission(PermissionList.Client)]
+        public async Task<ActionResult> GetCart()
+        {
+            var result = await _mediator.Send(new GetCartQuery());
 
-//            return Ok();
-//        }
+            return Ok(result);
+        }
 
-//        [HttpPost]
-//        [HasPermission(PermissionList.Client)]
-//        public async Task<ActionResult> AddToCart()
-//        {
-//            return Ok();
-//        }
+        [HttpPost]
+        [HasPermission(PermissionList.Client)]
+        public async Task<ActionResult> AddToCart(AddCartItemCommand command)
+        {
 
-//        [HttpPut]
-//        [Route("minus-item")]
-//        [HasPermission(PermissionList.Client)]
-//        public async Task<ActionResult> Minus()
-//        {
+            var result = await _mediator.Send(command);
 
-//            return Ok();
-//        }
+            return Ok(result);
+        }
 
-//        [HttpPut]
-//        [Route("plus-item")]
-//        [HasPermission(PermissionList.Client)]
-//        public async Task<ActionResult> Plus()
-//        {
-//            return Ok();
-//        }
-       
-//    }
-//}
+        [HttpPut]
+        [Route("minus-item")]
+        [HasPermission(PermissionList.Client)]
+        public async Task<ActionResult> Minus(MinusProductCommand command)
+        {
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        [Route("plus-item")]
+        [HasPermission(PermissionList.Client)]
+        public async Task<ActionResult> Plus(PlusProductCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
+
+    }
+}

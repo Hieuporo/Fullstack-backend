@@ -10,5 +10,7 @@ namespace StoreProject.Application.Contracts.IReposiotry
     public interface IDiscountRepository : IGenericRepository<Discount>
     {
         Task<Discount?> GetDiscountByCode(string code);
+        Task<List<Discount>> GetAvailableDiscounts(int userId);
+
     }
 }

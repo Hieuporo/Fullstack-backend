@@ -1,15 +1,7 @@
 ﻿using MediatR;
-using StoreProject.Application.CartItems.Requests.Queries;
 using StoreProject.Application.Contracts.IReposiotry;
-using StoreProject.Application.Contracts.Service;
-using StoreProject.Application.DTOs.CartItem;
 using StoreProject.Application.Exceptions;
-using StoreProject.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace StoreProject.Application.Auth.Queries.CheckValidToken
 {

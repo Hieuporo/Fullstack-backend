@@ -27,7 +27,6 @@ namespace StoreProject.Infrastructure.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<UserDiscount> UserDiscounts { get; set; }
-        public DbSet<ProductAttribute> ProductAttributes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

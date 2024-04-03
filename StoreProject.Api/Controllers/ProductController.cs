@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StoreProject.Application.DTOs.Product;
 using StoreProject.Application.Products.Commands.CreateProduct;
+using StoreProject.Application.Products.Commands.DeleteProduct;
 using StoreProject.Application.Products.Commands.UpdateProduct;
 using StoreProject.Application.Products.Queries.GetProducts;
 using StoreProject.Domain.Enums;
@@ -9,7 +10,7 @@ using StoreProject.Infrastructure.Authentication;
 
 namespace StoreProject.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/product")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -23,6 +24,7 @@ namespace StoreProject.Api.Controllers
         public async Task<ActionResult> GetProducts()
         {
             var result = await _mediator.Send(new GetProductsQuery());
+
             return Ok(result);
         }
 
@@ -31,6 +33,7 @@ namespace StoreProject.Api.Controllers
         public async Task<ActionResult<ProductDto>> Get(int id)
         {
             var result = await _mediator.Send(new GetProductsQuery());
+
             return Ok(result);
         }
 
@@ -48,6 +51,7 @@ namespace StoreProject.Api.Controllers
         public async Task<ActionResult> Patch(UpdateProductCommand command)
         {
             var result = await _mediator.Send(command);
+
             return Ok(result);
         }
 
@@ -56,6 +60,8 @@ namespace StoreProject.Api.Controllers
         [HasPermission(PermissionList.DeleteProduct)]
         public async Task<ActionResult> Delete(int id)
         {
+            await _mediator.Send(new DeleteProductCommand() { Id = id });
+
             return NoContent();
         }
 

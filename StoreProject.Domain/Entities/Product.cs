@@ -21,7 +21,6 @@ namespace StoreProject.Domain.Entities
         public string Brand { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
-        public ICollection<ProductAttribute>? ProductAttributes { get; set; }
         public ICollection<FavoriteProduct>? FavoriteProducts { get; set; }
     }
 }

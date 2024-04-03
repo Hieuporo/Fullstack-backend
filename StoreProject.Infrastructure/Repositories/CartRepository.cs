@@ -30,10 +30,7 @@ namespace StoreProject.Infrastructure.Repositories
             return cart;
         }
 
-        public Task<Cart> CreateCart(string userId)
-        {
-            throw new NotImplementedException();
-        }
+     
 
         public async Task<Cart> GetCartByUserId(int userId)
         {
@@ -42,11 +39,7 @@ namespace StoreProject.Infrastructure.Repositories
             return cart;
         }
 
-        public Task<Cart> GetCartByUserId(string userId)
-        {
-            throw new NotImplementedException();
-        }
-
+      
         public async Task<decimal> GetTotalMoney(int userId)
         {
             var cart = await _dbContext.Carts.Include(u => u.CartItems)
@@ -62,10 +55,6 @@ namespace StoreProject.Infrastructure.Repositories
 
             return total;
         }
-
-        public Task<decimal> GetTotalMoney(string userId)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

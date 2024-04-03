@@ -2,7 +2,10 @@
 using StoreProject.Application.Categories.Commands.Create;
 using StoreProject.Application.Categories.Commands.Update;
 using StoreProject.Application.DTOs.Category;
+using StoreProject.Application.DTOs.Product;
 using StoreProject.Application.DTOs.ShippingMethod;
+using StoreProject.Application.Products.Commands.CreateProduct;
+using StoreProject.Application.Products.Commands.UpdateProduct;
 using StoreProject.Application.ShippingMethods.Command.Create;
 using StoreProject.Application.ShippingMethods.Command.Update;
 using StoreProject.Domain.Entities;
@@ -25,6 +28,10 @@ namespace StoreProject.Application.Profiles
             CreateMap<CreateShippingMethodCommand, ShippingMethod>().ReverseMap();
             CreateMap<UpdateShippingMethodCommand, ShippingMethod>().ReverseMap();
             CreateMap<ShippingMethodDto, ShippingMethod>().ReverseMap();
+
+            CreateMap<CreateProductCommand, Product>().ReverseMap();
+            CreateMap<UpdateProductCommand, Product>().ReverseMap();
+            CreateMap<Product, ProductDto>().ReverseMap();
         }
     }
 }

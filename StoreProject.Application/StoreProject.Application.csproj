@@ -20,12 +20,5 @@
     <ProjectReference Include="..\StoreProject.Domain\StoreProject.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Carts\Handlers\Commands\" />
-    <Folder Include="Discount\Handlers\" />
-    <Folder Include="Discount\Requests\" />
-    <Folder Include="Products\Commands\DeleteProduct\" />
-  </ItemGroup>
-
 
 </Project>

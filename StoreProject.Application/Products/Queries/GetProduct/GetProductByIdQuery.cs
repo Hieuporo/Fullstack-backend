@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using StoreProject.Application.DTOs.Product;
+
 
 namespace StoreProject.Application.Products.Queries.GetProduct
 {
-    public class GetProductByIdQuery
+    public class GetProductByIdQuery : IRequest<ProductDto>
     {
+        public int Id { get; set; }
     }
 }
